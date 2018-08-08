@@ -1,0 +1,129 @@
+.sapFDynamicPageContent .sapFDynamicPageAlignContent,
+.sapUiSizeCompact .sapMInputBase.sapMTextArea,
+.noMargin{
+	margin: 0;
+}
+.sapMTB{
+	height: auto;
+}
+.padding{
+	padding: 1rem;
+}
+.alignRight{
+	text-align: right;
+}
+.sapFDynamicPage-Std-Tablet .sapFDynamicPageContent, .sapFDynamicPage-Std-Tablet .sapFDynamicPageContentFitContainer,
+.sapFDynamicPage-Std-Phone .sapFDynamicPageContent, .sapFDynamicPage-Std-Phone .sapFDynamicPageContentFitContainer,
+.sapFDynamicPageContent, .sapFDynamicPageContentFitContainer{
+	padding: 0;
+}
+.detailPage .sapMFooter-CTX div:first-child,
+.closeOffer{
+	display: none;
+}
+.sapUiBlockLayoutSizeL:not(.sapUiBlockLayoutKeepFontSize) .sapUiBlockCellContent{
+	padding: 0 1rem 1rem 1rem;
+}
+.topLabel{
+	margin-top: 1rem;
+	font-size: .85rem;
+}
+.fullWidth{
+	width: 100%;
+}
+.margin-top{
+	margin-top: 1rem;
+}
+.leftVBoxStyle {
+  padding-right: .5rem;
+}
+
+.rightVBoxStyle {
+  padding-left: .5rem;
+}
+.sapMPanelContent{
+	padding: 1rem;
+	background: rgba(200,200,200,.2);
+}
+.sapMPanelContent .sapMPanelContent{
+	background: #fff;
+}
+.sapUiBlockCellContent{
+	padding: 0 1rem 1rem 1rem;
+}
+.sapMDialogSection .sapUiBlockCellContent{
+	padding: 0 0 1rem 0;
+}
+.border-top{
+	border-top: 2px solid #dfdfdf;
+}
+[id*="deliveryPointsListPanel"] .sapMCbMarkChecked,
+[id*="deliveryPointsListPanel"] .sapMCbBg.sapMCbMarkChecked:before{
+    border-color: red !important;
+    color: red !important;
+}
+
+.sapFDynamicPageTitleMain>.sapFDynamicPageTitleMainInner{
+	align-items: center;
+}
+.paddingRem{
+	padding: 1rem;
+}
+.red{
+	color: red !important;
+}
+.sapUiSizeCompact .sapMTB{
+	height: auto;
+}
+.sapMLIBActive div, .sapMLIBActive .sapMLIBCounter{
+	color: #000;
+}
+.sapMSwt,
+.sapUiSizeCompact .sapMSwt{
+	width: 100px;
+}
+.sapMSwtLabel{
+	width: 85px;
+}
+.sapMSwtOn .sapMSwtHandle{
+	left: 80px;
+}
+.marginTop{
+	margin-top: 1rem;
+}
+.borderBottom{
+	border-bottom: 1px solid #dfdfdf;
+}
+.marginBottom,
+.sapMListUl{
+	margin-bottom: 1rem;
+}
+.smallMarginBottom{
+	margin-bottom: 7px;
+}
+
+.sapMLabel,.sapMLIBActive .sapMLabel{
+	color: #888;
+}
+.sapMText,.sapMLIBActive .sapMText{
+	font-size: .9rem;
+	color: #000;
+}
+@media (max-width: 640px) { 
+	.sapMNav{
+		position: absolute;
+	}
+	.sapMSwt,
+	.sapUiSizeCompact .sapMSwt{
+		width: 110px;
+	}
+	.closeOffer{
+		display: block;
+	}
+	.fullscreen{
+		display: none;
+	}
+	.alignRight{
+		text-align: left;
+	}
+}

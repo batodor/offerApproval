@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core" 
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table inset="false">
+		<columns>
+			<Column></Column>
+			<Column></Column>
+			<Column></Column>
+			<Column></Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="Fixed Volume"/>
+					<Text text="Russian Steam Coal"/>
+					<Text text="90 000 TO +/- 10%"/>
+					<Text text="04.2018 – 12.2018"/>
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="Price"/>
+					<Text text="API2 – 6 USD"/>
+					<Text text="FOB Vyborg"/>
+					<Text text="6000 NAR"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<form:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" backgroundDesign="Transparent">
+		<form:content>
+			<Label text="Payment Term"/><Text text="Postpayment"/>
+			<Label text="Comment"/><Text text="Equivalent to CIF ARA + 2.5 USD"/>
+		</form:content>
+	</form:SimpleForm>
+</core:FragmentDefinition>

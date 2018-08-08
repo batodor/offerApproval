@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Table growing="true" growingThreshold="20" growingScrollToLoad="true" noDataText="{i18n>noData}">
+		<columns>
+			<Column hAlign="Left">
+				<header>
+					<Label text="Partner Name" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Center">
+				<header>
+					<Label text="Rating" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Center">
+				<header>
+					<Label text="Blacklist Status" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Center">
+				<header>
+					<Label text="Country Sanctions" design="Bold"></Label>
+				</header>
+			</Column>
+			<Column hAlign="Center">
+				<header>
+					<Label text="CP risks" design="Bold"></Label>
+				</header>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="Datang Overseas (Beijing)" />
+					<Text text="B" />
+					<Text text="Not Blacklisted" />
+					<Text text="None" />
+					<Text text="None" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</core:FragmentDefinition>

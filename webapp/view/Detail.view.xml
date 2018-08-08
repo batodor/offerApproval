@@ -1,0 +1,78 @@
+<mvc:View
+	controllerName="OfferApproval.OfferApproval.controller.Detail"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:footerbar="sap.ushell.ui.footerbar">
+
+	<semantic:SemanticPage
+		id="detailPage"
+		class="detailPage"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<VBox class="padding">
+				<MessageStrip enableFormattedText="true" text="{i18n>WarningCPRating}" type="Error" showIcon="true" class="smallMarginBottom" />
+				<MessageStrip enableFormattedText="true" text="{i18n>WarningLimitsNotApproved}" type="Error" showIcon="true" class="smallMarginBottom" />
+				<MessageStrip enableFormattedText="true" text="{i18n>WarningComplienceRisk}" type="Error" showIcon="true" class="smallMarginBottom" />
+			</VBox>
+			<l:BlockLayout class="borderBottom">
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell width="1">
+						<VBox>
+							<Title id="objectHeader" titleStyle="H3" text="Datang Overseas (Beijing)" />
+							<Label text="SUEK AG / Khrabraya Ekaterina / Variant Number: 3" />
+						</VBox>
+					</l:BlockLayoutCell>
+					<l:BlockLayoutCell width="1">
+						<VBox class=" alignRight">
+							<Label text="{i18n>validityDate}:" />
+							<Text text="10.08.2018 01:00 GMT+0"/>
+						</VBox>
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+			
+			<IconTabBar id="itbMain" selectedKey="offer">
+				<items>
+					<IconTabFilter icon="sap-icon://hint" text="{i18n>offer}" key="offer">
+						<core:Fragment fragmentName="fragment.offer" type="XML"></core:Fragment>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://activity-items" text="{i18n>volumes}" key="volumes">
+						<List noDataText="{i18n>noData}" selectionChange="onListSelect">
+							<items>
+								<CustomListItem>
+									<core:Fragment fragmentName="fragment.volumes" type="XML"></core:Fragment>
+								</CustomListItem>
+								<CustomListItem>
+									<core:Fragment fragmentName="fragment.volumes2" type="XML"></core:Fragment>
+								</CustomListItem>
+							</items>
+						</List>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://supplier" text="{i18n>counterparties}" key="counterparties">
+						<core:Fragment fragmentName="fragment.counterparties" type="XML"></core:Fragment>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://group" text="{i18n>approvalHistory}" key="approvalHistory">
+						<core:Fragment fragmentName="fragment.approvalHistory" type="XML"></core:Fragment>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://attachment" text="{i18n>attachments}" key="attachments">
+						<core:Fragment fragmentName="fragment.attachments" type="XML"></core:Fragment>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+		<semantic:customFooterContent>
+			<Button press="toggleFullScreen" class="fullscreen" type="Back" text="{i18n>fullscreen}" />
+			<Button press="onCloseDetailPress" class="closeOffer" type="Back" text="{i18n>close}" />
+			<ToolbarSpacer/>
+			<Button press="approve" custom:id="approveDialog" type="Accept" text="{i18n>approve}" />
+			<Button press="reject" custom:id="approveDialog" type="Reject" text="{i18n>reject}" />
+			<Button press="forward" custom:id="approveDialog" type="Default" text="{i18n>forward}" />
+		</semantic:customFooterContent>
+	</semantic:SemanticPage>
+
+</mvc:View>

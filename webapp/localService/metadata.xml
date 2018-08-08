@@ -1,0 +1,625 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZTSWSD_TCAPPROVAL_SRV" xml:lang="ru" sap:schema-version="1">
+            <EntityType Name="Workitem" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="WorkitemID"/>
+                </Key>
+                <Property Name="Value" Type="Edm.Decimal" Precision="15" Scale="15" sap:unit="ValueCurrency" sap:label="Стоимость нетто" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Side" Type="Edm.String" MaxLength="1" sap:label="Страница" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ApprovalRequestedOn" Type="Edm.DateTime" Precision="8" sap:label="Текущая дата" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SubstitutingForID" Type="Edm.String" MaxLength="12" sap:label="Имя пользователя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReassignByName" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReassignById" Type="Edm.String" MaxLength="12" sap:label="Имя пользователя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TaskType" Type="Edm.String" MaxLength="14" sap:label="ОбъектОргМенеджмента" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkitemID" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Идентификатор" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValueCurrency" Type="Edm.String" MaxLength="5" sap:label="Валюта ТоргКнтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="CreatedByID" Type="Edm.String" MaxLength="12" sap:label="Создал" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedByName" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ItemCount" Type="Edm.Int32" sap:label="Число" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkitemPriority" Type="Edm.String" MaxLength="1" sap:label="Приоритет" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SubstitutingForName" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vendor" Type="Edm.String" MaxLength="10" sap:label="Поставщик" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VendorDescription" Type="Edm.String" MaxLength="35" sap:label="Имя поставщика" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:label="Дебитор" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerDescription" Type="Edm.String" MaxLength="35" sap:label="Имя клиента" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="WorkitemStatus" Type="Edm.String" MaxLength="12" sap:label="Статус" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DealNumber" Type="Edm.String" MaxLength="30" sap:label="Deal Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValidityDate" Type="Edm.DateTime" Precision="0" sap:label="Validity Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="TCHeaders" Relationship="ZTSWSD_TCAPPROVAL_SRV.Workitem_TCHeaders" FromRole="FromRole_Workitem_TCHeaders" ToRole="ToRole_Workitem_TCHeaders"/>
+            </EntityType>
+            <EntityType Name="TCHeader" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="WorkitemID"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCNumberFormatted" Type="Edm.String" MaxLength="10" sap:label="Длина символьного поля = 10" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ExternalNumber" Type="Edm.String" MaxLength="30" sap:label="Внешний номер" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCType" Type="Edm.String" MaxLength="4" sap:label="Вид ТорговКонтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCTypeDescription" Type="Edm.String" MaxLength="40" sap:label="Название В/ТК" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.DateTime" Precision="0" sap:label="Дата создания" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateCustomerCategory" Type="Edm.String" MaxLength="1" sap:label="Дата поставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateCustomerCategoryDescr" Type="Edm.String" MaxLength="20" sap:label="ОбозначТипаДаты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateCustomer" Type="Edm.String" MaxLength="10" sap:label="ТрбДатаПоставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateVendorCategory" Type="Edm.String" MaxLength="1" sap:label="ТрбДатаПоставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateVendorCategoryDescr" Type="Edm.String" MaxLength="20" sap:label="ОбозначТипаДаты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateVendor" Type="Edm.String" MaxLength="10" sap:label="ТрбДатаПоставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="БЕ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyCodeDescription" Type="Edm.String" MaxLength="25" sap:label="Название фирмы" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkitemID" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Идентификатор" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PaymentTerms" Type="Edm.String" MaxLength="50" sap:label="Payment terms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Comment" Type="Edm.String" sap:label="Comments" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyName" Type="Edm.String" MaxLength="25" sap:label="Company name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WarningCPRating" Type="Edm.Boolean" sap:label="The rating of the counterparty hasn't been updated" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WarningLimitsNotApproved" Type="Edm.Boolean" sap:label="The offer limits were not approved by the Supervisory Author" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WarningComplienceRisk" Type="Edm.Boolean" sap:label="There are not eliminated compliance risks" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Rating" Type="Edm.String" MaxLength="3" sap:label="string" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="20" sap:label="string" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValidityDate" Type="Edm.DateTime" Precision="0" sap:label="Validity Date" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Logo" Type="Edm.String" MaxLength="10" sap:label="string" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TraderName" Type="Edm.String" MaxLength="90" sap:label="Trader Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TraderEmail" Type="Edm.String" MaxLength="241" sap:label="Trader E-mail" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TraderPhone" Type="Edm.String" MaxLength="30" sap:label="Trader Phone" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LimitsApprStatus" Type="Edm.String" MaxLength="1" sap:label="Limits' Approval Status" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CPTentative" Type="Edm.String" sap:label="CP Tentative Comment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ApproveForAll" Type="Edm.Boolean" sap:label="Approve for all flag" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="TCItemGenerals" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCHeader_TCItemGenerals" FromRole="FromRole_TCHeader_TCItemGenerals" ToRole="ToRole_TCHeader_TCItemGenerals"/>
+                <NavigationProperty Name="Attachments" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Attachments" FromRole="FromRole_TCHeader_Attachments" ToRole="ToRole_TCHeader_Attachments"/>
+                <NavigationProperty Name="Notes" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Notes" FromRole="FromRole_TCHeader_Notes" ToRole="ToRole_TCHeader_Notes"/>
+                <NavigationProperty Name="ApproveIterations" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCHeader_ApproveIteration" FromRole="FromRole_TCHeader_ApproveIteration" ToRole="ToRole_TCHeader_ApproveIteration"/>
+                <NavigationProperty Name="ToProducts" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Product" FromRole="FromRole_TCHeader_Product" ToRole="ToRole_TCHeader_Product"/>
+                <NavigationProperty Name="ToCounterparty" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Counterparty" FromRole="FromRole_TCHeader_Counterparty" ToRole="ToRole_TCHeader_Counterparty"/>
+            </EntityType>
+            <EntityType Name="BusinessCard" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UserID"/>
+                </Key>
+                <Property Name="UserID" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Имя пользователя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FirstName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Имя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LastName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Фамилия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FullName" Type="Edm.String" Nullable="false" MaxLength="80" sap:label="Полное имя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Department" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Отдел" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MobilePhone" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Телефон" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkPhone" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Телефон" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Email" Type="Edm.String" Nullable="false" MaxLength="241" sap:label="Адрес эл. почты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="EmailSubject" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyName" Type="Edm.String" Nullable="false" MaxLength="42" sap:label="Компания" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CompanyAddress" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Char255" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ImageURL" Type="Edm.String" Nullable="false" MaxLength="512" sap:label="Символ 512" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:label="Тип MIME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Attachment" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="AttachmentGuid"/>
+                </Key>
+                <Property Name="AttachmentGuid" Type="Edm.String" Nullable="false" MaxLength="46" sap:label="Ид. записи папки (объект+папка+имя экспедитора)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Description" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Заголовок" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FileName" Type="Edm.String" Nullable="false" MaxLength="255" sap:label="Имя компонента" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MimeType" Type="Edm.String" Nullable="false" MaxLength="128" sap:label="MIME-тип" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FileSize" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Размер документа SAPoffice (для API1)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedByUserID" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Имя пользователя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedByUserName" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedOn" Type="Edm.DateTime" Nullable="false" Precision="0" sap:label="Метка времени" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ForwardingAgent" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="UserID"/>
+                </Key>
+                <Property Name="UserID" Type="Edm.String" Nullable="false" MaxLength="12" sap:label="Имя пользователя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Department" Type="Edm.String" MaxLength="40" sap:label="Отдел" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FullName" Type="Edm.String" MaxLength="80" sap:label="Полное имя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SearchText" Type="Edm.String" sap:label="Искомый текст" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="TCItemGeneral" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="TCItemNumber"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCItemNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Номер позиции" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Vendor" Type="Edm.String" MaxLength="10" sap:label="Поставщик" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VendorDescription" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:label="Завод" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PlantDescription" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="18" sap:label="Материал" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesQuantity" Type="Edm.Decimal" Precision="15" Scale="3" sap:unit="SalesQuantityUnit" sap:label="Объем продажи" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesQuantityUnit" Type="Edm.String" MaxLength="3" sap:label="ПродажнЕдиница" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="SalesValueCurrency" Type="Edm.String" MaxLength="5" sap:label="ВалютаДокумента" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="PurchasingQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="PurchasingQuantityUnit" sap:label="Объем заказа" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingQuantityUnit" Type="Edm.String" MaxLength="3" sap:label="ЕИ заказа" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="PurchasingValueCurrency" Type="Edm.String" MaxLength="5" sap:label="Валюта ТоргКнтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="PurchasingValue" Type="Edm.Decimal" Precision="15" Scale="15" sap:unit="PurchasingValueCurrency" sap:label="Стоимость нетто" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesValue" Type="Edm.Decimal" Precision="15" Scale="15" sap:unit="SalesValueCurrency" sap:label="Стоимость нетто" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Side" Type="Edm.String" MaxLength="1" sap:label="Страница" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BasePrice" Type="Edm.Decimal" Precision="11" Scale="2" sap:unit="SalesValueCurrency" sap:label="Base Price" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesIncoterms1" Type="Edm.String" MaxLength="31" sap:label="Sales Incoterms" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Caloric" Type="Edm.String" MaxLength="10" sap:label="Caloric" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryPeriodFrom" Type="Edm.DateTime" Precision="0" sap:label="Delivery Period From" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryPeriodTo" Type="Edm.DateTime" Precision="0" sap:label="Delivery Period To" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="TCItemDetails" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCItemGeneral_TCItemDetail" FromRole="FromRole_TCItemGeneral_TCItemDetail" ToRole="ToRole_TCItemGeneral_TCItemDetail"/>
+            </EntityType>
+            <EntityType Name="TCItemDetail" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="TCItemNumber"/>
+                </Key>
+                <Property Name="SalesPricingDate" Type="Edm.DateTime" Precision="0" sap:label="Дата цены" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProfitCenterDescription" Type="Edm.String" MaxLength="20" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CostCenterDescription" Type="Edm.String" MaxLength="20" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BusinessAreaDescription" Type="Edm.String" MaxLength="30" sap:label="Бизнес-сфера" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WBSElementDescription" Type="Edm.String" MaxLength="40" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WBSElement" Type="Edm.String" MaxLength="8" sap:label="СПП-элемент" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BusinessArea" Type="Edm.String" MaxLength="4" sap:label="Бизнес-сфера" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PlantDescription" Type="Edm.String" MaxLength="30" sap:label="Имя 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:label="Завод" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingIncoterms1Description" Type="Edm.String" MaxLength="30" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesIncoterms1Description" Type="Edm.String" MaxLength="30" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaterialGroupDescription" Type="Edm.String" MaxLength="20" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateVendorCategoryDescr" Type="Edm.String" MaxLength="20" sap:label="ОбозначТипаДаты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateCustomerCategoryDescr" Type="Edm.String" MaxLength="20" sap:label="ОбозначТипаДаты" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateVendor" Type="Edm.String" MaxLength="10" sap:label="ТрбДатаПоставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateVendorCategory" Type="Edm.String" MaxLength="1" sap:label="ТрбДатаПоставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PlantAddress" Type="Edm.String" MaxLength="80" sap:label="Строка адреса" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProfitCenter" Type="Edm.String" MaxLength="10" sap:label="МВП" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CostCenter" Type="Edm.String" MaxLength="10" sap:label="МВЗ" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateCustomer" Type="Edm.String" MaxLength="10" sap:label="ТрбДатаПоставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ReqDeliveryDateCustomerCategory" Type="Edm.String" MaxLength="1" sap:label="Дата поставки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingIncoterms2" Type="Edm.String" MaxLength="28" sap:label="Инкотермс2Закуп" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingIncoterms1" Type="Edm.String" MaxLength="3" sap:label="ИнкотермсЗакупк" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesIncoterms2" Type="Edm.String" MaxLength="28" sap:label="Инкот2Продажа" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesIncoterms1" Type="Edm.String" MaxLength="3" sap:label="ИнкотермсПродаж" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesPriceUnitOfMeasure" Type="Edm.String" MaxLength="3" sap:label="ЕдИзмерения" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="SalesPriceUnit" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Единица цены" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesCurrency" Type="Edm.String" MaxLength="5" sap:label="ВалютаДокумента" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="SalesPricePerUnit" Type="Edm.Decimal" Precision="11" Scale="11" sap:unit="SalesCurrency" sap:label="Продажная цена" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingPriceUnitOfMeasure" Type="Edm.String" MaxLength="3" sap:label="ЕИ цены заказа" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="PurchasingPriceUnit" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Единица цены" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingCurrency" Type="Edm.String" MaxLength="5" sap:label="Валюта закупки" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="PurchasingPricePerUnit" Type="Edm.Decimal" Precision="11" Scale="11" sap:unit="PurchasingCurrency" sap:label="Закупочная цена" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCItemNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Номер позиции" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MaterialGroup" Type="Edm.String" MaxLength="9" sap:label="ГрМатериалов" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PurchasingPricingDate" Type="Edm.DateTime" Precision="0" sap:label="Дата цены" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="MainVolume" Type="Edm.String" MaxLength="60" sap:label="MainVolume" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OptionOwner" Type="Edm.String" MaxLength="60" sap:label="OptionOwner" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OptionDate" Type="Edm.DateTime" Precision="0" sap:label="OptionDate" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AdditionalBonus" Type="Edm.String" MaxLength="10" sap:label="AdditionalBonus" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PriceComment" Type="Edm.String" MaxLength="10" sap:label="PriceComment" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BenchmarkSUEKAG" Type="Edm.String" MaxLength="10" sap:label="BenchmarkSUEKAG" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BenchmarkWoodMac" Type="Edm.String" MaxLength="10" sap:label=" BenchmarkWoodMac" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FOBprice" Type="Edm.String" MaxLength="10" sap:label="FOBprice" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DAPprice" Type="Edm.String" MaxLength="10" sap:label="DAPprice" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShipDimension" Type="Edm.String" MaxLength="60" sap:label="ShipDimension" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OptionPeriod" Type="Edm.String" MaxLength="60" sap:label="OptionPeriod" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IndexRule" Type="Edm.String" MaxLength="10" sap:label="IndexRule" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Index" Type="Edm.String" MaxLength="10" sap:label="Index" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AverageIndex" Type="Edm.String" MaxLength="10" sap:label="AverageIndex" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="SalesPricingConditions" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail_SalesPricingConditions" FromRole="FromRole_TCItemDetail_SalesPricingConditions" ToRole="ToRole_TCItemDetail_SalesPricingConditions"/>
+                <NavigationProperty Name="PurchasingPricingConditions" Relationship="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail_PurchasingPricingConditions" FromRole="FromRole_TCItemDetail_PurchasingPricingConditions" ToRole="ToRole_TCItemDetail_PurchasingPricingConditions"/>
+            </EntityType>
+            <EntityType Name="SalesPricingCondition" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="TCItemNumber"/>
+                    <PropertyRef Name="ConditionCount"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCItemNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Номер позиции" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionType" Type="Edm.String" MaxLength="4" sap:label="Вид условия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionTypeDescription" Type="Edm.String" MaxLength="20" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.Decimal" Precision="13" Scale="13" sap:unit="Currency" sap:label="СтоимУсловия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="ВалютаДокумента" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="ConditionCount" Type="Edm.Int32" Nullable="false" sap:label="Число" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="PurchasingPricingCondition" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="TCItemNumber"/>
+                    <PropertyRef Name="ConditionCount"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCItemNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="Номер позиции" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionType" Type="Edm.String" MaxLength="4" sap:label="Вид условия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ConditionTypeDescription" Type="Edm.String" MaxLength="20" sap:label="Название" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Value" Type="Edm.Decimal" Precision="13" Scale="13" sap:unit="Currency" sap:label="СтоимУсловия" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="ВалютаДокумента" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="ConditionCount" Type="Edm.Int32" Nullable="false" sap:label="Число" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Note" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NoteID"/>
+                </Key>
+                <Property Name="NoteID" Type="Edm.String" Nullable="false" MaxLength="46" sap:label="Ид. записи папки (объект+папка+имя экспедитора)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedByUser" Type="Edm.String" MaxLength="12" sap:label="Имя пользователя" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreatedByUserName" Type="Edm.String" MaxLength="40" sap:label="Сhar" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CreationUtcDateTime" Type="Edm.DateTime" Precision="0" sap:label="Метка времени" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NoteText" Type="Edm.String" sap:label="Строка" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Route" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductNum"/>
+                    <PropertyRef Name="VolumeNumber"/>
+                    <PropertyRef Name="RouteNumber"/>
+                </Key>
+                <Property Name="ProductNum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VolumeNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="RouteNumber" Type="Edm.String" Nullable="false" MaxLength="6" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BaseRoute" Type="Edm.Boolean" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LoadingPort1" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LoadingPort2" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Порт погрузки 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TranshipmentPort" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Промежуточный порт" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TerminalLP1" Type="Edm.String" Nullable="false" MaxLength="128" sap:label="Терминал 1" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TerminalLP2" Type="Edm.String" Nullable="false" MaxLength="128" sap:label="Терминал 2" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LP1Pct" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="0" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryPort1" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryPort2" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Price" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="2" sap:unit="Currency" sap:label="Цена нетто" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AddPremium" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="2" sap:unit="Currency" sap:label="Добавочный премиум" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:label="Валюта" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="BenchmVs" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="2" sap:unit="Currency" sap:label="VerBenchWoodMac" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BenchmVsAG" Type="Edm.Decimal" Nullable="false" Precision="11" Scale="2" sap:unit="Currency" sap:label="VerBSUEKAG" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Counterparty" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PartnerFunction"/>
+                </Key>
+                <Property Name="PartnerFunction" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FunctionName" Type="Edm.String" MaxLength="20" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PartnerName" Type="Edm.String" MaxLength="35" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Rating" Type="Edm.String" MaxLength="3" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Product" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductNum"/>
+                </Key>
+                <Property Name="ProductNum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductName" Type="Edm.String" MaxLength="40" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CVforAdj" Type="Edm.Decimal" Precision="5" Scale="0" sap:unit="CaloricityUoM" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CVforFCA" Type="Edm.Decimal" Precision="5" Scale="0" sap:unit="CaloricityUoM" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CaloricityUoM" Type="Edm.String" MaxLength="3" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="CompetitorsForProd" Type="Edm.String" MaxLength="256" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToVolumes" Relationship="ZTSWSD_TCAPPROVAL_SRV.Product_Volume" FromRole="FromRole_Product_Volume" ToRole="ToRole_Product_Volume"/>
+            </EntityType>
+            <EntityType Name="Volume" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductNum"/>
+                    <PropertyRef Name="VolumeNumber"/>
+                </Key>
+                <Property Name="ProductNum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VolumeNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VolumeType" Type="Edm.String" MaxLength="1" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IncoCode" Type="Edm.String" MaxLength="3" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IncoBasis" Type="Edm.String" MaxLength="28" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PriceType" Type="Edm.String" MaxLength="20" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IndexName" Type="Edm.String" MaxLength="5" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="IntervalIndex" Type="Edm.String" MaxLength="5" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Premium" Type="Edm.Decimal" Precision="12" Scale="3" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OptionOwner" Type="Edm.String" MaxLength="60" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BeforeDataType" Type="Edm.String" MaxLength="60" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BeforeOffset" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OptionDate" Type="Edm.String" MaxLength="4" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OptDateDescr" Type="Edm.String" MaxLength="60" sap:label="Опис. типа даты дек." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShiftsNum" Type="Edm.Byte" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ShiftUnit" Type="Edm.String" MaxLength="30" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToRoutes" Relationship="ZTSWSD_TCAPPROVAL_SRV.Volume_Route" FromRole="FromRole_Volume_Route" ToRole="ToRole_Volume_Route"/>
+                <NavigationProperty Name="ToPeriods" Relationship="ZTSWSD_TCAPPROVAL_SRV.Volume_Period" FromRole="FromRole_Volume_Period" ToRole="ToRole_Volume_Period"/>
+            </EntityType>
+            <EntityType Name="Period" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductNum"/>
+                    <PropertyRef Name="PeriodNumber"/>
+                    <PropertyRef Name="VolumeNumber"/>
+                </Key>
+                <Property Name="ProductNum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodNumber" Type="Edm.Byte" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="VolumeNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryFrom" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DeliveryTo" Type="Edm.DateTime" Nullable="false" Precision="7" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QuanNomComm" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unit="QuanUoM" sap:label="КонтрТолеКол Max" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QuanMinComm" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unit="QuanUoM" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QuanMaxComm" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unit="QuanUoM" sap:label="КонтрТолеКол Max" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ToleranceComm" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="0" sap:label="Контрактный толеранс" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Quantity" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unit="QuanUoM" sap:label="Кол-во" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QuantityMin" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unit="QuanUoM" sap:label="Количество min" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QuantityMax" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unit="QuanUoM" sap:label="Количество max" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OverdlvTolerance" Type="Edm.Decimal" Nullable="false" Precision="3" Scale="1" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="QuanUoM" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="OwnerQuan" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OwnerDlv" Type="Edm.String" Nullable="false" MaxLength="60" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NumOfLots" Type="Edm.Byte" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TolerancePeriod" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="3" sap:unit="TolrncPeriodUoM" sap:label="Del Period Tolerance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TolrncPeriodUoM" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Tolerance UoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="ToleranceLot" Type="Edm.Decimal" Nullable="false" Precision="10" Scale="3" sap:unit="TolrncLotUoM" sap:label="Del Lot Tolerance" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TolrncLotUoM" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Tolerance UoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityType Name="ApproveIteration" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Iteration"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iteration" Type="Edm.Int32" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ApproveLevels" Relationship="ZTSWSD_TCAPPROVAL_SRV.ApproveIteration_ApproveLevel" FromRole="FromRole_ApproveIteration_ApproveLevel" ToRole="ToRole_ApproveIteration_ApproveLevel"/>
+            </EntityType>
+            <EntityType Name="ApprovingHistory" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Iteration"/>
+                    <PropertyRef Name="Level"/>
+                    <PropertyRef Name="Sequence"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iteration" Type="Edm.Int32" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Level" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sequence" Type="Edm.Int32" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FIO" Type="Edm.String" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Executed" Type="Edm.DateTime" Precision="0" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Comment" Type="Edm.String" MaxLength="200" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ApproveLevel" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Iteration"/>
+                    <PropertyRef Name="Level"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iteration" Type="Edm.Int32" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Level" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LevelName" Type="Edm.String" Nullable="false" sap:label="" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Approvers" Relationship="ZTSWSD_TCAPPROVAL_SRV.ApproveLevel_ApprovingHistory" FromRole="FromRole_ApproveLevel_ApprovingHistory" ToRole="ToRole_ApproveLevel_ApprovingHistory"/>
+            </EntityType>
+            <ComplexType Name="ActionResult">
+                <Property Name="ActionSuccessful" Type="Edm.Boolean" sap:label="Независимая кнопка" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" sap:label="Строка" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="ApproveIteration_ApproveLevel" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.ApproveIteration" Multiplicity="1" Role="FromRole_ApproveIteration_ApproveLevel"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.ApproveLevel" Multiplicity="*" Role="ToRole_ApproveIteration_ApproveLevel"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ApproveIteration_ApproveLevel">
+                        <PropertyRef Name="Iteration"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ApproveIteration_ApproveLevel">
+                        <PropertyRef Name="Iteration"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="ApproveLevel_ApprovingHistory" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.ApproveLevel" Multiplicity="1" Role="FromRole_ApproveLevel_ApprovingHistory"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.ApprovingHistory" Multiplicity="*" Role="ToRole_ApproveLevel_ApprovingHistory"/>
+            </Association>
+            <Association Name="TCItemGeneral_TCItemDetail" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCItemGeneral" Multiplicity="1" Role="FromRole_TCItemGeneral_TCItemDetail"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail" Multiplicity="1" Role="ToRole_TCItemGeneral_TCItemDetail"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_TCItemGeneral_TCItemDetail">
+                        <PropertyRef Name="TCItemNumber"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_TCItemGeneral_TCItemDetail">
+                        <PropertyRef Name="TCItemNumber"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Product_Volume" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Product" Multiplicity="1" Role="FromRole_Product_Volume"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Volume" Multiplicity="*" Role="ToRole_Product_Volume"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Product_Volume">
+                        <PropertyRef Name="ProductNum"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Product_Volume">
+                        <PropertyRef Name="ProductNum"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Workitem_TCHeaders" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Workitem" Multiplicity="1" Role="FromRole_Workitem_TCHeaders"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="ToRole_Workitem_TCHeaders"/>
+            </Association>
+            <Association Name="TCHeader_TCItemGenerals" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_TCItemGenerals"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCItemGeneral" Multiplicity="*" Role="ToRole_TCHeader_TCItemGenerals"/>
+            </Association>
+            <Association Name="TCHeader_Attachments" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_Attachments"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Attachment" Multiplicity="*" Role="ToRole_TCHeader_Attachments"/>
+            </Association>
+            <Association Name="TCHeader_Notes" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_Notes"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Note" Multiplicity="*" Role="ToRole_TCHeader_Notes"/>
+            </Association>
+            <Association Name="TCHeader_Counterparty" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_Counterparty"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Counterparty" Multiplicity="*" Role="ToRole_TCHeader_Counterparty"/>
+            </Association>
+            <Association Name="TCHeader_Product" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_Product"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Product" Multiplicity="*" Role="ToRole_TCHeader_Product"/>
+            </Association>
+            <Association Name="TCHeader_BusinessCard" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_BusinessCard"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.BusinessCard" Multiplicity="1" Role="ToRole_TCHeader_BusinessCard"/>
+            </Association>
+            <Association Name="TCHeader_ApproveIteration" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCHeader" Multiplicity="1" Role="FromRole_TCHeader_ApproveIteration"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.ApproveIteration" Multiplicity="*" Role="ToRole_TCHeader_ApproveIteration"/>
+            </Association>
+            <Association Name="TCItemDetail_PurchasingPricingConditions" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail" Multiplicity="0..1" Role="FromRole_TCItemDetail_PurchasingPricingConditions"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.PurchasingPricingCondition" Multiplicity="*" Role="ToRole_TCItemDetail_PurchasingPricingConditions"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_TCItemDetail_PurchasingPricingConditions">
+                        <PropertyRef Name="TCItemNumber"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_TCItemDetail_PurchasingPricingConditions">
+                        <PropertyRef Name="TCItemNumber"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="TCItemDetail_SalesPricingConditions" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail" Multiplicity="0..1" Role="FromRole_TCItemDetail_SalesPricingConditions"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.SalesPricingCondition" Multiplicity="*" Role="ToRole_TCItemDetail_SalesPricingConditions"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_TCItemDetail_SalesPricingConditions">
+                        <PropertyRef Name="TCItemNumber"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_TCItemDetail_SalesPricingConditions">
+                        <PropertyRef Name="TCItemNumber"/>
+                        <PropertyRef Name="TCNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Volume_Route" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Volume" Multiplicity="1" Role="FromRole_Volume_Route"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Route" Multiplicity="*" Role="ToRole_Volume_Route"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Volume_Route">
+                        <PropertyRef Name="VolumeNumber"/>
+                        <PropertyRef Name="ProductNum"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Volume_Route">
+                        <PropertyRef Name="VolumeNumber"/>
+                        <PropertyRef Name="ProductNum"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Volume_Period" sap:content-version="1">
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Volume" Multiplicity="1" Role="FromRole_Volume_Period"/>
+                <End Type="ZTSWSD_TCAPPROVAL_SRV.Period" Multiplicity="*" Role="ToRole_Volume_Period"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Volume_Period">
+                        <PropertyRef Name="VolumeNumber"/>
+                        <PropertyRef Name="ProductNum"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Volume_Period">
+                        <PropertyRef Name="VolumeNumber"/>
+                        <PropertyRef Name="ProductNum"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZTSWSD_TCAPPROVAL_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="RouteSet" EntityType="ZTSWSD_TCAPPROVAL_SRV.Route" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="CounterpartySet" EntityType="ZTSWSD_TCAPPROVAL_SRV.Counterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ProductSet" EntityType="ZTSWSD_TCAPPROVAL_SRV.Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="VolumeSet" EntityType="ZTSWSD_TCAPPROVAL_SRV.Volume" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="PeriodSet" EntityType="ZTSWSD_TCAPPROVAL_SRV.Period" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ApproveLevelSet" EntityType="ZTSWSD_TCAPPROVAL_SRV.ApproveLevel" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ApproveIterationSet" EntityType="ZTSWSD_TCAPPROVAL_SRV.ApproveIteration" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ApprovingHistorySet" EntityType="ZTSWSD_TCAPPROVAL_SRV.ApprovingHistory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Workitems" EntityType="ZTSWSD_TCAPPROVAL_SRV.Workitem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="TCHeaders" EntityType="ZTSWSD_TCAPPROVAL_SRV.TCHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="BusinessCards" EntityType="ZTSWSD_TCAPPROVAL_SRV.BusinessCard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Attachments" EntityType="ZTSWSD_TCAPPROVAL_SRV.Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ForwardingAgents" EntityType="ZTSWSD_TCAPPROVAL_SRV.ForwardingAgent" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="TCItemGenerals" EntityType="ZTSWSD_TCAPPROVAL_SRV.TCItemGeneral" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="TCItemDetails" EntityType="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="SalesPricingConditions" EntityType="ZTSWSD_TCAPPROVAL_SRV.SalesPricingCondition" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="PurchasingPricingConditions" EntityType="ZTSWSD_TCAPPROVAL_SRV.PurchasingPricingCondition" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Notes" EntityType="ZTSWSD_TCAPPROVAL_SRV.Note" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="Volume_PeriodSet" Association="ZTSWSD_TCAPPROVAL_SRV.Volume_Period" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="VolumeSet" Role="FromRole_Volume_Period"/>
+                    <End EntitySet="PeriodSet" Role="ToRole_Volume_Period"/>
+                </AssociationSet>
+                <AssociationSet Name="TCItemDetails_SalesPricingConditions" Association="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail_SalesPricingConditions" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCItemDetails" Role="FromRole_TCItemDetail_SalesPricingConditions"/>
+                    <End EntitySet="SalesPricingConditions" Role="ToRole_TCItemDetail_SalesPricingConditions"/>
+                </AssociationSet>
+                <AssociationSet Name="ApproveLevel_ApprovingHistorySet" Association="ZTSWSD_TCAPPROVAL_SRV.ApproveLevel_ApprovingHistory" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ApproveLevelSet" Role="FromRole_ApproveLevel_ApprovingHistory"/>
+                    <End EntitySet="ApprovingHistorySet" Role="ToRole_ApproveLevel_ApprovingHistory"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_Notes_AssocSet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Notes" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_Notes"/>
+                    <End EntitySet="Notes" Role="ToRole_TCHeader_Notes"/>
+                </AssociationSet>
+                <AssociationSet Name="TCItemGenerals_TCItemDetails" Association="ZTSWSD_TCAPPROVAL_SRV.TCItemGeneral_TCItemDetail" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCItemGenerals" Role="FromRole_TCItemGeneral_TCItemDetail"/>
+                    <End EntitySet="TCItemDetails" Role="ToRole_TCItemGeneral_TCItemDetail"/>
+                </AssociationSet>
+                <AssociationSet Name="ApproveIteration_ApproveLevelSet" Association="ZTSWSD_TCAPPROVAL_SRV.ApproveIteration_ApproveLevel" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ApproveIterationSet" Role="FromRole_ApproveIteration_ApproveLevel"/>
+                    <End EntitySet="ApproveLevelSet" Role="ToRole_ApproveIteration_ApproveLevel"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_ProductSet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_Product"/>
+                    <End EntitySet="ProductSet" Role="ToRole_TCHeader_Product"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_TCItemGenerals_AssocSet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_TCItemGenerals" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_TCItemGenerals"/>
+                    <End EntitySet="TCItemGenerals" Role="ToRole_TCHeader_TCItemGenerals"/>
+                </AssociationSet>
+                <AssociationSet Name="Product_VolumeSet" Association="ZTSWSD_TCAPPROVAL_SRV.Product_Volume" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProductSet" Role="FromRole_Product_Volume"/>
+                    <End EntitySet="VolumeSet" Role="ToRole_Product_Volume"/>
+                </AssociationSet>
+                <AssociationSet Name="Workitem_TCHeaders_AssocSet" Association="ZTSWSD_TCAPPROVAL_SRV.Workitem_TCHeaders" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Workitems" Role="FromRole_Workitem_TCHeaders"/>
+                    <End EntitySet="TCHeaders" Role="ToRole_Workitem_TCHeaders"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_CounterpartySet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Counterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_Counterparty"/>
+                    <End EntitySet="CounterpartySet" Role="ToRole_TCHeader_Counterparty"/>
+                </AssociationSet>
+                <AssociationSet Name="Volume_RouteSet" Association="ZTSWSD_TCAPPROVAL_SRV.Volume_Route" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="VolumeSet" Role="FromRole_Volume_Route"/>
+                    <End EntitySet="RouteSet" Role="ToRole_Volume_Route"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_Attachments_AssocSet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_Attachments" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_Attachments"/>
+                    <End EntitySet="Attachments" Role="ToRole_TCHeader_Attachments"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_ApproveIterationSet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_ApproveIteration" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_ApproveIteration"/>
+                    <End EntitySet="ApproveIterationSet" Role="ToRole_TCHeader_ApproveIteration"/>
+                </AssociationSet>
+                <AssociationSet Name="TCItemDetails_PurchasingPricingCondition" Association="ZTSWSD_TCAPPROVAL_SRV.TCItemDetail_PurchasingPricingConditions" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCItemDetails" Role="FromRole_TCItemDetail_PurchasingPricingConditions"/>
+                    <End EntitySet="PurchasingPricingConditions" Role="ToRole_TCItemDetail_PurchasingPricingConditions"/>
+                </AssociationSet>
+                <AssociationSet Name="TCHeader_BusinessCardSet" Association="ZTSWSD_TCAPPROVAL_SRV.TCHeader_BusinessCard" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="TCHeaders" Role="FromRole_TCHeader_BusinessCard"/>
+                    <End EntitySet="BusinessCards" Role="ToRole_TCHeader_BusinessCard"/>
+                </AssociationSet>
+                <FunctionImport Name="declineTradingContract" ReturnType="ZTSWSD_TCAPPROVAL_SRV.ActionResult" m:HttpMethod="POST">
+                    <Parameter Name="WorkitemID" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="Comment" Type="Edm.String" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="approveTradingContract" ReturnType="ZTSWSD_TCAPPROVAL_SRV.ActionResult" m:HttpMethod="POST">
+                    <Parameter Name="WorkitemID" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="ForAll" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="Comment" Type="Edm.String" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="reserveWorkitem" ReturnType="ZTSWSD_TCAPPROVAL_SRV.ActionResult" m:HttpMethod="POST">
+                    <Parameter Name="WorkitemID" Type="Edm.String" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="resetWorkitemReservation" ReturnType="ZTSWSD_TCAPPROVAL_SRV.ActionResult" m:HttpMethod="POST">
+                    <Parameter Name="WorkitemID" Type="Edm.String" Mode="In"/>
+                </FunctionImport>
+                <FunctionImport Name="forwardWorkitem" ReturnType="ZTSWSD_TCAPPROVAL_SRV.ActionResult" m:HttpMethod="POST">
+                    <Parameter Name="Comment" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="WorkitemID" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="ForwardToUser" Type="Edm.String" Mode="In"/>
+                </FunctionImport>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTSWSD_TCAPPROVAL_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTSWSD_TCAPPROVAL_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

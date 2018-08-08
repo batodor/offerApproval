@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog class="sapUiContentPadding" id="approveDialog">
+		<content>
+			<Text text="" id="approveText" class="smallMarginBottom" />
+			<TextArea maxLength="300" rows="7" width="100%" showExceededText="true" />
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" custom:id="approveDialog" type="Back" press="dialogCancel"/>
+			<Button text="{i18n>ok}" id="dialogOk" type="Accept" press="dialogOk"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
