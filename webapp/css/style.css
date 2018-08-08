@@ -62,12 +62,20 @@
     border-color: red !important;
     color: red !important;
 }
-
+.sapFDynamicPageTitle{
+	justify-content: center;
+	padding: 0 1rem !important;
+}
 .sapFDynamicPageTitleMain>.sapFDynamicPageTitleMainInner{
 	align-items: center;
 }
 .paddingRem{
 	padding: 1rem;
+}
+.sapMLIBSelected .sapMText,
+.sapMLIBSelected .sapMObjectNumberText,
+.sapMLIBSelected .sapMObjectNumberUnit{
+	color: #000 !important;
 }
 .red{
 	color: red !important;

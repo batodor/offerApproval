@@ -3,8 +3,6 @@
 		<headerToolbar>
 			<Toolbar height="3rem">
 				<Title text="CIF - Gwangyang" />
-				<ToolbarSpacer />
-				<CheckBox select="onCheckBoxSelect" selected="false" />
 			</Toolbar>
 		</headerToolbar>
 		<content>

@@ -3,8 +3,6 @@
 		<headerToolbar>
 			<Toolbar height="3rem">
 				<Title text="01" />
-				<ToolbarSpacer />
-				<CheckBox select="onCheckBoxSelect" custom:id="volume" selected="false" />
 			</Toolbar>
 		</headerToolbar>
 		<content>

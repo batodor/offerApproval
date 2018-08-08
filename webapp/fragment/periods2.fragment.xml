@@ -3,8 +3,6 @@
 		<headerToolbar>
 			<Toolbar height="3rem">
 				<Title text="01.09.18 - 30.09.18" />
-				<ToolbarSpacer />
-				<CheckBox select="onCheckBoxSelect" selected="false" />
 			</Toolbar>
 		</headerToolbar>
 		<content>
