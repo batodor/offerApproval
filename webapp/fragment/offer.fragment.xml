@@ -12,15 +12,31 @@
 				<cells>
 					<Text text="Fixed Volume"/>
 					<Text text="Russian Steam Coal"/>
-					<Text text="90 000 TO +/- 10%"/>
-					<Text text="04.2018 – 12.2018"/>
+					<Text text="210 000 TO +/- 10%"/>
+					<Text text="06.2018 – 08.2018"/>
 				</cells>
 			</ColumnListItem>
 			<ColumnListItem>
 				<cells>
 					<Text text="Price"/>
-					<Text text="API2 – 6 USD"/>
-					<Text text="FOB Vyborg"/>
+					<Text text="101,2 USD"/>
+					<Text text="CIF - Shanghai"/>
+					<Text text="6000 NAR"/>
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="Optional Volume"/>
+					<Text text="Russian Steam Coal"/>
+					<Text text="70 000 TO +/- 10%"/>
+					<Text text="09.2018 – 09.2018"/>
+				</cells>
+			</ColumnListItem>
+			<ColumnListItem>
+				<cells>
+					<Text text="Price"/>
+					<Text text="104,6 USD"/>
+					<Text text="CIF - Gwangyang"/>
 					<Text text="6000 NAR"/>
 				</cells>
 			</ColumnListItem>

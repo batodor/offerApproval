@@ -1,42 +1,68 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Table growing="true" growingThreshold="20" growingScrollToLoad="true" noDataText="{i18n>noData}">
-		<columns>
-			<Column hAlign="Left">
-				<header>
-					<Label text="Partner Name" design="Bold"></Label>
-				</header>
-			</Column>
-			<Column hAlign="Center">
-				<header>
-					<Label text="Rating" design="Bold"></Label>
-				</header>
-			</Column>
-			<Column hAlign="Center">
-				<header>
-					<Label text="Blacklist Status" design="Bold"></Label>
-				</header>
-			</Column>
-			<Column hAlign="Center">
-				<header>
-					<Label text="Country Sanctions" design="Bold"></Label>
-				</header>
-			</Column>
-			<Column hAlign="Center">
-				<header>
-					<Label text="CP risks" design="Bold"></Label>
-				</header>
-			</Column>
-		</columns>
-		<items>
-			<ColumnListItem>
-				<cells>
-					<Text text="Datang Overseas (Beijing)" />
-					<Text text="B" />
-					<Text text="Not Blacklisted" />
-					<Text text="None" />
-					<Text text="None" />
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
+	<VBox class="padding">
+		<HBox justifyContent="SpaceBetween" width="100%">
+			<VBox class="leftVBoxStyle" width="50%">
+				<Label text="Partner Name"></Label>
+				<Text text="Datang Overseas (Beijing)" />
+			</VBox>
+			<VBox class="rightVBoxStyle" width="50%">
+				<Label text="Rating"></Label>
+				<Text text="B" />
+			</VBox>
+		</HBox>
+		<HBox justifyContent="SpaceBetween" width="100%">
+			<VBox class="leftVBoxStyle" width="50%">
+				<Label class="topLabel" text="Blacklist Status"></Label>
+				<Text text="Not Blacklisted" />
+			</VBox>
+			<VBox class="rightVBoxStyle" width="50%">
+				<Label class="topLabel" text="Country Sanctions"></Label>
+				<Text text="Korea" class="red" />
+			</VBox>
+		</HBox>
+		<VBox class="leftVBoxStyle" width="50%">
+			<Label text="CP risks" class="topLabel"></Label>
+			<Text text="None" />
+		</VBox>
+	</VBox>
+	<!--<Table growing="true" growingThreshold="20" growingScrollToLoad="true" noDataText="{i18n>noData}">-->
+	<!--	<columns>-->
+	<!--		<Column hAlign="Left">-->
+	<!--			<header>-->
+	<!--				<Label text="Partner Name" design="Bold"></Label>-->
+	<!--			</header>-->
+	<!--		</Column>-->
+	<!--		<Column hAlign="Center">-->
+	<!--			<header>-->
+	<!--				<Label text="Rating" design="Bold"></Label>-->
+	<!--			</header>-->
+	<!--		</Column>-->
+	<!--		<Column hAlign="Center">-->
+	<!--			<header>-->
+	<!--				<Label text="Blacklist Status" design="Bold"></Label>-->
+	<!--			</header>-->
+	<!--		</Column>-->
+	<!--		<Column hAlign="Center">-->
+	<!--			<header>-->
+	<!--				<Label text="Country Sanctions" design="Bold"></Label>-->
+	<!--			</header>-->
+	<!--		</Column>-->
+	<!--		<Column hAlign="Center">-->
+	<!--			<header>-->
+	<!--				<Label text="CP risks" design="Bold"></Label>-->
+	<!--			</header>-->
+	<!--		</Column>-->
+	<!--	</columns>-->
+	<!--	<items>-->
+	<!--		<ColumnListItem>-->
+	<!--			<cells>-->
+	<!--				<Text text="Datang Overseas (Beijing)" />-->
+	<!--				<Text text="B" />-->
+	<!--				<Text text="Not Blacklisted" />-->
+	<!--				<Text text="None" />-->
+	<!--				<Text text="None" />-->
+	<!--			</cells>-->
+	<!--		</ColumnListItem>-->
+	<!--	</items>-->
+	<!--</Table>-->
 </core:FragmentDefinition>
