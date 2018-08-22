@@ -290,9 +290,10 @@ sap.ui.define([
 				});
 			},
 
-			_onMasterMatched :  function() {
+			_onMasterMatched :  function(oEvent) {
 				//Set the layout property of the FCL control to 'OneColumn'
 				this.getModel("appView").setProperty("/layout", "OneColumn");
+				this.type = oEvent.getParameter("arguments").type;
 			},
 
 			/**
@@ -306,7 +307,8 @@ sap.ui.define([
 				// set the layout property of FCL control to show two columns
 				this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
 				this.getRouter().navTo("object", {
-					objectId : oItem.getBindingContext().getProperty("WorkitemID")
+					objectId : oItem.getBindingContext().getProperty("WorkitemID"),
+					type: this.type
 				}, bReplace);
 			},
 

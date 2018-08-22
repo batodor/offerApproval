@@ -72,6 +72,7 @@ sap.ui.define([
 			 */
 			_onObjectMatched : function (oEvent) {
 				var sObjectId =  oEvent.getParameter("arguments").objectId;
+				this.type =  oEvent.getParameter("arguments").type;
 				this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
 				this.getModel().metadataLoaded().then( function() {
 					var sObjectPath = this.getModel().createKey("Workitems", {
@@ -79,6 +80,15 @@ sap.ui.define([
 					});
 					this._bindView("/" + sObjectPath);
 				}.bind(this));
+				if(this.type){
+					this.byId("mainDeleteButton").setVisible(true);
+					this.byId("mainCopyButton").setVisible(true);
+					this.byId("mainEditButton").setVisible(true);
+				}else{
+					this.byId("mainApproveButton").setVisible(true);
+					this.byId("mainRejectButton").setVisible(true);
+					this.byId("mainForwardButton").setVisible(true);
+				}
 			},
 
 			/**

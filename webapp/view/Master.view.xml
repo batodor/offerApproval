@@ -83,13 +83,14 @@
 					<ObjectListItem
 						type="Navigation"
 						press="onSelectionChange"
-						title="{= ${Customer} === '1000011406' ? 'Datang Overseas (Beijing)' : ${Customer} }"
+						title="{CustomerDescription}"
 						number="7M"
 						numberUnit="USD">
 						<attributes>
-							<ObjectAttribute title="Trading Contract" text="30" />
-							<ObjectAttribute title="Variant Number" text="3" />
-							<ObjectAttribute title="Validity Date" text="10.08.2018 01:00 GMT+0" />
+							<ObjectAttribute title="Trading Contract" text="{TCNumber}" />
+							<ObjectAttribute title="Variant Number" text="{ItemCount}" />
+							<ObjectAttribute title="Validity Date" 
+								text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"  />
 						</attributes>
 					</ObjectListItem>
 				</items>

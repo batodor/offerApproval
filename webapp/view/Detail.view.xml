@@ -69,9 +69,13 @@
 			<Button press="toggleFullScreen" class="fullscreen" type="Back" text="{i18n>fullscreen}" />
 			<Button press="onCloseDetailPress" class="closeOffer" type="Back" text="{i18n>close}" />
 			<ToolbarSpacer/>
-			<Button press="approve" custom:id="approveDialog" type="Accept" text="{i18n>approve}" />
-			<Button press="reject" custom:id="approveDialog" type="Reject" text="{i18n>reject}" />
-			<Button press="forward" custom:id="approveDialog" type="Default" text="{i18n>forward}" />
+			<Button press="approve" id="mainApproveButton" visible="false" custom:id="approveDialog" type="Accept" text="{i18n>approve}" />
+			<Button press="reject" id="mainRejectButton" visible="false" custom:id="approveDialog" type="Reject" text="{i18n>reject}" />
+			<Button press="forward" id="mainForwardButton" visible="false" custom:id="approveDialog" type="Emphasized" text="{i18n>forward}" />
+			
+			<Button id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
+			<Button id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />
+			<Button id="mainEditButton" visible="false" type="Accept" text="{i18n>edit}" />
 		</semantic:customFooterContent>
 	</semantic:SemanticPage>
 

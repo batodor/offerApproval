@@ -89,12 +89,17 @@
 			},
 			"routes": [
 				{
-					"pattern": "",
+					"pattern": [
+						"",
+						"Type/{type}"
+					],
 					"name": "master",
 					"target": "master"
 				},
 				{
-					"pattern": "Workitems/{objectId}",
+					"pattern": [
+						"Workitems/{objectId}/:type:"
+					],
 					"name": "object",
 					"target": [
 						"master",
