@@ -7,22 +7,10 @@
             xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZTS_OFFER_SRV" xml:lang="ru" sap:schema-version="1">
             <EntityType Name="dictionaryTradingPurpose" sap:content-version="1">
                 <Key>
-                    <PropertyRef Name="Type"/>
                     <PropertyRef Name="Code"/>
                 </Key>
-                <Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="offerList" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="TCNumber"/>
-                </Key>
-                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="TradingPurpose" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="CreateBy" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="CreateOn" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <NavigationProperty Name="ToOfferHeader" Relationship="ZTS_OFFER_SRV.OfferListToOfferHeader" FromRole="FromRole_OfferListToOfferHeader" ToRole="ToRole_OfferListToOfferHeader"/>
             </EntityType>
             <EntityType Name="dictionaryTrader" sap:content-version="1">
                 <Key>
@@ -84,6 +72,112 @@
                 <Property Name="FileName" Type="Edm.String" sap:unicode="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
                 <Property Name="CreateOn" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
             </EntityType>
+            <EntityType Name="limit" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                    <PropertyRef Name="Partner"/>
+                </Key>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Partner" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Tonnage" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:unit="TonnageUoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TonnageUoM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Period" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:unit="PeriodUoM" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PeriodUoM" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PaymentCondition" Type="Edm.String" MaxLength="100" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="dictionaryProduct" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="ProductType" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="dictionaryOfferType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="dictionaryProductType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
+            <EntityType Name="Workitem" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="WorkitemID"/>
+                    <PropertyRef Name="TCNumber"/>
+                </Key>
+                <Property Name="WorkitemID" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Торговый контр." sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="Value" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:unit="ValueCurrency" sap:label="Стоимость нетто" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValueCurrency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Валюта ТоргКнтр" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Side" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Страница" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="CustomerDescription" Type="Edm.String" MaxLength="35" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="VendorDescription" Type="Edm.String" MaxLength="35" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="DealNumber" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToOfferVolume" Relationship="ZTS_OFFER_SRV.WorkitemToOfferVolume" FromRole="FromRole_WorkitemToOfferVolume" ToRole="ToRole_WorkitemToOfferVolume"/>
+                <NavigationProperty Name="ToApprIterations" Relationship="ZTS_OFFER_SRV.WorkitemToApprovalIterations" FromRole="FromRole_WorkitemToApprovalIterations" ToRole="ToRole_WorkitemToApprovalIterations"/>
+                <NavigationProperty Name="ToOfferCounterparty" Relationship="ZTS_OFFER_SRV.WorkitemToOfferCounterparty" FromRole="FromRole_WorkitemToOfferCounterparty" ToRole="ToRole_WorkitemToOfferCounterparty"/>
+            </EntityType>
+            <EntityType Name="ApprovalAgent" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Iteration"/>
+                    <PropertyRef Name="Level"/>
+                    <PropertyRef Name="Sequence"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iteration" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Level" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Sequence" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="FIO" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Executed" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Comment" Type="Edm.String" MaxLength="200" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ApprovalLevel" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Iteration"/>
+                    <PropertyRef Name="Level"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iteration" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Level" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LevelName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToAgents" Relationship="ZTS_OFFER_SRV.ApprovalLevelToAgents" FromRole="FromRole_ApprovalLevelToAgents" ToRole="ToRole_ApprovalLevelToAgents"/>
+            </EntityType>
+            <EntityType Name="ApprovalIteration" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Iteration"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Iteration" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToLevels" Relationship="ZTS_OFFER_SRV.ApprovalIterationToLevels" FromRole="FromRole_ApprovalIterationToLevels" ToRole="ToRole_ApprovalIterationToLevels"/>
+            </EntityType>
+            <EntityType Name="offerList" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="TradingPurpose" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CounterpartyCode" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CounterpartyName" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ProductType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Trader" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Incoterms" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="DeliveryPoint" Type="Edm.String" Nullable="false" MaxLength="28" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="ValidityDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+            </EntityType>
             <EntityType Name="dictionaryCompanyBranch" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Code"/>
@@ -105,15 +199,6 @@
                 <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
             </EntityType>
-            <EntityType Name="counterpartyDetail" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="BlackList" Type="Edm.Boolean" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-            </EntityType>
             <EntityType Name="dictionaryCounterpartyRole" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="Code"/>
@@ -127,23 +212,28 @@
                 </Key>
                 <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:updatable="false" sap:filterable="false"/>
                 <Property Name="TradingPurpose" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="OfferType" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="CompanyBranch" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="Trader" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="VolumeUOM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:filterable="false" sap:semantics="currency-code"/>
-                <Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="Trader" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="VolumeUOM" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="VariantNumber" Type="Edm.String" MaxLength="10" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="Counterparty" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="ProductType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="Product" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="PaymentMethod" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="PaymentTerm" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="Comments" Type="Edm.String" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="MeansOfTransport" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="Comments" Type="Edm.String" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="LastChanged" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToLimit" Relationship="ZTS_OFFER_SRV.OfferHeaderToLimit" FromRole="FromRole_OfferHeaderToLimit" ToRole="ToRole_OfferHeaderToLimit"/>
+                <NavigationProperty Name="ToRisksByOffer" Relationship="ZTS_OFFER_SRV.OfferHeaderToRisksByOffer" FromRole="FromRole_OfferHeaderToRisksByOffer" ToRole="ToRole_OfferHeaderToRisksByOffer"/>
                 <NavigationProperty Name="ToOfferVolume" Relationship="ZTS_OFFER_SRV.OfferHeaderToOfferVolume" FromRole="FromRole_OfferHeaderToOfferVolume" ToRole="ToRole_OfferHeaderToOfferVolume"/>
-                <NavigationProperty Name="ToCounterpartyDetail" Relationship="ZTS_OFFER_SRV.OfferHeaderToCounterpartyDetail" FromRole="FromRole_OfferHeaderToCounterpartyDetail" ToRole="ToRole_OfferHeaderToCounterpartyDetail"/>
                 <NavigationProperty Name="ToAttachment" Relationship="ZTS_OFFER_SRV.OfferHeaderToAttachment" FromRole="FromRole_OfferHeaderToAttachment" ToRole="ToRole_OfferHeaderToAttachment"/>
+                <NavigationProperty Name="ToOfferCounterparty" Relationship="ZTS_OFFER_SRV.OfferHeaderToOfferCounterparty" FromRole="FromRole_OfferHeaderToOfferCounterparty" ToRole="ToRole_OfferHeaderToOfferCounterparty"/>
             </EntityType>
             <EntityType Name="dictionaryIncoterms" sap:content-version="1">
                 <Key>
@@ -151,20 +241,6 @@
                 </Key>
                 <Property Name="Incoterms" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Description" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="dictionarySalesDivisions" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-            </EntityType>
-            <EntityType Name="dictionaryType" sap:content-version="1">
-                <Key>
-                    <PropertyRef Name="Code"/>
-                </Key>
-                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="Name" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="dictionaryPaymentTerm" sap:content-version="1">
                 <Key>
@@ -189,9 +265,15 @@
                 <Property Name="VolumeNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false"/>
                 <Property Name="VolumeType" Type="Edm.Boolean" sap:unicode="false"/>
                 <Property Name="VolumeOwner" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:filterable="false"/>
-                <NavigationProperty Name="ToOfferPeriodAndPrice" Relationship="ZTS_OFFER_SRV.OfferVolumeToOfferPeriodAndPrice" FromRole="FromRole_OfferVolumeToOfferPeriodAndPrice" ToRole="ToRole_OfferVolumeToOfferPeriodAndPrice"/>
+                <Property Name="Incoterms" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="DeliveryPoint" Type="Edm.String" Nullable="false" MaxLength="28" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="IndexFormula" Type="Edm.String" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="FixPrice" Type="Edm.Decimal" Nullable="false" Precision="23" Scale="4" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="CV" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="0" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="CVBase" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToOfferPeriod" Relationship="ZTS_OFFER_SRV.OfferVolumeToOfferPeriod" FromRole="FromRole_OfferVolumeToOfferPeriod" ToRole="ToRole_OfferVolumeToOfferPeriod"/>
             </EntityType>
-            <EntityType Name="offerPeriodAndPrice" sap:content-version="1">
+            <EntityType Name="offerPeriod" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="TCNumber"/>
                     <PropertyRef Name="VolumeNumber"/>
@@ -199,25 +281,19 @@
                     <PropertyRef Name="DateTo"/>
                 </Key>
                 <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:updatable="false" sap:filterable="false"/>
-                <Property Name="TCPosition" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="TCPosition" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:updatable="false" sap:filterable="false"/>
                 <Property Name="VolumeNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:updatable="false" sap:filterable="false"/>
                 <Property Name="DateFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:filterable="false"/>
                 <Property Name="DateTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="NumberOfShipments" Type="Edm.String" MaxLength="2" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="ShipmentSizeMin" Type="Edm.Decimal" Precision="15" Scale="3" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="ShipmentSizeMax" Type="Edm.Decimal" Precision="15" Scale="3" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="ShipmentTolerance" Type="Edm.Decimal" Precision="10" Scale="3" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="NumberOfShipments" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="ShipmentSizeMin" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="ShipmentSizeMax" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="3" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="ShipmentTolerance" Type="Edm.Decimal" Precision="10" Scale="3" sap:unicode="false" sap:unit="ShipmentToleranceUOM" sap:filterable="false"/>
                 <Property Name="ShipmentToleranceUOM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="TonnageMin" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="TonnageMax" Type="Edm.Decimal" Precision="15" Scale="2" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="TonnageTolerance" Type="Edm.Decimal" Precision="10" Scale="3" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="TonnageMin" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="TonnageMax" Type="Edm.Decimal" Nullable="false" Precision="15" Scale="2" sap:unicode="false" sap:filterable="false"/>
+                <Property Name="TonnageTolerance" Type="Edm.Decimal" Precision="10" Scale="3" sap:unicode="false" sap:unit="TonnageToleranceUOM" sap:filterable="false"/>
                 <Property Name="TonnageToleranceUOM" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
-                <Property Name="FixPrice" Type="Edm.Decimal" Precision="23" Scale="4" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="Incoterms" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="DeliveryPoint" Type="Edm.String" MaxLength="28" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="CV" Type="Edm.Decimal" Precision="5" Scale="0" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="CVBase" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:filterable="false"/>
-                <Property Name="IndexFormula" Type="Edm.String" sap:unicode="false" sap:filterable="false"/>
             </EntityType>
             <EntityType Name="dictionaryDeliveryPoint" sap:content-version="1">
                 <Key>
@@ -225,8 +301,74 @@
                 </Key>
                 <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
                 <Property Name="Name" Type="Edm.String" MaxLength="30" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
-                <Property Name="Country" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
             </EntityType>
+            <EntityType Name="complianceRisk" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Partner"/>
+                    <PropertyRef Name="RiskType"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Partner" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="RiskName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Color" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="LinkToComplianceRisks" Type="Edm.String" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="offerCounterparty" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="Code"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Code" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="Name" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="BlackList" Type="Edm.Boolean" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Country" Type="Edm.String" MaxLength="15" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Rating" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <NavigationProperty Name="ToComplianceRisk" Relationship="ZTS_OFFER_SRV.OfferCounterpartyToComplianceRisk" FromRole="FromRole_OfferCounterpartyToComplianceRisk" ToRole="ToRole_OfferCounterpartyToComplianceRisk"/>
+            </EntityType>
+            <EntityType Name="risksByOffer" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="TCNumber"/>
+                    <PropertyRef Name="RiskType"/>
+                </Key>
+                <Property Name="TCNumber" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="RiskType" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="RiskName" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="defaultProductByType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ProductType"/>
+                </Key>
+                <Property Name="ProductType" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="18" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:filterable="false"/>
+            </EntityType>
+            <ComplexType Name="CopyResult">
+                <Property Name="CopyingSuccessfully" Type="Edm.Boolean" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <ComplexType Name="ActionResult">
+                <Property Name="ActionSuccessful" Type="Edm.Boolean" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Message" Type="Edm.String" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </ComplexType>
+            <Association Name="OfferHeaderToLimit" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="FromRole_OfferHeaderToLimit"/>
+                <End Type="ZTS_OFFER_SRV.limit" Multiplicity="*" Role="ToRole_OfferHeaderToLimit"/>
+            </Association>
+            <Association Name="OfferHeaderToRisksByOffer" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="FromRole_OfferHeaderToRisksByOffer"/>
+                <End Type="ZTS_OFFER_SRV.risksByOffer" Multiplicity="*" Role="ToRole_OfferHeaderToRisksByOffer"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_OfferHeaderToRisksByOffer">
+                        <PropertyRef Name="TCNumber"/>
+                    </Principal>
+                    <Dependent Role="ToRole_OfferHeaderToRisksByOffer">
+                        <PropertyRef Name="TCNumber"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
             <Association Name="OfferHeaderToOfferVolume" sap:content-version="1">
                 <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="FromRole_OfferHeaderToOfferVolume"/>
                 <End Type="ZTS_OFFER_SRV.offerVolume" Multiplicity="*" Role="ToRole_OfferHeaderToOfferVolume"/>
@@ -238,10 +380,6 @@
                         <PropertyRef Name="TCNumber"/>
                     </Dependent>
                 </ReferentialConstraint>
-            </Association>
-            <Association Name="OfferHeaderToCounterpartyDetail" sap:content-version="1">
-                <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="FromRole_OfferHeaderToCounterpartyDetail"/>
-                <End Type="ZTS_OFFER_SRV.counterpartyDetail" Multiplicity="*" Role="ToRole_OfferHeaderToCounterpartyDetail"/>
             </Association>
             <Association Name="OfferHeaderToAttachment" sap:content-version="1">
                 <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="FromRole_OfferHeaderToAttachment"/>
@@ -255,27 +393,75 @@
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
-            <Association Name="OfferListToOfferHeader" sap:content-version="1">
-                <End Type="ZTS_OFFER_SRV.offerList" Multiplicity="1" Role="FromRole_OfferListToOfferHeader"/>
-                <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="ToRole_OfferListToOfferHeader"/>
+            <Association Name="OfferHeaderToOfferCounterparty" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.offerHeader" Multiplicity="1" Role="FromRole_OfferHeaderToOfferCounterparty"/>
+                <End Type="ZTS_OFFER_SRV.offerCounterparty" Multiplicity="*" Role="ToRole_OfferHeaderToOfferCounterparty"/>
+            </Association>
+            <Association Name="ApprovalLevelToAgents" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.ApprovalLevel" Multiplicity="1" Role="FromRole_ApprovalLevelToAgents"/>
+                <End Type="ZTS_OFFER_SRV.ApprovalAgent" Multiplicity="*" Role="ToRole_ApprovalLevelToAgents"/>
                 <ReferentialConstraint>
-                    <Principal Role="FromRole_OfferListToOfferHeader">
+                    <Principal Role="FromRole_ApprovalLevelToAgents">
                         <PropertyRef Name="TCNumber"/>
+                        <PropertyRef Name="Iteration"/>
+                        <PropertyRef Name="Level"/>
                     </Principal>
-                    <Dependent Role="ToRole_OfferListToOfferHeader">
+                    <Dependent Role="ToRole_ApprovalLevelToAgents">
                         <PropertyRef Name="TCNumber"/>
+                        <PropertyRef Name="Iteration"/>
+                        <PropertyRef Name="Level"/>
                     </Dependent>
                 </ReferentialConstraint>
             </Association>
-            <Association Name="OfferVolumeToOfferPeriodAndPrice" sap:content-version="1">
-                <End Type="ZTS_OFFER_SRV.offerVolume" Multiplicity="1" Role="FromRole_OfferVolumeToOfferPeriodAndPrice"/>
-                <End Type="ZTS_OFFER_SRV.offerPeriodAndPrice" Multiplicity="*" Role="ToRole_OfferVolumeToOfferPeriodAndPrice"/>
+            <Association Name="OfferCounterpartyToComplianceRisk" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.offerCounterparty" Multiplicity="1" Role="FromRole_OfferCounterpartyToComplianceRisk"/>
+                <End Type="ZTS_OFFER_SRV.complianceRisk" Multiplicity="*" Role="ToRole_OfferCounterpartyToComplianceRisk"/>
                 <ReferentialConstraint>
-                    <Principal Role="FromRole_OfferVolumeToOfferPeriodAndPrice">
+                    <Principal Role="FromRole_OfferCounterpartyToComplianceRisk">
+                        <PropertyRef Name="TCNumber"/>
+                        <PropertyRef Name="Code"/>
+                    </Principal>
+                    <Dependent Role="ToRole_OfferCounterpartyToComplianceRisk">
+                        <PropertyRef Name="TCNumber"/>
+                        <PropertyRef Name="Partner"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="WorkitemToOfferVolume" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.Workitem" Multiplicity="1" Role="FromRole_WorkitemToOfferVolume"/>
+                <End Type="ZTS_OFFER_SRV.offerVolume" Multiplicity="*" Role="ToRole_WorkitemToOfferVolume"/>
+            </Association>
+            <Association Name="WorkitemToApprovalIterations" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.Workitem" Multiplicity="1" Role="FromRole_WorkitemToApprovalIterations"/>
+                <End Type="ZTS_OFFER_SRV.ApprovalIteration" Multiplicity="*" Role="ToRole_WorkitemToApprovalIterations"/>
+            </Association>
+            <Association Name="WorkitemToOfferCounterparty" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.Workitem" Multiplicity="1" Role="FromRole_WorkitemToOfferCounterparty"/>
+                <End Type="ZTS_OFFER_SRV.offerCounterparty" Multiplicity="*" Role="ToRole_WorkitemToOfferCounterparty"/>
+            </Association>
+            <Association Name="ApprovalIterationToLevels" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.ApprovalIteration" Multiplicity="1" Role="FromRole_ApprovalIterationToLevels"/>
+                <End Type="ZTS_OFFER_SRV.ApprovalLevel" Multiplicity="*" Role="ToRole_ApprovalIterationToLevels"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_ApprovalIterationToLevels">
+                        <PropertyRef Name="TCNumber"/>
+                        <PropertyRef Name="Iteration"/>
+                    </Principal>
+                    <Dependent Role="ToRole_ApprovalIterationToLevels">
+                        <PropertyRef Name="TCNumber"/>
+                        <PropertyRef Name="Iteration"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="OfferVolumeToOfferPeriod" sap:content-version="1">
+                <End Type="ZTS_OFFER_SRV.offerVolume" Multiplicity="1" Role="FromRole_OfferVolumeToOfferPeriod"/>
+                <End Type="ZTS_OFFER_SRV.offerPeriod" Multiplicity="*" Role="ToRole_OfferVolumeToOfferPeriod"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_OfferVolumeToOfferPeriod">
                         <PropertyRef Name="TCNumber"/>
                         <PropertyRef Name="VolumeNumber"/>
                     </Principal>
-                    <Dependent Role="ToRole_OfferVolumeToOfferPeriodAndPrice">
+                    <Dependent Role="ToRole_OfferVolumeToOfferPeriod">
                         <PropertyRef Name="TCNumber"/>
                         <PropertyRef Name="VolumeNumber"/>
                     </Dependent>
@@ -283,7 +469,6 @@
             </Association>
             <EntityContainer Name="ZTS_OFFER_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
                 <EntitySet Name="dictionaryTradingPurposeSet" EntityType="ZTS_OFFER_SRV.dictionaryTradingPurpose" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="offerListSet" EntityType="ZTS_OFFER_SRV.offerList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryTraderSet" EntityType="ZTS_OFFER_SRV.dictionaryTrader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryVolumeUOMSet" EntityType="ZTS_OFFER_SRV.dictionaryVolumeUOM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryVolumeTypeSet" EntityType="ZTS_OFFER_SRV.dictionaryVolumeType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
@@ -292,27 +477,45 @@
                 <EntitySet Name="dictionaryToleranceUOMSet" EntityType="ZTS_OFFER_SRV.dictionaryToleranceUOM" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryMeansOfTransportSet" EntityType="ZTS_OFFER_SRV.dictionaryMeansOfTransport" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="AttachmentSet" EntityType="ZTS_OFFER_SRV.Attachment" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="limitSet" EntityType="ZTS_OFFER_SRV.limit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="dictionaryProductSet" EntityType="ZTS_OFFER_SRV.dictionaryProduct" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="dictionaryOfferTypeSet" EntityType="ZTS_OFFER_SRV.dictionaryOfferType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="dictionaryProductTypeSet" EntityType="ZTS_OFFER_SRV.dictionaryProductType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="WorkitemSet" EntityType="ZTS_OFFER_SRV.Workitem" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ApprovalAgentSet" EntityType="ZTS_OFFER_SRV.ApprovalAgent" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ApprovalLevelSet" EntityType="ZTS_OFFER_SRV.ApprovalLevel" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ApprovalIterationSet" EntityType="ZTS_OFFER_SRV.ApprovalIteration" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="offerListSet" EntityType="ZTS_OFFER_SRV.offerList" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryCompanyBranchSet" EntityType="ZTS_OFFER_SRV.dictionaryCompanyBranch" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryCurrencySet" EntityType="ZTS_OFFER_SRV.dictionaryCurrency" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryStatusSet" EntityType="ZTS_OFFER_SRV.dictionaryStatus" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="counterpartyDetailSet" EntityType="ZTS_OFFER_SRV.counterpartyDetail" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryCounterpartyRoleSet" EntityType="ZTS_OFFER_SRV.dictionaryCounterpartyRole" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="offerHeaderSet" EntityType="ZTS_OFFER_SRV.offerHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryIncotermsSet" EntityType="ZTS_OFFER_SRV.dictionaryIncoterms" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="dictionarySalesDivisionsSet" EntityType="ZTS_OFFER_SRV.dictionarySalesDivisions" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="dictionaryTypeSet" EntityType="ZTS_OFFER_SRV.dictionaryType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryPaymentTermSet" EntityType="ZTS_OFFER_SRV.dictionaryPaymentTerm" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryPaymentMethodSet" EntityType="ZTS_OFFER_SRV.dictionaryPaymentMethod" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="offerVolumeSet" EntityType="ZTS_OFFER_SRV.offerVolume" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <EntitySet Name="offerPeriodAndPriceSet" EntityType="ZTS_OFFER_SRV.offerPeriodAndPrice" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="offerPeriodSet" EntityType="ZTS_OFFER_SRV.offerPeriod" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
                 <EntitySet Name="dictionaryDeliveryPointSet" EntityType="ZTS_OFFER_SRV.dictionaryDeliveryPoint" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
-                <AssociationSet Name="OfferListToOfferHeaderSet" Association="ZTS_OFFER_SRV.OfferListToOfferHeader" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="offerListSet" Role="FromRole_OfferListToOfferHeader"/>
-                    <End EntitySet="offerHeaderSet" Role="ToRole_OfferListToOfferHeader"/>
+                <EntitySet Name="complianceRiskSet" EntityType="ZTS_OFFER_SRV.complianceRisk" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="offerCounterpartySet" EntityType="ZTS_OFFER_SRV.offerCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="risksByOfferSet" EntityType="ZTS_OFFER_SRV.risksByOffer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="defaultProductByTypeSet" EntityType="ZTS_OFFER_SRV.defaultProductByType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <AssociationSet Name="WorkitemToOfferVolumeSet" Association="ZTS_OFFER_SRV.WorkitemToOfferVolume" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkitemSet" Role="FromRole_WorkitemToOfferVolume"/>
+                    <End EntitySet="offerVolumeSet" Role="ToRole_WorkitemToOfferVolume"/>
                 </AssociationSet>
-                <AssociationSet Name="OfferVolumeToOfferPeriodAndPriceSet" Association="ZTS_OFFER_SRV.OfferVolumeToOfferPeriodAndPrice" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="offerVolumeSet" Role="FromRole_OfferVolumeToOfferPeriodAndPrice"/>
-                    <End EntitySet="offerPeriodAndPriceSet" Role="ToRole_OfferVolumeToOfferPeriodAndPrice"/>
+                <AssociationSet Name="OfferVolumeToOfferPeriodAndPriceSet" Association="ZTS_OFFER_SRV.OfferVolumeToOfferPeriod" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="offerVolumeSet" Role="FromRole_OfferVolumeToOfferPeriod"/>
+                    <End EntitySet="offerPeriodSet" Role="ToRole_OfferVolumeToOfferPeriod"/>
+                </AssociationSet>
+                <AssociationSet Name="WorkitemToOfferCounterpartySet" Association="ZTS_OFFER_SRV.WorkitemToOfferCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkitemSet" Role="FromRole_WorkitemToOfferCounterparty"/>
+                    <End EntitySet="offerCounterpartySet" Role="ToRole_WorkitemToOfferCounterparty"/>
+                </AssociationSet>
+                <AssociationSet Name="OfferCounterpartyToComplianceRiskSet" Association="ZTS_OFFER_SRV.OfferCounterpartyToComplianceRisk" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="offerCounterpartySet" Role="FromRole_OfferCounterpartyToComplianceRisk"/>
+                    <End EntitySet="complianceRiskSet" Role="ToRole_OfferCounterpartyToComplianceRisk"/>
                 </AssociationSet>
                 <AssociationSet Name="OfferHeaderToOfferVolumeSet" Association="ZTS_OFFER_SRV.OfferHeaderToOfferVolume" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="offerHeaderSet" Role="FromRole_OfferHeaderToOfferVolume"/>
@@ -322,10 +525,39 @@
                     <End EntitySet="offerHeaderSet" Role="FromRole_OfferHeaderToAttachment"/>
                     <End EntitySet="AttachmentSet" Role="ToRole_OfferHeaderToAttachment"/>
                 </AssociationSet>
-                <AssociationSet Name="OfferHeaderToCounterpartyDetailSet" Association="ZTS_OFFER_SRV.OfferHeaderToCounterpartyDetail" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
-                    <End EntitySet="offerHeaderSet" Role="FromRole_OfferHeaderToCounterpartyDetail"/>
-                    <End EntitySet="counterpartyDetailSet" Role="ToRole_OfferHeaderToCounterpartyDetail"/>
+                <AssociationSet Name="ApprovalIterationToLevelsSet" Association="ZTS_OFFER_SRV.ApprovalIterationToLevels" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ApprovalIterationSet" Role="FromRole_ApprovalIterationToLevels"/>
+                    <End EntitySet="ApprovalLevelSet" Role="ToRole_ApprovalIterationToLevels"/>
                 </AssociationSet>
+                <AssociationSet Name="ApprovalLevelToAgentsSet" Association="ZTS_OFFER_SRV.ApprovalLevelToAgents" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ApprovalLevelSet" Role="FromRole_ApprovalLevelToAgents"/>
+                    <End EntitySet="ApprovalAgentSet" Role="ToRole_ApprovalLevelToAgents"/>
+                </AssociationSet>
+                <AssociationSet Name="OfferHeaderToRisksByOfferSet" Association="ZTS_OFFER_SRV.OfferHeaderToRisksByOffer" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="offerHeaderSet" Role="FromRole_OfferHeaderToRisksByOffer"/>
+                    <End EntitySet="risksByOfferSet" Role="ToRole_OfferHeaderToRisksByOffer"/>
+                </AssociationSet>
+                <AssociationSet Name="OfferHeaderToOfferCounterpartySet" Association="ZTS_OFFER_SRV.OfferHeaderToOfferCounterparty" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="offerHeaderSet" Role="FromRole_OfferHeaderToOfferCounterparty"/>
+                    <End EntitySet="offerCounterpartySet" Role="ToRole_OfferHeaderToOfferCounterparty"/>
+                </AssociationSet>
+                <AssociationSet Name="WorkitemToApprovalIterationsSet" Association="ZTS_OFFER_SRV.WorkitemToApprovalIterations" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="WorkitemSet" Role="FromRole_WorkitemToApprovalIterations"/>
+                    <End EntitySet="ApprovalIterationSet" Role="ToRole_WorkitemToApprovalIterations"/>
+                </AssociationSet>
+                <AssociationSet Name="OfferHeaderToLimitSet" Association="ZTS_OFFER_SRV.OfferHeaderToLimit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="offerHeaderSet" Role="FromRole_OfferHeaderToLimit"/>
+                    <End EntitySet="limitSet" Role="ToRole_OfferHeaderToLimit"/>
+                </AssociationSet>
+                <FunctionImport Name="CopyOfferToTradingContract" ReturnType="ZTS_OFFER_SRV.CopyResult" m:HttpMethod="POST">
+                    <Parameter Name="OfferNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
+                <FunctionImport Name="SentOfferToApproval" ReturnType="ZTS_OFFER_SRV.ActionResult" m:HttpMethod="POST">
+                    <Parameter Name="ValidityDate" Type="Edm.DateTime" Mode="In" Precision="0"/>
+                    <Parameter Name="Recap" Type="Edm.Boolean" Mode="In"/>
+                    <Parameter Name="Comment" Type="Edm.String" Mode="In"/>
+                    <Parameter Name="TCNumber" Type="Edm.String" Mode="In" MaxLength="10"/>
+                </FunctionImport>
             </EntityContainer>
             <atom:link
                 xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="http://erd.corp.suek.ru:8000/sap/opu/odata/sap/ZTS_OFFER_SRV/$metadata"/>
