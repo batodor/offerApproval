@@ -74,6 +74,7 @@ sap.ui.define([
 				});
 
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
+				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
 			},
 
@@ -294,6 +295,22 @@ sap.ui.define([
 				//Set the layout property of the FCL control to 'OneColumn'
 				this.getModel("appView").setProperty("/layout", "OneColumn");
 				this.type = oEvent.getParameter("arguments").type;
+				var url = this.type ? "/offerListSet" : "/WorkitemSet";
+				this._oList.bindItems({
+					path: url,
+					template: this._oList['mBindingInfos'].items.template.clone()
+				});
+			},
+			
+			_onObjectMatched : function (oEvent) {
+				this.type = oEvent.getParameter("arguments").type;
+				var url = this.type ? "/offerListSet" : "/WorkitemSet";
+				if(this._oList.getItems().length === 0){
+					this._oList.bindItems({
+						path: url,
+						template: this._oList['mBindingInfos'].items.template.clone()
+					});
+				}
 			},
 
 			/**
@@ -306,10 +323,17 @@ sap.ui.define([
 				var bReplace = !Device.system.phone;
 				// set the layout property of FCL control to show two columns
 				this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-				this.getRouter().navTo("object", {
-					objectId : oItem.getBindingContext().getProperty("WorkitemID"),
-					type: this.type
-				}, bReplace);
+				if(this.type){
+					this.getRouter().navTo("object", {
+						TCNumber: oItem.getBindingContext().getProperty("TCNumber"),
+						type: this.type
+					}, bReplace);
+				}else{
+					this.getRouter().navTo("object", {
+						TCNumber: oItem.getBindingContext().getProperty("TCNumber"),
+						objectId: oItem.getBindingContext().getProperty("WorkitemID")
+					}, bReplace);
+				}
 			},
 
 			/**

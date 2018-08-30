@@ -23,14 +23,14 @@
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell width="1">
 						<VBox>
-							<Title id="objectHeader" titleStyle="H3" text="Datang Overseas (Beijing)" />
-							<Label text="SUEK AG / Khrabraya Ekaterina / Variant Number: 3" />
+							<Title id="objectHeader" titleStyle="H3" text="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'formatTitle'}" />
+							<Label text="SUEK AG / Khrabraya Ekaterina / Variant Number: {DealNumber}" />
 						</VBox>
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="1">
-						<VBox class=" alignRight">
+						<VBox class="alignRight">
 							<Label text="{i18n>validityDate}:" />
-							<Text text="10.08.2018 01:00 GMT+0"/>
+							<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"/>
 						</VBox>
 					</l:BlockLayoutCell>
 				</l:BlockLayoutRow>
@@ -42,13 +42,11 @@
 						<core:Fragment fragmentName="fragment.offer" type="XML"></core:Fragment>
 					</IconTabFilter>
 					<IconTabFilter icon="sap-icon://activity-items" text="{i18n>volumes}" key="volumes">
-						<List noDataText="{i18n>noData}" selectionChange="onListSelect">
+						<List noDataText="{i18n>noData}" mode="None" id="volumesList" items="{ path: 'ToOfferVolume', templateShareable:false }" 
+							selectionChange="onListSelect">
 							<items>
 								<CustomListItem>
 									<core:Fragment fragmentName="fragment.volumes" type="XML"></core:Fragment>
-								</CustomListItem>
-								<CustomListItem>
-									<core:Fragment fragmentName="fragment.volumes2" type="XML"></core:Fragment>
 								</CustomListItem>
 							</items>
 						</List>
@@ -69,9 +67,9 @@
 			<Button press="toggleFullScreen" class="fullscreen" type="Back" text="{i18n>fullscreen}" />
 			<Button press="onCloseDetailPress" class="closeOffer" type="Back" text="{i18n>close}" />
 			<ToolbarSpacer/>
-			<Button press="approve" id="mainApproveButton" visible="false" custom:id="approveDialog" type="Accept" text="{i18n>approve}" />
-			<Button press="reject" id="mainRejectButton" visible="false" custom:id="approveDialog" type="Reject" text="{i18n>reject}" />
-			<Button press="forward" id="mainForwardButton" visible="false" custom:id="approveDialog" type="Emphasized" text="{i18n>forward}" />
+			<Button press="approve" id="mainApproveButton" visible="false" custom:id="approve" type="Accept" text="{i18n>approve}" />
+			<Button press="reject" id="mainRejectButton" visible="false" custom:id="approve" type="Reject" text="{i18n>reject}" />
+			<Button press="forward" id="mainForwardButton" visible="false" custom:id="approve" type="Emphasized" text="{i18n>forward}" />
 			
 			<Button id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
 			<Button id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />

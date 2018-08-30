@@ -19,14 +19,7 @@
 				id="list"
 				width="auto"
 				class="sapFDynamicPageAlignContent"
-				items="{
-					path: '/Workitems',
-					sorter: {
-						path: 'Customer',
-						descending: false
-					},
-					groupHeaderFactory: '.createGroupHeader'
-				}"
+				items="{}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
 				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
@@ -83,9 +76,9 @@
 					<ObjectListItem
 						type="Navigation"
 						press="onSelectionChange"
-						title="{CustomerDescription}"
-						number="7M"
-						numberUnit="USD">
+						title="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'formatTitle'}"
+						number="{Value}"
+						numberUnit="{ValueCurrency}">
 						<attributes>
 							<ObjectAttribute title="Trading Contract" text="{TCNumber}" />
 							<ObjectAttribute title="Variant Number" text="{ItemCount}" />

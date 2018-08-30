@@ -23,6 +23,14 @@ sap.ui.define([
 					return "";
 				}
 				return decodeURI(fileName);
+			},
+			
+			formatTitle: function(s, c, v) {
+				if (s === "S" || s === "B") {
+					return c;
+				} else if (s === "P") {
+					return v;
+				}
 			}
 		};
 

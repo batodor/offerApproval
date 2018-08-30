@@ -2,45 +2,68 @@
 	<Panel expandable="true" expanded="true" width="auto">
 		<headerToolbar>
 			<Toolbar height="3rem">
-				<Title text="01" />
+				<Title text="{VolumeNumber} / {= ${VolumeType} ? ${i18n>optional} : ${i18n>fixed} }" />
+				<ToolbarSpacer />
 			</Toolbar>
 		</headerToolbar>
 		<content>
 			<VBox>
 				<HBox justifyContent="SpaceBetween">
 					<VBox class="leftVBoxStyle" width="50%">
-						<Label text="{i18n>type}" />
-						<Text text="{i18n>fixed}" />
+						<Label class="topLabel" text="{i18n>volumeType}" />
+						<Switch enabled="false" state="{VolumeType}" customTextOn="{i18n>optional}" customTextOff="{i18n>fixed}" />
 					</VBox>
-					<VBox class="rightVBoxStyle" visible="false" width="50%">
-						<Label text="{i18n>owner}" />
-						<Text text="Myself" />
+					<VBox class="rightVBoxStyle" visible="{= ${VolumeType} ? true : false }" width="50%">
+						<Label class="topLabel" text="{i18n>volumeOwner}" />
+						<Text text="{VolumeOwner}" />
 					</VBox>
 				</HBox>
-				<Label class="topLabel" text="{i18n>meansOfTransport}" />
-				<Text text="Vessel" />
+				<OverflowToolbar width="100%">
+					<Title text="{i18n>prices}" class="marginTop" titleStyle="H3"/>
+				</OverflowToolbar>
+				<HBox justifyContent="SpaceBetween">
+					<VBox class="leftVBoxStyle" width="50%">
+						<Label class="topLabel" text="{i18n>incoterms}" />
+						<Text text="{Incoterms}" />
+					</VBox>
+					<VBox class="rightVBoxStyle" width="50%">
+						<Label class="topLabel" text="{i18n>deliveryPoint}" />
+						<Text text="{DeliveryPoint}" />
+					</VBox>
+				</HBox>
+				<HBox justifyContent="SpaceBetween">
+					<VBox class="leftVBoxStyle" width="50%">
+						<Label class="topLabel" text="{i18n>price}" />
+						<Switch enabled="false" state="{= ${IndexFormula} ? true : false }" customTextOn="{i18n>index}" customTextOff="{i18n>fix}" />
+					</VBox>
+					<VBox 
+						visible="{= ${IndexFormula} ? true : false }" 
+						class="rightVBoxStyle"
+						width="50%">
+						<Label class="topLabel" text="{i18n>indexFormula}" />
+						<Text text="{IndexFormula}" />
+					</VBox>
+				</HBox>
+				<Label class="topLabel" text="{i18n>offerPrice}" />
+				<Text text="{FixPrice}" />
+				<HBox justifyContent="SpaceBetween">
+					<VBox class="leftVBoxStyle" width="50%">
+						<Label class="topLabel" text="{i18n>cv}" />
+						<Text text="{CV}"/>
+					</VBox>
+					<VBox class="rightVBoxStyle" width="50%">
+						<Label class="topLabel" text="{i18n>cvBase}" />
+						<Text text="{CVBase}"/>
+					</VBox>
+				</HBox>
 			</VBox>
-			<List noDataText="{i18n>noData}" selectionChange="onListSelect">
-				<headerToolbar>
-					<Toolbar>
-						<Title text="{i18n>prices}" titleStyle="H3" />
-					</Toolbar>
-				</headerToolbar>
+			<OverflowToolbar width="100%">
+				<Title text="{i18n>periods}" class="marginTop" titleStyle="H3"/>
+			</OverflowToolbar>
+			<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable:false }" selectionChange="onListSelect">
 				<items>
 					<CustomListItem>
-						<core:Fragment fragmentName="fragment.prices" type="XML"></core:Fragment>
-					</CustomListItem>
-				</items>
-			</List>
-			<List noDataText="{i18n>noData}" selectionChange="onListSelect">
-				<headerToolbar>
-					<Toolbar>
-						<Title text="{i18n>periods}" titleStyle="H3" />
-					</Toolbar>
-				</headerToolbar>
-				<items>
-					<CustomListItem>
-						<core:Fragment fragmentName="fragment.periods" type="XML"></core:Fragment>
+						<core:Fragment fragmentName="fragment.periodsPrices" type="XML"></core:Fragment>
 					</CustomListItem>
 				</items>
 			</List>

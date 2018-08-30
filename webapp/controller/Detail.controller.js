@@ -2,8 +2,10 @@
 sap.ui.define([
 		"OfferApproval/OfferApproval/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
-		"OfferApproval/OfferApproval/model/formatter"
-	], function (BaseController, JSONModel, formatter) {
+		"OfferApproval/OfferApproval/model/formatter",
+		'sap/m/MessageToast',
+		'sap/m/MessageBox'
+	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox) {
 		"use strict";
 
 		return BaseController.extend("OfferApproval.OfferApproval.controller.Detail", {
@@ -71,20 +73,32 @@ sap.ui.define([
 			 * @private
 			 */
 			_onObjectMatched : function (oEvent) {
-				var sObjectId =  oEvent.getParameter("arguments").objectId;
+				this.objectId =  oEvent.getParameter("arguments").objectId;
+				this.TCNumber =  oEvent.getParameter("arguments").TCNumber;
 				this.type =  oEvent.getParameter("arguments").type;
 				this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("Workitems", {
-						WorkitemID :  sObjectId
-					});
-					this._bindView("/" + sObjectPath);
-				}.bind(this));
+				if(this.objectId){
+					this.getModel().metadataLoaded().then( function() {
+						var sObjectPath = this.getModel().createKey("/WorkitemSet", {
+							WorkitemID :  this.objectId,
+							TCNumber: this.TCNumber
+						});
+						this._bindView(sObjectPath);
+					}.bind(this));
+				}else{
+					this.getModel().metadataLoaded().then( function() {
+						var sObjectPath = this.getModel().createKey("/offerHeaderSet", {
+							TCNumber: this.TCNumber
+						});
+						this._bindView(sObjectPath);
+					}.bind(this));
+				}
 				if(this.type){
 					this.byId("mainDeleteButton").setVisible(true);
 					this.byId("mainCopyButton").setVisible(true);
 					this.byId("mainEditButton").setVisible(true);
 				}else{
+					
 					this.byId("mainApproveButton").setVisible(true);
 					this.byId("mainRejectButton").setVisible(true);
 					this.byId("mainForwardButton").setVisible(true);
@@ -203,17 +217,40 @@ sap.ui.define([
 			
 			approve: function(oEvent){
 				var id = oEvent.getSource().data("id");
-				var dialog = this[id];
-				var text = sap.ui.getCore().byId("approveText");
-				var created = this.getView().getBindingContext().getProperty("CreatedByName");
-				text.setText("Approve the offer contract submitted by " + created + "?");
-				dialog.setTitle("Approve Offer");
-				dialog.open();
+				this[id + "Dialog"].open();
 			},
 			
 			dialogCancel: function(oEvent){
 				var id = oEvent.getSource().data("id");
 				this[id].close();
+			},
+			dialogApprove: function(oEvent){
+				var uploadItems = sap.ui.getCore().byId("approveUpload").getSelectedItems();
+				var attachList = '';
+				for(var i = 0; i < uploadItems.length; i++){
+					attachList = attachList + this.getModel().getData(uploadItems[i].getBindingContextPath()).FileGUID + ";";
+				}
+				attachList = attachList.slice(0,-1);
+				var oFuncParams = { 
+					TCNumber: this.TCNumber,
+					Comment: sap.ui.getCore().byId("approveComment").getValue(),
+					ValidityDate: sap.ui.getCore().byId("approveValidityDate").getDateValue(),
+					AttachList: attachList
+				};
+				console.log(oFuncParams);
+				this.getModel().callFunction("/SentOfferToApproval", {
+					method: "POST",
+					urlParameters: oFuncParams,
+					success: this.onApproveSuccess.bind(this, "SentOfferToApproval")
+				});
+			},
+			onApproveSuccess: function(link, oData) {
+				var oResult = oData[link];
+				if (oResult.ActionSuccessful) {
+					MessageToast.show(oResult.Message);
+				} else {
+					MessageBox.error(oResult.Message);
+				}
 			}
 
 		});

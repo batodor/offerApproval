@@ -11,11 +11,11 @@
 		},
 		"dataSources": {
 			"mainService": {
-				"uri": "/sap/opu/odata/sap/ZTSWSD_TCAPPROVAL_SRV/",
+				"uri": "/sap/opu/odata/sap/ZTS_OFFER_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0",
-					"localUri": "localService/metadata.xml"
+					"localUri": "localService/ZTS_OFFER_SRV/metadata.xml"
 				}
 			},
 			"ZTS_OFFER_SRV": {
@@ -99,15 +99,13 @@
 				{
 					"pattern": [
 						"",
-						"Type/{type}"
+						"Type/:type:"
 					],
 					"name": "master",
 					"target": "master"
 				},
 				{
-					"pattern": [
-						"Workitems/{objectId}/:type:"
-					],
+					"pattern": "TCNumber/{TCNumber}/:objectId:/:type:",
 					"name": "object",
 					"target": [
 						"master",
