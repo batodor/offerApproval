@@ -1,28 +1,87 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<VBox class="padding">
-		<HBox justifyContent="SpaceBetween" width="100%">
+		<List noDataText="{i18n>noData}" id="risks" class="listText" items="{ path: 'ToOfferCounterparty', templateShareable: false }">
+			<CustomListItem>
+				<Panel expandable="true" expanded="true" width="auto">
+					<headerToolbar>
+						<Toolbar height="3rem">
+							<Title text="{Name}" />
+							<ToolbarSpacer />
+						</Toolbar>
+					</headerToolbar>
+					<content>
+						<VBox>
+							<HBox justifyContent="SpaceBetween">
+								<VBox class="leftVBoxStyle" width="50%">
+									<Label class="topLabel" text="{i18n>rating}" />
+									<Text text="{Rating}" />
+								</VBox>
+								<VBox class="rightVBoxStyle" width="50%">
+									<Label class="topLabel" text="{i18n>status}" />
+									<Text class="{= ${BlackList} ? 'red' : '' }" text="{= ${BlackList} ? ${i18n>blacklisted} : ${i18n>notBlacklisted} }" />
+								</VBox>
+							</HBox>
+							<Label class="topLabel" text="{i18n>risks}" />
+							<List noDataText="{i18n>noData}" class="listText" 
+								items="{ path: 'ToComplianceRisk', templateShareable: false }">
+								<CustomListItem>
+									<HBox width="100%">
+										<core:Icon 
+											src="{= ${Color} === 'red' ? 'sap-icon://alert' : '' }{= ${Color} === 'yellow' ? 'sap-icon://message-warning' : '' }{= ${Color} === 'green' ? 'sap-icon://accept' : '' }" 
+											class="size1 marginRight" 
+											color="{Color}"
+											visible="{= ${Color} ? true : false }" />
+										<Text text="{RiskName}" />
+									</HBox>
+								</CustomListItem>
+							</List>
+						</VBox>
+					</content>
+				</Panel>
+			</CustomListItem>
+		</List>
+		<OverflowToolbar class="topLabel" height="3rem" width="100%">
+			<Title text="{i18n>limits}" titleStyle="H3"/>
+		</OverflowToolbar>
+		<Label class="topLabel" text="{i18n>paymentTerms}" />
+		<HBox width="100%">
+			<core:Icon class="marginRight" id="limitPaymentConditionIcon" />
+			<Text id="limitPaymentCondition" text="{i18n>none}" />
+		</HBox>
+		<HBox justifyContent="SpaceBetween">
 			<VBox class="leftVBoxStyle" width="50%">
-				<Label text="Partner Name"></Label>
-				<Text text="Datang Overseas (Beijing)" />
+				<Label class="topLabel" text="{i18n>tonnage}" />
+				<HBox width="100%">
+					<core:Icon class="marginRight" id="limitTonnageIcon" />
+					<Text id="limitTonnage" text="{i18n>none}" />
+				</HBox>
 			</VBox>
 			<VBox class="rightVBoxStyle" width="50%">
-				<Label text="Rating"></Label>
-				<Text text="B" />
+				<Label class="topLabel" text="{i18n>period}" />
+				<HBox width="100%">
+					<core:Icon class="marginRight" id="limitPeriodIcon" />
+					<Text id="limitPeriod" text="{i18n>none}" />
+				</HBox>
 			</VBox>
 		</HBox>
-		<HBox justifyContent="SpaceBetween" width="100%">
-			<VBox class="leftVBoxStyle" width="50%">
-				<Label class="topLabel" text="Blacklist Status"></Label>
-				<Text text="Not Blacklisted" />
-			</VBox>
-			<VBox class="rightVBoxStyle" width="50%">
-				<Label class="topLabel" text="Country Sanctions"></Label>
-				<Text text="Korea" class="red" />
-			</VBox>
+		<OverflowToolbar class="topLabel" height="3rem" width="100%">
+			<Title text="{i18n>otherRisks}" titleStyle="H3"/>
+		</OverflowToolbar>
+		<Label class="topLabel" text="{i18n>countriesSanction}" />
+		<Text id="countriesSanction" text="{i18n>none}" />
+		<Label class="topLabel" text="{i18n>risks}" />
+		<List noDataText="{i18n>none}" class="listText heightAuto" items="{ path: 'ToRisksByOffer', templateShareable: false }">
+			<CustomListItem>
+				<Text text="{RiskName}" />
+			</CustomListItem>
+		</List>
+		<OverflowToolbar class="topLabel" height="3rem" width="100%">
+			<Title text="{i18n>requestUpdates}" titleStyle="H3"/>
+		</OverflowToolbar>
+		<HBox alignContent="Center" justifyContent="SpaceBetween" width="100%">
+			<Button text="{i18n>blacklist}" width="100px" press="openMail" />
+			<Button text="{i18n>limits}" width="100px" press="openMail" />
+			<Button text="{i18n>risks}" width="100px" press="openMail" />
 		</HBox>
-		<VBox class="leftVBoxStyle" width="50%">
-			<Label text="CP risks" class="topLabel"></Label>
-			<Text text="None" />
-		</VBox>
 	</VBox>
 </core:FragmentDefinition>

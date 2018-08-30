@@ -77,22 +77,12 @@ sap.ui.define([
 				this.TCNumber =  oEvent.getParameter("arguments").TCNumber;
 				this.type =  oEvent.getParameter("arguments").type;
 				this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-				if(this.objectId){
-					this.getModel().metadataLoaded().then( function() {
-						var sObjectPath = this.getModel().createKey("/WorkitemSet", {
-							WorkitemID :  this.objectId,
-							TCNumber: this.TCNumber
-						});
-						this._bindView(sObjectPath);
-					}.bind(this));
-				}else{
-					this.getModel().metadataLoaded().then( function() {
-						var sObjectPath = this.getModel().createKey("/offerHeaderSet", {
-							TCNumber: this.TCNumber
-						});
-						this._bindView(sObjectPath);
-					}.bind(this));
-				}
+				this.getModel().metadataLoaded().then( function() {
+					var sObjectPath = this.getModel().createKey("/workitemHeaderSet", {
+						TCNumber: this.TCNumber
+					});
+					this._bindView(sObjectPath);
+				}.bind(this));
 				if(this.type){
 					this.byId("mainDeleteButton").setVisible(true);
 					this.byId("mainCopyButton").setVisible(true);
@@ -235,6 +225,7 @@ sap.ui.define([
 					TCNumber: this.TCNumber,
 					Comment: sap.ui.getCore().byId("approveComment").getValue(),
 					ValidityDate: sap.ui.getCore().byId("approveValidityDate").getDateValue(),
+					Trader: sap.ui.getCore().byId("approveTrader").getSelectedKey(),
 					AttachList: attachList
 				};
 				console.log(oFuncParams);

@@ -81,7 +81,7 @@
 						numberUnit="{ValueCurrency}">
 						<attributes>
 							<ObjectAttribute title="Trading Contract" text="{TCNumber}" />
-							<ObjectAttribute title="Variant Number" text="{ItemCount}" />
+							<ObjectAttribute title="Variant Number" text="{DealNumber}" />
 							<ObjectAttribute title="Validity Date" 
 								text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"  />
 						</attributes>

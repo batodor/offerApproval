@@ -295,7 +295,7 @@ sap.ui.define([
 				//Set the layout property of the FCL control to 'OneColumn'
 				this.getModel("appView").setProperty("/layout", "OneColumn");
 				this.type = oEvent.getParameter("arguments").type;
-				var url = this.type ? "/offerListSet" : "/WorkitemSet";
+				var url = this.type ? "/offerListSet" : "/workitemSet";
 				this._oList.bindItems({
 					path: url,
 					template: this._oList['mBindingInfos'].items.template.clone()
@@ -304,7 +304,7 @@ sap.ui.define([
 			
 			_onObjectMatched : function (oEvent) {
 				this.type = oEvent.getParameter("arguments").type;
-				var url = this.type ? "/offerListSet" : "/WorkitemSet";
+				var url = this.type ? "/offerListSet" : "/workitemSet";
 				if(this._oList.getItems().length === 0){
 					this._oList.bindItems({
 						path: url,
