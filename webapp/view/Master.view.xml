@@ -77,7 +77,16 @@
 						type="Navigation"
 						press="onSelectionChange"
 						title="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'.formatter.formatTitle'}"
-						number="{Value}"
+						number="{
+						    parts: [
+						        {path: 'Value'}, 
+						        {path: 'ValueCurrency'}
+						    ],
+						    type: 'sap.ui.model.type.Currency',
+						    formatOptions: {
+						        showMeasure: false
+						    }
+						}"
 						numberUnit="{ValueCurrency}">
 						<attributes>
 							<ObjectAttribute title="Trading Contract" text="{TCNumber}" />

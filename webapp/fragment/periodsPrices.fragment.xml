@@ -15,11 +15,11 @@
 				<HBox justifyContent="SpaceBetween">
 					<VBox class="leftVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>shipmentSize} ({i18n>min})" />
-						<Text text="{ShipmentSizeMin}" />
+						<Text text="{path: 'ShipmentSizeMin', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}" />
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>shipmentSize} ({i18n>max})" />
-						<Text text="{ShipmentSizeMax}" />
+						<Text text="{path: 'ShipmentSizeMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}" />
 					</VBox>
 				</HBox>
 				
@@ -37,11 +37,11 @@
 				<HBox justifyContent="SpaceBetween">
 					<VBox class="leftVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>tonnage} ({i18n>min})" />
-						<Text text="{TonnageMin}" />
+						<Text text="{path: 'TonnageMin', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}" />
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>tonnage} ({i18n>max})" />
-						<Text text="{TonnageMax}" />
+						<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}" />
 					</VBox>
 				</HBox>
 				

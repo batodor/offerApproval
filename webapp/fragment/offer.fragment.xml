@@ -10,7 +10,7 @@
 						<HBox class="halfPadding" justifyContent="SpaceBetween" alignItems="Center" alignContent="SpaceBetween" width="100%">
 							<Text width="100px" text="{= ${TCPosition} ==='000010' ? ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} : '' }"/>
 							<Text text="Russian Steam Coal"/>
-							<Text text="{TonnageMax} {TonnageToleranceUOM} +/- {TonnageTolerance}"/>
+							<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {TonnageToleranceUOM} +/- {TonnageTolerance}"/>
 							<Text text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } } 
 								{= ${DateFrom} ? ' - ' : '' } { path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }"/>
 						</HBox>

@@ -23,8 +23,7 @@
 		<CustomListItem>
 			<List items="{ToLevels}">
 				<CustomListItem>
-					<Panel width="auto" expandable="true">
-						<Title text="{LevelName}"/>
+					<Panel width="auto" headerText="{Level}{= ${LevelName} ? ' - ' : ''}{LevelName}" expandable="true">
 						<List items="{ToAgents}">
 							<CustomListItem>
 								<Panel width="auto">
