@@ -76,7 +76,7 @@
 					<ObjectListItem
 						type="Navigation"
 						press="onSelectionChange"
-						title="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'formatTitle'}"
+						title="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'.formatter.formatTitle'}"
 						number="{Value}"
 						numberUnit="{ValueCurrency}">
 						<attributes>

@@ -9,6 +9,9 @@
 .padding{
 	padding: 1rem;
 }
+.halfPadding{
+	padding: .5rem;
+}
 .alignRight{
 	text-align: right;
 }
@@ -102,10 +105,6 @@
 .borderBottom{
 	border-bottom: 1px solid #dfdfdf;
 }
-.marginBottom,
-.sapMListUl{
-	margin-bottom: 1rem;
-}
 .smallMarginBottom{
 	margin-bottom: 7px;
 }
@@ -113,25 +112,34 @@
 .sapMLabel,.sapMLIBActive .sapMLabel{
 	color: #888;
 }
+.marginRight{
+	margin-right: .5rem;
+}
 .sapMText,.sapMLIBActive .sapMText{
 	font-size: .9rem;
 	color: #000;
 }
-@media (max-width: 640px) { 
+.listText .sapMLIB{
+	background: transparent;
+	border: 0;
+	color: #000;
+}
+.heightAuto .sapMLIB{
+	height: auto;
+}
+.listText .sapMListNoData{
+	justify-content: start;
+	padding: 0 !important;
+}
+@media (max-width: 1280px) { 
 	.sapMNav{
 		position: absolute;
 	}
 	.sapMSwt,
 	.sapUiSizeCompact .sapMSwt{
-		width: 110px;
+		width: 120px;
 	}
-	.closeOffer{
-		display: block;
-	}
-	.fullscreen{
-		display: none;
-	}
-	.alignRight{
-		text-align: left;
+	.sapFDynamicPage-Std-Tablet .sapFDynamicPageContent, .sapFDynamicPage-Std-Tablet .sapFDynamicPageContentFitContainer{
+	    padding: 0;
 	}
 }

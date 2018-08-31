@@ -23,8 +23,9 @@
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell width="1">
 						<VBox>
-							<Title id="objectHeader" titleStyle="H3" text="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'formatTitle'}" />
-							<Label text="SUEK AG / Khrabraya Ekaterina / Variant Number: {DealNumber}" />
+							<Title id="objectHeader" titleStyle="H3" text="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'.formatter.formatTitle'}" />
+							<Label text="{= ${CompanyBranch} ? ${CompanyBranch} + ' / ' : ''}{= ${Trader} ? ${Trader} + ' / ' : ''}
+								{= ${DealNumber} ? 'Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="1">
@@ -36,13 +37,13 @@
 				</l:BlockLayoutRow>
 			</l:BlockLayout>
 			
-			<IconTabBar id="itbMain" selectedKey="offer">
+			<IconTabBar id="itbMain" selectedKey="approvalHistory">
 				<items>
 					<IconTabFilter icon="sap-icon://hint" text="{i18n>offer}" key="offer">
 						<core:Fragment fragmentName="fragment.offer" type="XML"></core:Fragment>
 					</IconTabFilter>
 					<IconTabFilter icon="sap-icon://activity-items" text="{i18n>volumes}" key="volumes">
-						<List noDataText="{i18n>noData}" mode="None" id="volumesList" items="{ path: 'ToOfferVolume', templateShareable:false }" 
+						<List noDataText="{i18n>noData}" mode="None" id="volumesList" items="{ path: 'ToOfferVolume', templateShareable: false }" 
 							selectionChange="onListSelect">
 							<items>
 								<CustomListItem>
@@ -67,13 +68,13 @@
 			<Button press="toggleFullScreen" class="fullscreen" type="Back" text="{i18n>fullscreen}" />
 			<Button press="onCloseDetailPress" class="closeOffer" type="Back" text="{i18n>close}" />
 			<ToolbarSpacer/>
-			<Button press="approve" id="mainApproveButton" visible="false" custom:id="approve" type="Accept" text="{i18n>approve}" />
-			<Button press="reject" id="mainRejectButton" visible="false" custom:id="approve" type="Reject" text="{i18n>reject}" />
-			<Button press="forward" id="mainForwardButton" visible="false" custom:id="approve" type="Emphasized" text="{i18n>forward}" />
+			<Button press="approveReject" id="mainApproveButton" visible="false" custom:id="approve" type="Accept" text="{i18n>approve}" />
+			<Button press="approveReject" id="mainRejectButton" visible="false" custom:id="reject" type="Reject" text="{i18n>reject}" />
+			<!--<Button press="forward" id="mainForwardButton" visible="false" custom:id="approve" type="Emphasized" text="{i18n>forward}" />-->
 			
-			<Button id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
-			<Button id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />
-			<Button id="mainEditButton" visible="false" type="Accept" text="{i18n>edit}" />
+			<Button press="delete" id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
+			<Button press="copy" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />
+			<Button press="edit" id="mainEditButton" visible="false" type="Accept" text="{i18n>edit}" />
 		</semantic:customFooterContent>
 	</semantic:SemanticPage>
 

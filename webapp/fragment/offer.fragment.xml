@@ -1,51 +1,34 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Table inset="false">
-		<columns>
-			<Column></Column>
-			<Column></Column>
-			<Column></Column>
-			<Column></Column>
-		</columns>
-		<items>
-			<ColumnListItem>
-				<cells>
-					<Text text="Fixed Volume"/>
-					<Text text="Russian Steam Coal"/>
-					<Text text="210 000 TO +/- 10%"/>
-					<Text text="06.2018 – 08.2018"/>
-				</cells>
-			</ColumnListItem>
-			<ColumnListItem>
-				<cells>
-					<Text text="Price"/>
-					<Text text="101,2 USD"/>
-					<Text text="CIF - Shanghai"/>
-					<Text text="6000 NAR"/>
-				</cells>
-			</ColumnListItem>
-			<ColumnListItem>
-				<cells>
-					<Text text="Optional Volume"/>
-					<Text text="Russian Steam Coal"/>
-					<Text text="70 000 TO +/- 10%"/>
-					<Text text="09.2018 – 09.2018"/>
-				</cells>
-			</ColumnListItem>
-			<ColumnListItem>
-				<cells>
-					<Text text="Price"/>
-					<Text text="104,6 USD"/>
-					<Text text="CIF - Gwangyang"/>
-					<Text text="6000 NAR"/>
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
+	<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferVolume', templateShareable: true }" 
+		selectionChange="onListSelect">
+		<CustomListItem>
+			<List width="100%" noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: true, sorter: { path: 'TCPosition' } }" 
+				selectionChange="onListSelect">
+				<CustomListItem>
+					<VBox width="100%">
+						<HBox class="halfPadding" justifyContent="SpaceBetween" alignItems="Center" alignContent="SpaceBetween" width="100%">
+							<Text width="100px" text="{= ${TCPosition} ==='000010' ? ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} : '' }"/>
+							<Text text="Russian Steam Coal"/>
+							<Text text="{TonnageMax} {TonnageToleranceUOM} +/- {TonnageTolerance}"/>
+							<Text text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } } 
+								{= ${DateFrom} ? ' - ' : '' } { path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }"/>
+						</HBox>
+					</VBox>
+				</CustomListItem>
+			</List>
+			<HBox class="halfPadding" justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Center" width="100%">
+				<Text text="Price"/>
+				<Text text="{FixPrice}"/>
+				<Text text="{Incoterms} - {DeliveryPoint}"/>
+				<Text text="{CV} {CVBase}"/>
+			</HBox>
+		</CustomListItem>
+	</List>
 	<form:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" backgroundDesign="Transparent">
 		<form:content>
-			<Label text="Payment Term"/><Text text="Postpayment"/>
-			<Label text="Comment"/><Text text="Equivalent to CIF ARA + 2.5 USD"/>
+			<Label text="Payment Term"/><Text text="{= ${PaymentTerm} ? ${PaymentTerm} : ${i18n>none} }"/>
+			<Label text="Comment"/><Text text="{= ${Comment} ? ${Comment} : ${i18n>none} }"/>
 		</form:content>
 	</form:SimpleForm>
 </core:FragmentDefinition>

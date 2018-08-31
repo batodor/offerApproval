@@ -97,10 +97,7 @@
 			},
 			"routes": [
 				{
-					"pattern": [
-						"",
-						"Type/:type:"
-					],
+					"pattern": ":type:",
 					"name": "master",
 					"target": "master"
 				},

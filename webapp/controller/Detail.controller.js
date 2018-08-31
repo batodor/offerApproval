@@ -84,14 +84,11 @@ sap.ui.define([
 					this._bindView(sObjectPath);
 				}.bind(this));
 				if(this.type){
-					this.byId("mainDeleteButton").setVisible(true);
-					this.byId("mainCopyButton").setVisible(true);
-					this.byId("mainEditButton").setVisible(true);
+					this.setInput(["mainDeleteButton", "mainCopyButton", "mainEditButton"], true, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], false, "Visible");
 				}else{
-					
-					this.byId("mainApproveButton").setVisible(true);
-					this.byId("mainRejectButton").setVisible(true);
-					this.byId("mainForwardButton").setVisible(true);
+					this.setInput(["mainDeleteButton", "mainCopyButton", "mainEditButton"], false, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], true, "Visible");
 				}
 			},
 
@@ -176,7 +173,11 @@ sap.ui.define([
 				this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", false);
 				// No item should be selected on master after detail page is closed
 				this.getOwnerComponent().oListSelector.clearMasterListSelection();
-				this.getRouter().navTo("master");
+				var settings = {};
+				if(this.type){
+					settings.type = this.type;      
+				}
+				this.getRouter().navTo("master", settings);
 			},
 
 			/**
@@ -205,9 +206,14 @@ sap.ui.define([
 				dialog.open();
 			},
 			
-			approve: function(oEvent){
+			approveReject: function(oEvent){
 				var id = oEvent.getSource().data("id");
-				this[id + "Dialog"].open();
+				var dialog = this["approveDialog"];
+				var button = this.byId("approveButton") || sap.ui.getCore().byId("approveButton");
+				var text = id === "reject" ? this.getResourceBundle().getText("reject") : this.getResourceBundle().getText("approve");
+				button.setText(text);
+				dialog.setTitle(text);
+				dialog.open();
 			},
 			
 			dialogCancel: function(oEvent){
@@ -215,29 +221,79 @@ sap.ui.define([
 				this[id].close();
 			},
 			dialogApprove: function(oEvent){
-				var uploadItems = sap.ui.getCore().byId("approveUpload").getSelectedItems();
-				var attachList = '';
-				for(var i = 0; i < uploadItems.length; i++){
-					attachList = attachList + this.getModel().getData(uploadItems[i].getBindingContextPath()).FileGUID + ";";
-				}
-				attachList = attachList.slice(0,-1);
 				var oFuncParams = { 
-					TCNumber: this.TCNumber,
-					Comment: sap.ui.getCore().byId("approveComment").getValue(),
-					ValidityDate: sap.ui.getCore().byId("approveValidityDate").getDateValue(),
-					Trader: sap.ui.getCore().byId("approveTrader").getSelectedKey(),
-					AttachList: attachList
+					WorkitemID: this.objectId,
+					Comment: sap.ui.getCore().byId("approveComment").getValue()
 				};
-				console.log(oFuncParams);
-				this.getModel().callFunction("/SentOfferToApproval", {
+				this.getModel().callFunction("/ApproveOffer", {
 					method: "POST",
 					urlParameters: oFuncParams,
-					success: this.onApproveSuccess.bind(this, "SentOfferToApproval")
+					success: this.onApproveSuccess.bind(this, "ApproveOffer")
 				});
 			},
 			onApproveSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
+					MessageToast.show(oResult.Message);
+				} else {
+					MessageBox.error(oResult.Message);
+				}
+			},
+			
+			// Enable/Disables inputs depending flag arg
+			// idArr can be array of strings as well as objects
+			setInput: function(idArr, flag, func){
+				var evalStr = 'input.set' + func + '(flag)';
+				for(var i = 0; i < idArr.length; i++){
+					var input = null;
+					if(typeof idArr[i] === "string"){
+						input = this.byId(idArr[i]) || sap.ui.getCore().byId(idArr[i]);
+					}else if(typeof idArr[i] === "object"){
+						input = idArr[i];
+					}
+					if(input){
+						eval(evalStr);
+					}
+				}
+			},
+			
+			delete: function(oEvent){
+				var that = this;
+				var model = this.getModel();
+				MessageBox.confirm(that.getResourceBundle().getText("askDelete"), {
+					actions: [that.getResourceBundle().getText("delete"), sap.m.MessageBox.Action.CLOSE],
+					onClose: function(sAction) {
+						if (sAction === that.getResourceBundle().getText("delete")) {
+							model.remove("/offerHeaderSet('" + that.TCNumber + "')",{
+								success: function(){
+									MessageToast.show("Delete successful!");
+									that.onCloseDetailPress();
+								}
+							});
+						} else {
+							MessageToast.show("Delete canceled!");
+						}
+					}
+				});
+			},
+			
+			edit: function(){
+				window.open("/sap/bc/ui2/flp#ZTS_OFFER-change&/" + this.TCNumber);
+			},
+			
+			copy: function(oEvent){
+				var oFuncParams = { 
+					OfferNumber: this.TCNumber
+				};
+				this.getModel().callFunction("/CopyOfferToTradingContract", {
+					method: "POST",
+					urlParameters: oFuncParams,
+					success: this.onApproveSuccess.bind(this, "CopyOfferToTradingContract")
+				});
+			},
+			onCopySuccess: function(link, oData) {
+				var oResult = oData[link];
+				if (oResult.CopyingSuccessfully) {
 					MessageToast.show(oResult.Message);
 				} else {
 					MessageBox.error(oResult.Message);
