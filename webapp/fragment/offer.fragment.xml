@@ -21,7 +21,7 @@
 				<Text text="Price"/>
 				<Text text="{FixPrice}"/>
 				<Text text="{Incoterms} - {DeliveryPoint}"/>
-				<Text text="{CV} {CVBase}"/>
+				<Text text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {CVBase}"/>
 			</HBox>
 		</CustomListItem>
 	</List>
