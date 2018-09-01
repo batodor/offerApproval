@@ -60,7 +60,7 @@
 			<OverflowToolbar width="100%">
 				<Title text="{i18n>periods}" class="marginTop" titleStyle="H3"/>
 			</OverflowToolbar>
-			<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable:false }" selectionChange="onListSelect">
+			<List noDataText="{i18n>noData}" updateFinished="onPeriodsFinished" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: false }" selectionChange="onListSelect">
 				<items>
 					<CustomListItem>
 						<core:Fragment fragmentName="fragment.periodsPrices" type="XML"></core:Fragment>

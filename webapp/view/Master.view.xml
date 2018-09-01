@@ -65,18 +65,13 @@
 							press="onOpenViewSettings"
 							icon="sap-icon://filter"
 							type="Transparent"/>
-						<Button
-							id="groupButton"
-							press="onOpenViewSettings"
-							icon="sap-icon://group-2"
-							type="Transparent"/>
 					</OverflowToolbar>
 				</headerToolbar>
 				<items>
 					<ObjectListItem
 						type="Navigation"
 						press="onSelectionChange"
-						title="{parts:['Side', 'CustomerDescription', 'VendorDescription'], formatter:'.formatter.formatTitle'}"
+						title="{CustomerDescription}{CounterpartyName}"
 						number="{
 						    parts: [
 						        {path: 'Value'}, 

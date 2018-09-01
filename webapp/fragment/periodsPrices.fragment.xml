@@ -9,6 +9,9 @@
 		</headerToolbar>
 		<content>
 			<VBox>
+				<DatePicker dateValue="{DateFrom}" visible="false" />
+				<DatePicker dateValue="{DateTo}" visible="false" />
+				
 				<Label text="{i18n>numberOfShipments}" />
 				<Text text="{NumberOfShipments}" />
 				

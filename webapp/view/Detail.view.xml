@@ -14,18 +14,18 @@
 		busy="{detailView>/busy}"
 		busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<VBox class="padding">
-				<MessageStrip enableFormattedText="true" text="{i18n>WarningCPRating}" type="Error" showIcon="true" class="smallMarginBottom" />
-				<MessageStrip enableFormattedText="true" text="{i18n>WarningLimitsNotApproved}" type="Error" showIcon="true" class="smallMarginBottom" />
-				<MessageStrip enableFormattedText="true" text="{i18n>WarningComplienceRisk}" type="Error" showIcon="true" class="smallMarginBottom" />
+			<VBox>
+				<MessageStrip visible="{CPIssue}" enableFormattedText="true" text="{i18n>WarningCPRating}" type="Error" showIcon="true" class="margin" />
+				<MessageStrip visible="{LimitsIssue}" enableFormattedText="true" text="{i18n>WarningLimitsNotApproved}" type="Error" showIcon="true" class="margin" />
+				<MessageStrip visible="{RisksIssue}" enableFormattedText="true" text="{i18n>WarningComplienceRisk}" type="Error" showIcon="true" class="margin" />
 			</VBox>
 			<l:BlockLayout class="borderBottom">
 				<l:BlockLayoutRow>
-					<l:BlockLayoutCell width="1">
+					<l:BlockLayoutCell width="2">
 						<VBox>
 							<Title id="objectHeader" titleStyle="H3" text="{CounterpartyName}" />
-							<Label text="{= ${Company} ? ${Company} + ' / ' : ''}{= ${Trader} ? ${Trader} + ' / ' : ''}
-								{= ${DealNumber} ? 'Variant Number: ' + ${DealNumber} : '' }" />
+							<Label text="{= ${Company} ? ${Company} : ''}{= ${Trader} ? ' / ' + ${Trader} : ''}
+								{= ${DealNumber} ? ' / Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="1">

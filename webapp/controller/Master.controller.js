@@ -114,7 +114,7 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 
 				if (sQuery) {
-					this._oListFilterState.aSearch = [new Filter("Customer", FilterOperator.Contains, sQuery)];
+					this._oListFilterState.aSearch = [new Filter("CounterpartyName", FilterOperator.Contains, sQuery)];
 				} else {
 					this._oListFilterState.aSearch = [];
 				}

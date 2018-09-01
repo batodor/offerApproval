@@ -34,6 +34,8 @@ sap.ui.define([
 				
 				this.approveDialog = sap.ui.xmlfragment("fragment.approveDialog", this);
 				this.getView().addDependent(this.approveDialog);
+				
+				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
 			},
 
 			/* =========================================================== */
@@ -223,7 +225,8 @@ sap.ui.define([
 			dialogApprove: function(oEvent){
 				var oFuncParams = { 
 					WorkitemID: this.objectId,
-					Comment: sap.ui.getCore().byId("approveComment").getValue()
+					Comment: sap.ui.getCore().byId("approveComment").getValue(),
+					ForAll: false
 				};
 				this.getModel().callFunction("/ApproveOffer", {
 					method: "POST",
@@ -298,6 +301,190 @@ sap.ui.define([
 				} else {
 					MessageBox.error(oResult.Message);
 				}
+			},
+			
+			// Set odata from any dialog, argument object = any object / return object inputs Data
+			getData: function(object){
+				var oData = {};
+				var inputs = this.getInputs(object);
+				for(var i = 0; i < inputs.length; i++){
+					var input = inputs[i];
+					if(input["sId"].indexOf('hbox') > -1){
+						var vboxes = input.getItems();
+						for(var j = 0; j < vboxes.length; j++){
+							oData = this.mergeObjects(oData, this.getDataInner(vboxes[j].getItems()[1]));
+						}
+					}else{
+						oData = this.mergeObjects(oData, this.getDataInner(input));
+					}
+				}
+				return oData;
+			},
+			getDataInner: function(input){
+				var oData = {};
+				for(var j = 0; j < this.typeArr.length; j++){
+					var type = this.typeArr[j];
+					if(input.getBindingInfo(type) && !input.data("omit")){
+						var value;
+						if(type === "tokens"){
+							var tokens = input.getTokens();
+							value = [];
+							for(var l = 0; l < tokens.length; l++){
+								var token = {};
+								token.Name = tokens[l].getText();
+								token.Code = tokens[l].getKey();
+								value.push(token);
+							}
+						}else{
+							value = input.getProperty(type);
+						}
+						if(input.data("data")){
+							value = input.data("data");
+						}
+						
+						var name = input.getBindingInfo(type).binding.sPath;
+						
+						// Set default value(placeholder) if value is not defined
+						if(!value && input["mProperties"].hasOwnProperty("placeholder")){
+							value = input["mProperties"].placeholder;
+						}
+						
+						if(input.data("string")){
+							value = value.toString();
+						}
+						
+						// If inputs name is not defined
+						if(input.data("name")){
+							name = input.data("name");
+						}
+						
+						// Remove offset for dates
+						if(input.hasOwnProperty("_oMaxDate")){
+							value = input.getDateValue();
+							if(value) {
+								value.setMinutes(-value.getTimezoneOffset());
+							} else { 
+								value = null;
+							}
+						}
+						oData[name] = value;
+					}
+				}
+				return oData;
+			},
+			
+			getVolumeData: function(){
+				var oData = {};
+				oData = {};
+				var list = this.byId("volumesList");
+				var volumes = list.getItems();
+				oData.ToOfferVolume = [];
+				for(var i = 0; i < volumes.length; i++){
+					var volumeName = this.getData(volumes[i].getContent()[0].getHeaderToolbar());
+					var volumeData = this.getData(volumes[i].getContent()[0].getContent()[0]);
+					var allVolumeData = this.mergeObjects(volumeName, volumeData);
+					
+					var periods = volumes[i].getContent()[0].getContent()[2].getItems();
+					allVolumeData.ToOfferPeriod = [];
+					for(var j = 0; j < periods.length; j++){
+						var period = periods[j].getContent()[0].getContent()[0];
+						var periodData = this.getData(period);
+						allVolumeData.ToOfferPeriod.push(periodData);
+					}
+					oData.ToOfferVolume.push(allVolumeData);
+				}
+				return oData;
+			},
+			
+			collectLimitsData: function(){
+				var oData = {};
+				// var offerData = this.getData(["pageOfferDetails"]);
+				// oData.Partners = this.TCNumber;
+				// oData.CompanyCode = offerData.CompanyBranch;
+				// oData.PaymentMethod = offerData.PaymentMethod;
+				// oData.PaymentTerm = offerData.PaymentTerm;
+				
+				var volumeData = this.getVolumeData();
+				var DateFrom = null;
+				var DateTo = null;
+				var oneDay = 24*60*60*1000;
+				var Tonnage = 0;
+				for(var i = 0; i < volumeData.ToOfferVolume.length; i++){
+					for(var j = 0; j < volumeData.ToOfferVolume[i].ToOfferPeriod.length; j++){
+						var period = volumeData.ToOfferVolume[i].ToOfferPeriod[j];
+						if(DateFrom){
+							DateFrom = period.DateFrom < DateFrom ? period.DateFrom : DateFrom;
+						}else{
+							DateFrom = period.DateFrom;
+						}
+						if(DateTo){
+							DateTo = period.DateTo > DateTo ? period.DateTo : DateTo;
+						}else{
+							DateTo = period.DateTo;
+						}
+						Tonnage = Tonnage + parseInt(period.TonnageMax);
+					}
+				}
+				var Period = Math.round(Math.abs((DateFrom - DateTo)/(oneDay)));
+				oData.Period = Period;
+				oData.Tonnage = Tonnage;
+				oData.TCNumber = this.TCNumber;
+				return oData;
+			},
+			
+			checkLimits: function(){
+				var oFuncParams = this.collectLimitsData();
+				this.getModel().callFunction("/CheckValidityLimits", {
+					method: "GET",
+					urlParameters: oFuncParams,
+					success: this.onCheckLimitsSuccess.bind(this, "CheckValidityLimits")
+				});
+			},
+			onCheckLimitsSuccess: function(link, oData) {
+				var oResult = oData[link];
+				this.byId("limitPaymentConditionIcon").setColor(oResult.PaymentExceed ? "red" : "green").setSrc(oResult.PaymentExceed ? 'sap-icon://alert' : 'sap-icon://accept');
+				this.byId("limitPeriodIcon").setColor(oResult.PeriodExceed ? "red" : "green").setSrc(oResult.PeriodExceed ? 'sap-icon://alert' : 'sap-icon://accept');
+				this.byId("limitTonnageIcon").setColor(oResult.TonnageExceed ? "red" : "green").setSrc(oResult.TonnageExceed ? 'sap-icon://alert' : 'sap-icon://accept');
+				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : this.getResourceBundle().getText("worklistTableTitle"));
+				this.byId("limitPeriod").setText(oResult.Period + " " + oResult.PeriodUoM);
+				this.byId("limitTonnage").setText(oResult.Tonnage + " " + oResult.TonnageUoM);
+				
+				if(oResult.PaymentExceed || oResult.PeriodExceed || oResult.TonnageExceed){
+					this.byId("requestLimit").setEnabled(true);
+				}else{
+					this.byId("requestLimit").setEnabled(false);
+				}
+			},
+			
+			// Object.assign doesnt work in IE so this function is created
+			mergeObjects: function(objOne, objTwo){
+				var objs = [objOne, objTwo],
+			    result =  objs.reduce(function (r, o) {
+			        Object.keys(o).forEach(function (k) {
+			            r[k] = o[k];
+			        });
+			        return r;
+			    }, {});
+			    return result;
+			},
+			
+			// Gete inputs from array of ids or directly from object
+			getInputs: function(object){
+				var inputs = [];
+				if(Array.isArray(object)){
+					for(var i = 0; i < object.length; i++){
+						var obj = this.byId(object[i]) || sap.ui.getCore().byId(object[i]);
+						var objInputs = obj.getAggregation("content") || obj.getAggregation("items");
+						inputs = inputs.concat(objInputs);
+					}
+				}else{
+					inputs = object.getAggregation("content") || object.getAggregation("items");
+				}
+				return inputs;
+			},
+			
+			onPeriodsFinished: function(oEvent){
+				// this.checkLimits();
 			}
 
 		});

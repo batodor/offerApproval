@@ -19,7 +19,7 @@
 	<!--		</Panel>-->
 	<!--	</CustomListItem>-->
 	<!--</List>	-->
-	<List items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' } }">
+	<List items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' }, templateShareable: false }">
 		<CustomListItem>
 			<List items="{ToLevels}">
 				<CustomListItem>
