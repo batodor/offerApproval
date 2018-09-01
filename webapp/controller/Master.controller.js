@@ -74,7 +74,7 @@ sap.ui.define([
 				});
 
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
-				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
+				this.getRouter().getRoute("object").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
 			},
 
@@ -114,7 +114,8 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 
 				if (sQuery) {
-					this._oListFilterState.aSearch = [new Filter("CounterpartyName", FilterOperator.Contains, sQuery)];
+					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.EQ, sQuery);
+					this._oListFilterState.aSearch = [filter];
 				} else {
 					this._oListFilterState.aSearch = [];
 				}
@@ -294,15 +295,6 @@ sap.ui.define([
 			_onMasterMatched :  function(oEvent) {
 				//Set the layout property of the FCL control to 'OneColumn'
 				this.getModel("appView").setProperty("/layout", "OneColumn");
-				this.type = oEvent.getParameter("arguments").type;
-				var url = this.type ? "/offerListSet" : "/workitemSet";
-				this._oList.bindItems({
-					path: url,
-					template: this._oList['mBindingInfos'].items.template.clone()
-				});
-			},
-			
-			_onObjectMatched : function (oEvent) {
 				this.type = oEvent.getParameter("arguments").type;
 				var url = this.type ? "/offerListSet" : "/workitemSet";
 				if(this._oList.getItems().length === 0){

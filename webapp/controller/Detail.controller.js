@@ -213,6 +213,7 @@ sap.ui.define([
 				var dialog = this["approveDialog"];
 				var button = this.byId("approveButton") || sap.ui.getCore().byId("approveButton");
 				var text = id === "reject" ? this.getResourceBundle().getText("reject") : this.getResourceBundle().getText("approve");
+				button.data("id", id);
 				button.setText(text);
 				dialog.setTitle(text);
 				dialog.open();
@@ -223,18 +224,20 @@ sap.ui.define([
 				this[id].close();
 			},
 			dialogApprove: function(oEvent){
+				var id = oEvent.getSource().data("id");
+				var link = id === "approve" ? "ApproveOffer" : "RejectOffer";
 				var oFuncParams = { 
 					WorkitemID: this.objectId,
 					Comment: sap.ui.getCore().byId("approveComment").getValue(),
 					ForAll: false
 				};
-				this.getModel().callFunction("/ApproveOffer", {
+				this.getModel().callFunction("/" + link, {
 					method: "POST",
 					urlParameters: oFuncParams,
-					success: this.onApproveSuccess.bind(this, "ApproveOffer")
+					success: this.onApproveRejectSuccess.bind(this, link)
 				});
 			},
-			onApproveSuccess: function(link, oData) {
+			onApproveRejectSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
 					MessageToast.show(oResult.Message);
@@ -291,7 +294,7 @@ sap.ui.define([
 				this.getModel().callFunction("/CopyOfferToTradingContract", {
 					method: "POST",
 					urlParameters: oFuncParams,
-					success: this.onApproveSuccess.bind(this, "CopyOfferToTradingContract")
+					success: this.onCopySuccess.bind(this, "CopyOfferToTradingContract")
 				});
 			},
 			onCopySuccess: function(link, oData) {

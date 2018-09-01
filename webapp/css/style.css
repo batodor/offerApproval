@@ -134,6 +134,11 @@
 	justify-content: start;
 	padding: 0 !important;
 }
+.wrap{
+	white-space: normal;
+	line-height: normal;
+	vertical-align: middle;
+}
 @media (max-width: 1280px) { 
 	.sapMNav{
 		position: absolute;
@@ -144,5 +149,15 @@
 	}
 	.sapFDynamicPage-Std-Tablet .sapFDynamicPageContent, .sapFDynamicPage-Std-Tablet .sapFDynamicPageContentFitContainer{
 	    padding: 0;
+	}
+	.closeOffer{
+		display: block;
+	}
+	.fullscreen{
+		display: none;
+		width: 120px;
+	}
+	.mobilePadding{
+		padding: 1rem;
 	}
 }

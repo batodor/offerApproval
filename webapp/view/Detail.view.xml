@@ -23,8 +23,8 @@
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell width="2">
 						<VBox>
-							<Title id="objectHeader" titleStyle="H3" text="{CounterpartyName}" />
-							<Label text="{= ${Company} ? ${Company} : ''}{= ${Trader} ? ' / ' + ${Trader} : ''}
+							<Title id="objectHeader" class="marginTop" titleStyle="H3" text="{CounterpartyName}" />
+							<Label class="wrap" text="{= ${Company} ? ${Company} : ''}{= ${Trader} ? ' / ' + ${Trader} : ''}
 								{= ${DealNumber} ? ' / Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
 					</l:BlockLayoutCell>

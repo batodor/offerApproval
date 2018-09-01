@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core"	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<VBox>
+	<VBox class="mobilePadding">
 		<List noDataText="{i18n>noData}" id="risks" class="listText" items="{ path: 'ToOfferCounterparty', templateShareable: false }">
 			<CustomListItem>
 				<Panel expandable="true" expanded="true" width="auto">
