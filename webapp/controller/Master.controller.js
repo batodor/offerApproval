@@ -173,23 +173,45 @@ sap.ui.define([
 				// update filter state:
 				// combine the filter array and the filter string
 				aFilterItems.forEach(function (oItem) {
-					switch (oItem.getKey()) {
-						case "Filter1" :
-							aFilters.push(new Filter("Value", FilterOperator.LE, 100));
-							break;
-						case "Filter2" :
-							aFilters.push(new Filter("Value", FilterOperator.GT, 100));
-							break;
-						default :
-							break;
-					}
+					var operator = oItem.data("operator") ? FilterOperator[oItem.data("operator")] : FilterOperator.EQ;
+					aFilters.push(new Filter(oItem.data("name"), operator, oItem.getKey()));
 					aCaptions.push(oItem.getText());
 				});
-
-				this._oListFilterState.aFilter = aFilters;
+				if(aFilters.length > 0){
+					var andFilter = [new Filter({ filters: aFilters, and: true})];
+					this._oListFilterState.aFilter = andFilter;
+				}else{
+					this._oListFilterState.aFilter = [];
+				}
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();
 				this._applySortGroup(oEvent);
+			},
+			
+			setDateFilter: function(oEvent){
+				var dp = oEvent.getSource();
+				var value = dp.getDateValue();
+				var operator = dp.data("operator");
+				var name = dp.data("name");
+				var order = dp.data("order");
+				var filterDialog = this.byId("viewSettingsDialog") || sap.ui.getCore().byId("viewSettingsDialog");
+				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
+				customFilter.setFilterCount(1);
+				customFilter.setSelected(true);
+				customFilter.data("name", name);
+				customFilter.setKey(value);
+				customFilter.data("operator", operator);
+			},
+			
+			onResetFilters: function(oEvent){
+				var filterDialog = oEvent.getSource();
+				var items = filterDialog.getFilterItems();
+				for(var i=0;i<items.length;i++){
+					if(items[i]["mProperties"].hasOwnProperty("filterCount")){
+						items[i].setFilterCount(0);
+						items[i].setSelected(false);
+					}
+				}
 			},
 
 			/**
@@ -302,6 +324,11 @@ sap.ui.define([
 						path: url,
 						template: this._oList['mBindingInfos'].items.template.clone()
 					});
+				}
+				if(this.type){
+					this.byId("filterButton").setVisible(true);
+				}else{
+					this.byId("filterButton").setVisible(false);
 				}
 			},
 

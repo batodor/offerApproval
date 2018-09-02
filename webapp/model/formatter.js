@@ -31,6 +31,35 @@ sap.ui.define([
 				} else if (s === "P") {
 					return v;
 				}
+			},
+			
+			getApprovalAction: function(sStatus) {
+				switch (sStatus) {
+					case "A":
+						return "Approved";
+					case "R":
+						return "Rejected";
+					default: return "Not processed";
+				}
+			},
+			
+			getApprovalItemIcon: function(sStatus) {
+				switch (sStatus) {
+					case "A":
+						return "sap-icon://accept";
+					case "R":
+						return "sap-icon://sys-cancel";
+					default: return "sap-icon://write-new";
+				}
+			},
+			
+			getApprovalIconColor: function(sStatus) {
+				switch (sStatus) {
+					case "A":
+						return sap.ui.core.IconColor.Positive;
+					case "R":
+						return sap.ui.core.IconColor.Negative;
+				}
 			}
 		};
 

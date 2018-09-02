@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferVolume', templateShareable: false }" 
+	<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferVolume', templateShareable: false }" class="padding"
 		selectionChange="onListSelect">
 		<CustomListItem>
 			<List width="100%" noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: false, sorter: { path: 'TCPosition' } }" 

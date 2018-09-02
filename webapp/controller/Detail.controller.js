@@ -241,6 +241,11 @@ sap.ui.define([
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
 					MessageToast.show(oResult.Message);
+					var oDialog = this.approveDialog;
+					oDialog.close();
+					this.getRouter().navTo("master", { type: "" });
+					// Refresh Master list data
+					this.getOwnerComponent().byId("master").getController()._oList.getBinding("items").refresh();
 				} else {
 					MessageBox.error(oResult.Message);
 				}

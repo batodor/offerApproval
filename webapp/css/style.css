@@ -3,8 +3,14 @@
 .noMargin{
 	margin: 0;
 }
+.sapMITBContent{
+	padding: 0;
+}
 .sapMTB{
 	height: auto;
+}
+.minusMargin{
+	margin: -1rem;
 }
 .padding{
 	padding: 1rem;

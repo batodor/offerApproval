@@ -1,51 +1,39 @@
 <core:FragmentDefinition xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<!--<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' } }" -->
-	<!--	selectionChange="onListSelect">-->
-	<!--	<CustomListItem>-->
-	<!--		<Panel expandable="true" expanded="true" width="auto">-->
-	<!--			<headerToolbar>-->
-	<!--				<Toolbar height="3rem">-->
-	<!--					<Title text="{FIO}" />-->
-	<!--				</Toolbar>-->
-	<!--			</headerToolbar>-->
-	<!--			<content>-->
-	<!--				<Label text="Action:" width="100px" /><Text text="Not processed"/>-->
-	<!--				<ToolbarSpacer />-->
-	<!--				<Label text="Comment:" width="100px" /><Text text=""/>-->
-	<!--				<ToolbarSpacer />-->
-	<!--				<Label text="Action Date:" width="100px" /><Text text="10.08.2018 01:00 GMT+0"/>-->
-	<!--			</content>-->
-	<!--		</Panel>-->
-	<!--	</CustomListItem>-->
-	<!--</List>	-->
-	<List items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' }, templateShareable: false }">
-		<CustomListItem>
-			<List items="{ToLevels}">
-				<CustomListItem>
-					<Panel width="auto" headerText="{Level}{= ${LevelName} ? ' - ' : ''}{LevelName}" expandable="true">
-						<List items="{ToAgents}">
-							<CustomListItem>
-								<Panel width="auto">
-									<headerToolbar>
-										<Toolbar>
-											<Title text="{FIO}"/>
-										</Toolbar>
-									</headerToolbar>
-									<content>
-										<form:SimpleForm backgroundDesign="Transparent" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="3" labelSpanS="5" 
-											adjustLabelSpan="false" singleContainerFullSize="false">
-											<Label text="Action"/><Text text="{Status}"/>
-											<Label text="Comment"/><Text text="{Comment}"/>
-											<Label text="Action Date"/><Text text="{path:'Executed', type:'sap.ui.model.type.DateTime', formatOptions : { pattern: 'dd.MM.y' }}"/>
-										</form:SimpleForm>
-									</content>
-								</Panel>
-							</CustomListItem>
-						</List>
-					</Panel>
-				</CustomListItem>
-			</List>
-		</CustomListItem>
-	</List>
+	<IconTabBar id="idIconTabBarNoIcons" expanded="true" expandable="false" showOverflowSelectList="true"
+		items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' }, templateShareable: false }">
+		<items>
+			<IconTabFilter key="{Iteration}" text="Approval Cycle: {Iteration}">
+				<List items="{ToLevels}">
+					<CustomListItem>
+						<Panel width="auto" headerText="{LevelName}" expandable="true">
+							<List items="{ToAgents}">
+								<CustomListItem>
+									<Panel width="auto">
+										<headerToolbar>
+											<Toolbar>
+												<Title text="{FIO}"/>
+												<core:Icon src="{path:'Status', formatter: '.formatter.getApprovalItemIcon'}" size="1.5rem"
+														   color="{path:'Status', formatter: '.formatter.getApprovalIconColor'}"
+														   class="sapUiTinyMargin"/>
+											</Toolbar>
+										</headerToolbar>
+										<content>
+											<form:SimpleForm backgroundDesign="Transparent" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="3" labelSpanS="5" 
+												adjustLabelSpan="false" singleContainerFullSize="false">
+												<Label text="Action"/><Text text="{path:'Status', formatter : '.formatter.getApprovalAction'}"/>
+												<Label text="Comment"/><Text text="{Comment}"/>
+												<Label text="Action Date"/><Text text="{path:'Executed', type:'sap.ui.model.type.DateTime', formatOptions : { pattern: 'dd.MM.y' }}"/>
+											</form:SimpleForm>
+										</content>
+									</Panel>
+								</CustomListItem>
+							</List>
+						</Panel>
+					</CustomListItem>
+				</List>
+			</IconTabFilter>
+			<IconTabFilter visible="false"></IconTabFilter>
+		</items>
+	</IconTabBar>
 </core:FragmentDefinition>

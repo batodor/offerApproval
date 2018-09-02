@@ -40,40 +40,42 @@
 				</Panel>
 			</CustomListItem>
 		</List>
-		<OverflowToolbar class="topLabel" height="3rem" width="100%">
-			<Title text="{i18n>limits}" titleStyle="H3"/>
-		</OverflowToolbar>
-		<Label class="topLabel" text="{i18n>paymentTerms}" />
-		<HBox width="100%">
-			<core:Icon class="marginRight" id="limitPaymentConditionIcon" />
-			<Text id="limitPaymentCondition" text="{i18n>none}" />
-		</HBox>
-		<HBox justifyContent="SpaceBetween">
-			<VBox class="leftVBoxStyle" width="50%">
-				<Label class="topLabel" text="{i18n>tonnage}" />
-				<HBox width="100%">
-					<core:Icon class="marginRight" id="limitTonnageIcon" />
-					<Text id="limitTonnage" text="{i18n>none}" />
-				</HBox>
-			</VBox>
-			<VBox class="rightVBoxStyle" width="50%">
-				<Label class="topLabel" text="{i18n>period}" />
-				<HBox width="100%">
-					<core:Icon class="marginRight" id="limitPeriodIcon" />
-					<Text id="limitPeriod" text="{i18n>none}" />
-				</HBox>
-			</VBox>
-		</HBox>
-		<OverflowToolbar class="topLabel" height="3rem" width="100%">
-			<Title text="{i18n>otherRisks}" titleStyle="H3"/>
-		</OverflowToolbar>
-		<Label class="topLabel" text="{i18n>countriesSanction}" />
-		<Text id="countriesSanction" text="{i18n>none}" />
-		<Label class="topLabel" text="{i18n>risks}" />
-		<List noDataText="{i18n>none}" class="listText heightAuto" items="{ path: 'ToRisksByOffer', templateShareable: false }">
-			<CustomListItem>
-				<Text text="{RiskName}" />
-			</CustomListItem>
-		</List>
+		<VBox class="padding">
+			<OverflowToolbar height="3rem" width="100%">
+				<Title text="{i18n>limits}" titleStyle="H3"/>
+			</OverflowToolbar>
+			<Label class="topLabel" text="{i18n>paymentTerms}" />
+			<HBox width="100%">
+				<core:Icon class="marginRight" id="limitPaymentConditionIcon" />
+				<Text id="limitPaymentCondition" text="{i18n>none}" />
+			</HBox>
+			<HBox justifyContent="SpaceBetween">
+				<VBox class="leftVBoxStyle" width="50%">
+					<Label class="topLabel" text="{i18n>tonnage}" />
+					<HBox width="100%">
+						<core:Icon class="marginRight" id="limitTonnageIcon" />
+						<Text id="limitTonnage" text="{i18n>none}" />
+					</HBox>
+				</VBox>
+				<VBox class="rightVBoxStyle" width="50%">
+					<Label class="topLabel" text="{i18n>period}" />
+					<HBox width="100%">
+						<core:Icon class="marginRight" id="limitPeriodIcon" />
+						<Text id="limitPeriod" text="{i18n>none}" />
+					</HBox>
+				</VBox>
+			</HBox>
+			<OverflowToolbar class="topLabel" height="3rem" width="100%">
+				<Title text="{i18n>otherRisks}" titleStyle="H3"/>
+			</OverflowToolbar>
+			<Label class="topLabel" text="{i18n>countriesSanction}" />
+			<Text id="countriesSanction" text="{i18n>none}" />
+			<Label class="topLabel" text="{i18n>risks}" />
+			<List noDataText="{i18n>none}" class="listText heightAuto" items="{ path: 'ToRisksByOffer', templateShareable: false }">
+				<CustomListItem>
+					<Text text="{RiskName}" />
+				</CustomListItem>
+			</List>
+		</VBox>
 	</VBox>
 </core:FragmentDefinition>
