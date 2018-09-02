@@ -33,7 +33,6 @@
 					</CustomListItem>
 				</List>
 			</IconTabFilter>
-			<IconTabFilter visible="false"></IconTabFilter>
 		</items>
 	</IconTabBar>
 </core:FragmentDefinition>
