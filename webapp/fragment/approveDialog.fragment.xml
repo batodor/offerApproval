@@ -1,4 +1,4 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+<Button text="{i18n>select}" custom:id=<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<Dialog title="{i18n>approve}" stretch="true" class="sapUiContentPadding" id="approveDialog">
 		<content>
 			<VBox>

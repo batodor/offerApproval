@@ -1,16 +1,16 @@
 <core:FragmentDefinition xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core" 
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<List noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferVolume', templateShareable: false }" class="padding"
+	<List noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferVolume', templateShareable: false }" class="padding"
 		selectionChange="onListSelect">
 		<CustomListItem>
-			<List width="100%" noDataText="{i18n>noData}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: false, sorter: { path: 'TCPosition' } }" 
+			<List width="100%" noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: false, sorter: { path: 'TCPosition' } }" 
 				selectionChange="onListSelect">
 				<CustomListItem>
 					<VBox width="100%">
 						<HBox class="halfPadding" justifyContent="SpaceBetween" alignItems="Center" alignContent="SpaceBetween" width="100%">
 							<Text width="100px" text="{= ${TCPosition} ==='000010' ? ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} : '' }"/>
 							<Text text="Russian Steam Coal"/>
-							<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {TonnageToleranceUOM} +/- {TonnageTolerance}"/>
+							<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} +/- {TonnageTolerance} {TonnageToleranceUOM}"/>
 							<Text textAlign="Right" text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } } 
 								{= ${DateFrom} ? ' - ' : '' } { path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }"/>
 						</HBox>
