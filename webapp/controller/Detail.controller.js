@@ -35,6 +35,9 @@ sap.ui.define([
 				this.approveDialog = sap.ui.xmlfragment("fragment.approveDialog", this);
 				this.getView().addDependent(this.approveDialog);
 				
+				this.forwardDialog = sap.ui.xmlfragment("fragment.forwardDialog", this);
+				this.getView().addDependent(this.forwardDialog);
+				
 				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
 			},
 
@@ -87,10 +90,10 @@ sap.ui.define([
 				}.bind(this));
 				if(this.type){
 					this.setInput(["mainDeleteButton", "mainEditButton"], true, "Visible");
-					this.setInput(["mainApproveButton", "mainRejectButton"], false, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], false, "Visible");
 				}else{
 					this.setInput(["mainDeleteButton", "mainEditButton"], false, "Visible");
-					this.setInput(["mainApproveButton", "mainRejectButton"], true, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], true, "Visible");
 				}
 			},
 
@@ -107,19 +110,61 @@ sap.ui.define([
 
 				// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
 				oViewModel.setProperty("/busy", false);
-
-				this.getView().bindElement({
+				var settings = {
 					path : sObjectPath,
 					events: {
 						change : this._onBindingChange.bind(this),
 						dataRequested : function () {
 							oViewModel.setProperty("/busy", true);
 						},
-						dataReceived: function () {
-							oViewModel.setProperty("/busy", false);
-						}
+						dataReceived: this.dataReceived.bind(this)
 					}
+				};
+				if(this.objectId){
+					settings.parameters = {
+						custom: { WorkitemID: this.objectId }
+					};
+				}
+				this.getView().bindElement(settings);
+			},
+			
+			recall: function(){
+				this.changeOfferStatus("5");
+			},
+			
+			dataReceived: function(oEvent){
+				this.getModel("detailView").setProperty("/busy", false);
+				var data = oEvent.getParameters("data").data;
+				if(data.Status === "1" && this.type){
+					this.byId("mainRecallButton").setVisible(true);
+				}else{
+					this.byId("mainRecallButton").setVisible(false);
+				}
+				if(data.ApprForAllPossible){
+					this.byId("mainFinalApproveButton").setVisible(true);
+				}else{
+					this.byId("mainFinalApproveButton").setVisible(false);
+				}
+			},
+			
+			changeOfferStatus: function(status){
+				var oFuncParams = {
+					TCNumber: this.TCNumber,
+					Status: status
+				};
+				this.getModel().callFunction("/ChangeOfferStatus", {
+					method: "GET",
+					urlParameters: oFuncParams,
+					success: this.onChangeStatusSuccess.bind(this, "ChangeOfferStatus")
 				});
+			},
+			onChangeStatusSuccess: function(link, oData) {
+				var oResult = oData[link];
+				if (oResult.ActionSuccessful) {
+					MessageToast.show(oResult.Message);
+				} else {
+					MessageBox.error(oResult.Message);
+				}
 			},
 
 			_onBindingChange : function () {
@@ -226,10 +271,11 @@ sap.ui.define([
 			dialogApprove: function(oEvent){
 				var id = oEvent.getSource().data("id");
 				var link = id === "approve" ? "ApproveOffer" : "RejectOffer";
+				var all = oEvent.getSource().data("all");
 				var oFuncParams = { 
 					WorkitemID: this.objectId,
 					Comment: sap.ui.getCore().byId("approveComment").getValue(),
-					ForAll: false
+					ForAll: all ? true : false
 				};
 				this.getModel().callFunction("/" + link, {
 					method: "POST",
@@ -237,6 +283,7 @@ sap.ui.define([
 					success: this.onApproveRejectSuccess.bind(this, link)
 				});
 			},
+			
 			onApproveRejectSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
@@ -246,6 +293,31 @@ sap.ui.define([
 					this.getRouter().navTo("master", { type: "" });
 					// Refresh Master list data
 					this.getOwnerComponent().byId("master").getController()._oList.getBinding("items").refresh();
+				} else {
+					MessageBox.error(oResult.Message);
+				}
+			},
+			
+			forward: function(oEvent){
+				var id = oEvent.getSource().data("id");
+				this[id + "Dialog"].open();
+			},
+			dialogForward: function(oEvent){
+				var oFuncParams = { 
+					WorkitemID: this.objectId,
+					Comment: sap.ui.getCore().byId("forwardComment").getValue(),
+					ForwardToUser: sap.ui.getCore().byId("forwardTrader").getSelectedKey()
+				};
+				this.getModel().callFunction("/ForwardOffer", {
+					method: "POST",
+					urlParameters: oFuncParams,
+					success: this.onForwardSuccess.bind(this, "ForwardOffer")
+				});
+			},
+			onForwardSuccess: function(link, oData){
+				var oResult = oData[link];
+				if (oResult.CopyingSuccessfully) {
+					MessageToast.show(oResult.Message);
 				} else {
 					MessageBox.error(oResult.Message);
 				}

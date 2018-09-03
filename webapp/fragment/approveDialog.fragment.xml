@@ -3,7 +3,7 @@
 		<content>
 			<VBox>
 				<HBox>
-					<Label class="topLabel" text="{i18n>enterComments}" />
+					<Label class="topLabel" text="{i18n>enterComments} " />
 					<Label class="topLabel" text="{Trader}" />
 				</HBox>
 				<TextArea id="approveComment" valueLiveUpdate="true" maxLength="300" showExceededText="true" rows="6" width="100%" />
