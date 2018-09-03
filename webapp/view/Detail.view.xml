@@ -30,7 +30,7 @@
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="1">
 						<VBox class="alignRight">
-							<Label text="{i18n>validityDate}:" />
+							<Label text="{i18n>validityDate}" class="marginTop" />
 							<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"/>
 						</VBox>
 					</l:BlockLayoutCell>

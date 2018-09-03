@@ -35,17 +35,28 @@
 				text="{i18n>counterpartyName}"
 				multiSelect="true">
 				<items>
-					<ViewSettingsItem text="{CounterpartyName}" key="{CounterpartyName}" custom:name="CounterpartyName" custom:operator="Contains" />
+					<ViewSettingsItem text="{CounterpartyName}" key="{CounterpartyName} - {CounterpartyCode}" custom:name="CounterpartyName" custom:operator="Contains" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/offerListSet' }"
 				text="{i18n>counterpartyCode}"
 				multiSelect="true">
 				<items>
-					<ViewSettingsItem text="{CounterpartyCode}" key="{CounterpartyCode}" custom:name="CounterpartyCode" />
+					<ViewSettingsItem text="{CounterpartyCode}" key="{CounterpartyCode} - {CounterpartyName}" custom:name="CounterpartyCode" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet', 
+				filters: [
+					{ path: 'Code', operator: 'EQ', value1: '0' },
+					{ path: 'Code', operator: 'EQ', value1: '1' },
+					{ path: 'Code', operator: 'EQ', value1: '2' },
+					{ path: 'Code', operator: 'EQ', value1: '3' },
+					{ path: 'Code', operator: 'EQ', value1: '4' },
+					{ path: 'Code', operator: 'EQ', value1: '5' },
+					{ path: 'Code', operator: 'EQ', value1: '6' },
+					{ path: 'Code', operator: 'EQ', value1: '7' },
+					{ path: 'Code', operator: 'EQ', value1: '8' }
+				]}"
 				text="{i18n>status}"
 				multiSelect="false">
 				<items>
@@ -73,14 +84,14 @@
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Trader" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryIncoterms' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionaryIncotermsSet' }"
 				text="{i18n>incoterms}"
 				multiSelect="false">
 				<items>
-					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Incoterms" />
+					<ViewSettingsItem text="{Incoterms} - {Description}" key="{Incoterms}" custom:name="Incoterms" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryDeliveryPoint' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionaryDeliveryPointSet' }"
 				text="{i18n>deliveryPoint}"
 				multiSelect="false">
 				<items>
