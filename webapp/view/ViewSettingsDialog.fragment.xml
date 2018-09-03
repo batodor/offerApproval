@@ -45,18 +45,7 @@
 					<ViewSettingsItem text="{CounterpartyCode} - {CounterpartyName}" key="{CounterpartyCode}" custom:name="CounterpartyCode" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet', 
-				filters: [
-					{ path: 'Code', operator: 'EQ', value1: '0' },
-					{ path: 'Code', operator: 'EQ', value1: '1' },
-					{ path: 'Code', operator: 'EQ', value1: '2' },
-					{ path: 'Code', operator: 'EQ', value1: '3' },
-					{ path: 'Code', operator: 'EQ', value1: '4' },
-					{ path: 'Code', operator: 'EQ', value1: '5' },
-					{ path: 'Code', operator: 'EQ', value1: '6' },
-					{ path: 'Code', operator: 'EQ', value1: '7' },
-					{ path: 'Code', operator: 'EQ', value1: '8' }
-				]}"
+			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet' }"
 				text="{i18n>status}"
 				multiSelect="false">
 				<items>
