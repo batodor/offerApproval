@@ -31,14 +31,14 @@
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="TradingPurpose" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/offerCounterpartySet', sorter: { path: 'Name' } }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' } }"
 				text="{i18n>counterpartyName}"
 				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Name} - {Code}" key="{Code}" custom:name="CounterpartyName" custom:operator="Contains" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/offerListSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchCounterpartySet' }"
 				text="{i18n>counterpartyCode}"
 				multiSelect="true">
 				<items>

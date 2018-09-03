@@ -17,14 +17,14 @@
 			<!-- For client side filtering add this to the items attribute: parameters: {operationMode: 'Client'}}" -->
 			<List
 				id="list"
+				growing="true"
+    			growingScrollToLoad="true"
 				width="auto"
 				class="sapFDynamicPageAlignContent"
 				items="{}"
 				busyIndicatorDelay="{masterView>/delay}"
 				noDataText="{masterView>/noDataText}"
 				mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}"
-				growing="true"
-				growingScrollToLoad="true"
 				updateFinished="onUpdateFinished"
 				selectionChange="onSelectionChange">
 				<infoToolbar>

@@ -319,6 +319,7 @@ sap.ui.define([
 				this.getModel("appView").setProperty("/layout", "OneColumn");
 				this.type = oEvent.getParameter("arguments").type;
 				var url = this.type ? "/offerListSet" : "/workitemSet";
+				this.getModel().setSizeLimit(500);
 				if(this._oList.getItems().length === 0){
 					this._oList.bindItems({
 						path: url,
