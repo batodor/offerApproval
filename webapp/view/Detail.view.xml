@@ -73,7 +73,7 @@
 			<!--<Button press="forward" id="mainForwardButton" visible="false" custom:id="approve" type="Emphasized" text="{i18n>forward}" />-->
 			
 			<Button press="delete" id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
-			<Button press="copy" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />
+			<!--<Button press="copy" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />-->
 			<Button press="edit" id="mainEditButton" visible="false" type="Accept" text="{i18n>edit}" />
 		</semantic:customFooterContent>
 	</semantic:SemanticPage>

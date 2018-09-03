@@ -33,23 +33,30 @@
 				</HBox>
 				<HBox justifyContent="SpaceBetween">
 					<VBox class="leftVBoxStyle" width="50%">
-						<Label class="topLabel" text="{i18n>price}" />
-						<Switch enabled="false" state="{= ${IndexFormula} ? true : false }" customTextOn="{i18n>index}" customTextOff="{i18n>fix}" />
+						<Label class="topLabel" text="{i18n>priceType}" />
+						<Switch enabled="false" custom:switch="true" state="{PriceType}" customTextOn="{i18n>index}" customTextOff="{i18n>fix}" />
 					</VBox>
 					<VBox 
-						visible="{= ${IndexFormula} ? true : false }" 
+						visible="{= ${PriceType} ? true : false }" 
 						class="rightVBoxStyle"
 						width="50%">
-						<Label class="topLabel" text="{i18n>indexFormula}" />
-						<Text text="{IndexFormula}" />
+						<Label class="topLabel noWrapping" text="{i18n>indexFormula}" />
+						<Text custom:key="indexFormula" text="{IndexFormula}" />
+					</VBox>
+					<VBox 
+						visible="{= ${PriceType} ? false : true }" 
+						class="rightVBoxStyle"
+						width="50%">
+						<Label class="topLabel" text="{i18n>offerPriceForBase}" />
+						<Text custom:key="offerPriceForBase" text="{path: 'OfferPriceBaseRoute', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}" />
 					</VBox>
 				</HBox>
 				<Label class="topLabel" text="{i18n>offerPrice}" />
-				<Text text="{FixPrice}" />
+				<Text text="{path: 'FixPrice', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}" />
 				<HBox justifyContent="SpaceBetween">
 					<VBox class="leftVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>cv}" />
-						<Text text="{CV}"/>
+						<Text text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}}"/>
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>cvBase}" />

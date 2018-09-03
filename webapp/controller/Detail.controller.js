@@ -86,11 +86,11 @@ sap.ui.define([
 					this._bindView(sObjectPath);
 				}.bind(this));
 				if(this.type){
-					this.setInput(["mainDeleteButton", "mainCopyButton", "mainEditButton"], true, "Visible");
-					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], false, "Visible");
+					this.setInput(["mainDeleteButton", "mainEditButton"], true, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton"], false, "Visible");
 				}else{
-					this.setInput(["mainDeleteButton", "mainCopyButton", "mainEditButton"], false, "Visible");
-					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], true, "Visible");
+					this.setInput(["mainDeleteButton", "mainEditButton"], false, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton"], true, "Visible");
 				}
 			},
 
