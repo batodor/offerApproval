@@ -111,6 +111,9 @@
 .marginTop{
 	margin-top: 1rem;
 }
+.marginBottom{
+	margin-bottom: 1rem;
+}
 .borderBottom{
 	border-bottom: 1px solid #dfdfdf;
 }

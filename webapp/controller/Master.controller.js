@@ -177,11 +177,11 @@ sap.ui.define([
 					aFilters.push(new Filter(oItem.data("name"), operator, oItem.getKey()));
 					aCaptions.push(oItem.getText());
 				});
-				if(aFilters.length > 0){
+				if(aFilters.length > 1){
 					var andFilter = [new Filter({ filters: aFilters, and: true})];
 					this._oListFilterState.aFilter = andFilter;
 				}else{
-					this._oListFilterState.aFilter = [];
+					this._oListFilterState.aFilter = aFilters;
 				}
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();

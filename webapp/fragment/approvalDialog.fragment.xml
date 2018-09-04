@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog title="{i18n>sendForApproval}" stretch="true" class="sapUiContentPadding" id="approvalDialog">
+		<content>
+			<VBox>
+				<HBox justifyContent="SpaceBetween">
+					<VBox class="leftVBoxStyle" width="50%">
+						<Label text="{i18n>validityDate}" />
+						<DatePicker dateValue="{ValidityDate}" id="approvalValidityDate"  />
+					</VBox>
+					<VBox class="rightVBoxStyle" width="50%">
+						<Label text="{i18n>trader}" />
+						<Select forceSelection="true" id="approvalTrader" selectedKey="{Trader}" width="100%" 
+							items="{ path: '/dictionaryTraderSet',
+									 parameters: { custom: { Type: 'A' } },
+									 sorter: { path: 'Name' } }">
+							<core:Item key="{Code}" text="{Name}"/>
+						</Select>
+					</VBox>
+				</HBox>
+				<Label class="topLabel noWrapping" text="{i18n>enterComments}" />
+				<TextArea value="{Comment}" id="approvalComment" rows="6" width="100%" />
+				<Label class="topLabel" text="{i18n>attachments}" />
+				<Table id="approvalUpload" custom:id="approvalUpload" select="onAttachmentSelect" mode="MultiSelect" includeItemInSelection="true" 
+					width="100%" items="{ path: 'ToAttachment' }" noDataText="{i18n>noData}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					<columns>
+						<Column><Label class="black" text="{i18n>name}"/></Column>
+						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{ path: 'FileName', formatter: '.formatter.getFileName' }" />
+								<Text text="{ path: 'CreateOn', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy' } }"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</VBox>
+		</content>
+		<buttons>
+			<Button text="{i18n>cancel}" custom:id="approvalDialog" type="Back" press="dialogCancel"/>
+			<Button text="{i18n>send}" custom:id="approval" type="Accept" press="dialogApprove"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

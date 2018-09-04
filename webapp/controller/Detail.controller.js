@@ -38,6 +38,9 @@ sap.ui.define([
 				this.forwardDialog = sap.ui.xmlfragment("fragment.forwardDialog", this);
 				this.getView().addDependent(this.forwardDialog);
 				
+				this.approvalDialog = sap.ui.xmlfragment("fragment.approvalDialog", this);
+				this.getView().addDependent(this.approvalDialog);
+				
 				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
 			},
 
@@ -126,10 +129,9 @@ sap.ui.define([
 					};
 				}
 				this.getView().bindElement(settings);
-			},
-			
-			recall: function(){
-				this.changeOfferStatus("5");
+				
+				// this.byId('offerProductText').bindElement(sObjectPath);
+				//this.byId('offerProductText').bindProperty("text", { path: sObjectPath + "/ProductName" });
 			},
 			
 			dataReceived: function(oEvent){
@@ -138,19 +140,37 @@ sap.ui.define([
 				if(data.Status === "1" && this.type){
 					this.byId("mainRecallButton").setVisible(true);
 				}else{
-					this.byId("mainRecallButton").setVisible(false);
+					this.setInput(["mainRecallButton"], false, "Visible");
+				} 
+				if(data.Status === "2" && this.type){
+					this.byId("mainDoneButton").setVisible(true);
+				}else{
+					this.setInput(["mainDoneButton"], false, "Visible");
+				}
+				if(data.Status === "0" && this.type){
+					this.byId("mainExecuteButton").setVisible(true);
+				}else{
+					this.setInput(["mainExecuteButton"], false, "Visible");
+				}
+				if(!(data.Status === "1" || data.Status === "6")){
+					this.byId("mainApprovalButton").setVisible(true);
+				}else{
+					this.byId("mainApprovalButton").setVisible(false);
 				}
 				if(data.ApprForAllPossible){
 					this.byId("mainFinalApproveButton").setVisible(true);
 				}else{
 					this.byId("mainFinalApproveButton").setVisible(false);
 				}
+				var oModel = new JSONModel(data); // Only set data here.
+				this.getView().setModel(oModel, "header"); // set the alias here
 			},
 			
-			changeOfferStatus: function(status){
+			changeOfferStatus: function(oEvent){
+				var id = oEvent.getSource().data("id");
 				var oFuncParams = {
 					TCNumber: this.TCNumber,
-					Status: status
+					Status: id
 				};
 				this.getModel().callFunction("/ChangeOfferStatus", {
 					method: "GET",
@@ -182,19 +202,22 @@ sap.ui.define([
 
 				var sPath = oElementBinding.getPath(),
 					oResourceBundle = this.getResourceBundle(),
-					oObject = oView.getModel().getObject(sPath),
-					sObjectId = oObject.WorkitemID,
-					sObjectName = oObject.Customer,
-					oViewModel = this.getModel("detailView");
+					oObject = oView.getModel().getObject(sPath);
+					
+				if(oObject){
+					var sObjectId = oObject.TCNumber;
+					var sObjectName = oObject.CounterpartyName;
+					var oViewModel = this.getModel("detailView");
 
-				this.getOwnerComponent().oListSelector.selectAListItem(sPath);
-
-				oViewModel.setProperty("/saveAsTileTitle",oResourceBundle.getText("shareSaveTileAppTitle", [sObjectName]));
-				oViewModel.setProperty("/shareOnJamTitle", sObjectName);
-				oViewModel.setProperty("/shareSendEmailSubject",
-					oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
-				oViewModel.setProperty("/shareSendEmailMessage",
-					oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+					this.getOwnerComponent().oListSelector.selectAListItem(sPath);
+	
+					oViewModel.setProperty("/saveAsTileTitle",oResourceBundle.getText("shareSaveTileAppTitle", [sObjectName]));
+					oViewModel.setProperty("/shareOnJamTitle", sObjectName);
+					oViewModel.setProperty("/shareSendEmailSubject",
+						oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
+					oViewModel.setProperty("/shareSendEmailMessage",
+						oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+				}
 			},
 
 			_onMetadataLoaded : function () {
@@ -282,6 +305,36 @@ sap.ui.define([
 					urlParameters: oFuncParams,
 					success: this.onApproveRejectSuccess.bind(this, link)
 				});
+			},
+			dialogApproval: function(oEvent){
+				var uploadItems = sap.ui.getCore().byId("approvalUpload").getSelectedItems();
+				var attachList = '';
+				for(var i = 0; i < uploadItems.length; i++){
+					attachList = attachList + this.getModel().getData(uploadItems[i].getBindingContextPath()).FileGUID + ";";
+				}
+				attachList = attachList.slice(0,-1);
+				var oFuncParams = { 
+					TCNumber: this.TCNumber,
+					Comment: sap.ui.getCore().byId("approvalComment").getValue(),
+					ValidityDate: sap.ui.getCore().byId("approvalValidityDate").getDateValue(),
+					AttachList: attachList,
+					GlobalTrader: sap.ui.getCore().byId("approvalTrader").getSelectedKey()
+				};
+				this.getModel().callFunction("/SentOfferToApproval", {
+					method: "POST",
+					urlParameters: oFuncParams,
+					success: this.onApprovalSuccess.bind(this, "SentOfferToApproval")
+				});
+			},
+			onApprovalSuccess: function(link, oData) {
+				var oResult = oData[link];
+				if (oResult.ActionSuccessful) {
+					MessageToast.show(oResult.Message);
+					this.getModel().refresh(true);
+					this.approvalDialog.close();
+				} else {
+					MessageBox.error(oResult.Message);
+				}
 			},
 			
 			onApproveRejectSuccess: function(link, oData) {

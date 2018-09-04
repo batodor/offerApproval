@@ -14,24 +14,30 @@
 		busy="{detailView>/busy}"
 		busyIndicatorDelay="{detailView>/delay}">
 		<semantic:content>
-			<VBox>
+			<VBox class="marginBottom">
 				<MessageStrip visible="{CPIssue}" enableFormattedText="true" text="{i18n>WarningCPRating}" type="Error" showIcon="true" class="margin" />
 				<MessageStrip visible="{LimitsIssue}" enableFormattedText="true" text="{i18n>WarningLimitsNotApproved}" type="Error" showIcon="true" class="margin" />
 				<MessageStrip visible="{RisksIssue}" enableFormattedText="true" text="{i18n>WarningComplienceRisk}" type="Error" showIcon="true" class="margin" />
 			</VBox>
 			<l:BlockLayout class="borderBottom">
 				<l:BlockLayoutRow>
-					<l:BlockLayoutCell width="2">
+					<l:BlockLayoutCell width="4">
 						<VBox>
-							<Title id="objectHeader" class="marginTop" titleStyle="H3" text="{CounterpartyName}" />
+							<Title id="objectHeader" titleStyle="H3" text="{CounterpartyName}" />
 							<Label class="wrap" text="{= ${Company} ? ${Company} : ''}{= ${Trader} ? ' / ' + ${Trader} : ''}
 								{= ${DealNumber} ? ' / Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
 					</l:BlockLayoutCell>
-					<l:BlockLayoutCell width="1">
-						<VBox class="alignRight">
-							<Label text="{i18n>validityDate}" visible="{= ${ValidityDate} ? true : false }" class="marginTop" />
-							<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"/>
+					<l:BlockLayoutCell width="3">
+						<VBox class="alignRight" justifyContent="SpaceBetween">
+							<HBox justifyContent="End">
+								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>validityDate}" visible="{= ${ValidityDate} ? true : false }" width="90px" />
+								<Text width="200px" text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"/>
+							</HBox>
+							<HBox justifyContent="End">
+								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>status}" visible="{= ${StatusName} ? true : false }" width="90px" />
+								<Text text="{StatusName}" width="200px" />
+							</HBox>
 						</VBox>
 					</l:BlockLayoutCell>
 				</l:BlockLayoutRow>
@@ -73,10 +79,13 @@
 			<Button press="approveReject" id="mainFinalApproveButton" visible="false" custom:id="approve" custom:all="true" type="Accept" text="{i18n>finalApproval}" />
 			<Button press="forward" id="mainForwardButton" visible="false" custom:id="forward" type="Emphasized" text="{i18n>forward}" />
 			
-			<Button press="recall" id="mainRecallButton" visible="false" type="Emphasized" text="{i18n>recall}" />
-			<Button press="delete" id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
-			<!--<Button press="copy" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />-->
 			<Button press="edit" id="mainEditButton" visible="false" type="Accept" text="{i18n>edit}" />
+			<Button press="delete" id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
+			<Button press="forward" id="mainApprovalButton" visible="false" custom:id="approval" type="Accept" text="{i18n>sendForApproval}" />
+			<Button press="changeOfferStatus" custom:id="5" id="mainRecallButton" visible="false" type="Emphasized" text="{i18n>recall}" />
+			<!--<Button press="copy" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copy}" />-->
+			<Button press="changeOfferStatus" custom:id="6" id="mainDoneButton" visible="false" type="Emphasized" text="{i18n>offerDone}" />
+			<Button press="changeOfferStatus" custom:id="7" id="mainExecuteButton" visible="false" type="Emphasized" text="{i18n>notExecuted}" />
 		</semantic:customFooterContent>
 	</semantic:SemanticPage>
 
