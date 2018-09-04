@@ -28,7 +28,7 @@
 	</List>
 	<form:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" backgroundDesign="Transparent">
 		<form:content>
-			<Label text="Payment Term"/><Text text="{= ${PaymentTerm} ? ${PaymentTerm} : ${i18n>none} }"/>
+			<Label text="Payment Term"/><Text text="{= ${PaymTerms} ? ${PaymTerms} : ${i18n>none} }"/>
 			<Label text="Comment"/><Text text="{= ${Comment} ? ${Comment} : ${i18n>none} }"/>
 		</form:content>
 	</form:SimpleForm>

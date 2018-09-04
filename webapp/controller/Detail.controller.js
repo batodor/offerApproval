@@ -150,9 +150,9 @@ sap.ui.define([
 				if(data.Status === "0" && this.type){
 					this.byId("mainExecuteButton").setVisible(true);
 				}else{
-					this.setInput(["mainExecuteButton"], false, "Visible");
+					this.byId("mainExecuteButton").setVisible(false);
 				}
-				if(!(data.Status === "1" || data.Status === "6")){
+				if(!(data.Status === "0" || data.Status === "6") && this.type){
 					this.byId("mainApprovalButton").setVisible(true);
 				}else{
 					this.byId("mainApprovalButton").setVisible(false);
@@ -173,7 +173,7 @@ sap.ui.define([
 					Status: id
 				};
 				this.getModel().callFunction("/ChangeOfferStatus", {
-					method: "GET",
+					method: "POST",
 					urlParameters: oFuncParams,
 					success: this.onChangeStatusSuccess.bind(this, "ChangeOfferStatus")
 				});
@@ -312,7 +312,9 @@ sap.ui.define([
 				for(var i = 0; i < uploadItems.length; i++){
 					attachList = attachList + this.getModel().getData(uploadItems[i].getBindingContextPath()).FileGUID + ";";
 				}
-				attachList = attachList.slice(0,-1);
+				if(attachList){
+					attachList = attachList.slice(0,-1);
+				}
 				var oFuncParams = { 
 					TCNumber: this.TCNumber,
 					Comment: sap.ui.getCore().byId("approvalComment").getValue(),

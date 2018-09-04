@@ -9,12 +9,12 @@
 			resetFilters="onResetFilters">
 		<sortItems>
 			<ViewSettingsItem
+				text="{i18n>masterSort2}"
+				key="TCNumber"/>
+			<ViewSettingsItem
 				text="{i18n>masterSort1}"
 				key="CounterpartyName"
 				selected="true"/>
-			<ViewSettingsItem
-				text="{i18n>masterSort2}"
-				key="TCNumber"/>
 			<ViewSettingsItem
 				text="{i18n>masterSort3}"
 				key="ValidityDate"/>
@@ -55,35 +55,35 @@
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Status" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryProductTypeSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchProductTypeSet' }"
 				text="{i18n>productType}"
 				multiSelect="false">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="ProductType" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryProductSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchProductSet' }"
 				text="{i18n>product}"
 				multiSelect="false">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Product" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryTraderSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchTraderSet' }"
 				text="{i18n>trader}"
 				multiSelect="false">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Trader" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryIncotermsSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchIncotermsSet' }"
 				text="{i18n>incoterms}"
 				multiSelect="false">
 				<items>
-					<ViewSettingsItem text="{Incoterms} - {Description}" key="{Incoterms}" custom:name="Incoterms" />
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Incoterms" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionaryDeliveryPointSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchDeliveryPointSet' }"
 				text="{i18n>deliveryPoint}"
 				multiSelect="false">
 				<items>

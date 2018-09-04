@@ -77,6 +77,10 @@
 						        {path: 'Value'}, 
 						        {path: 'ValueCurrency'}
 						    ],
+							sorter : {
+								path : 'TCNumber',
+								descending: false
+							},
 						    type: 'sap.ui.model.type.Currency',
 						    formatOptions: {
 						        showMeasure: false

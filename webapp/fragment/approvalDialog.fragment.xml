@@ -39,7 +39,7 @@
 		</content>
 		<buttons>
 			<Button text="{i18n>cancel}" custom:id="approvalDialog" type="Back" press="dialogCancel"/>
-			<Button text="{i18n>send}" custom:id="approval" type="Accept" press="dialogApprove"/>
+			<Button text="{i18n>send}" custom:id="approval" type="Accept" press="dialogApproval"/>
 		</buttons>
 	</Dialog>
 </core:FragmentDefinition>
