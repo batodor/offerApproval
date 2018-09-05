@@ -147,12 +147,12 @@ sap.ui.define([
 				}else{
 					this.setInput(["mainDoneButton"], false, "Visible");
 				}
-				if(data.Status === "0" && this.type){
+				if(data.Status !== "0" && this.type){
 					this.byId("mainExecuteButton").setVisible(true);
 				}else{
 					this.byId("mainExecuteButton").setVisible(false);
 				}
-				if(!(data.Status === "0" || data.Status === "6") && this.type){
+				if(!(data.Status === "1" || data.Status === "6" || data.Status === "7") && this.type){
 					this.byId("mainApprovalButton").setVisible(true);
 				}else{
 					this.byId("mainApprovalButton").setVisible(false);
@@ -315,10 +315,14 @@ sap.ui.define([
 				if(attachList){
 					attachList = attachList.slice(0,-1);
 				}
+				var dUTCDate = sap.ui.getCore().byId("approvalValidityDateTime").getDateValue();
+				// Consider selected date as UTC date
+				dUTCDate.setMinutes(dUTCDate.getMinutes() + (-dUTCDate.getTimezoneOffset()));
 				var oFuncParams = { 
 					TCNumber: this.TCNumber,
 					Comment: sap.ui.getCore().byId("approvalComment").getValue(),
-					ValidityDate: sap.ui.getCore().byId("approvalValidityDate").getDateValue(),
+					ValidityDate: dUTCDate,
+					ValidityTimeZone: sap.ui.getCore().byId("approvalValidityTimeZone").getSelectedKey(),
 					AttachList: attachList,
 					GlobalTrader: sap.ui.getCore().byId("approvalTrader").getSelectedKey()
 				};

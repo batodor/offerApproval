@@ -2,7 +2,7 @@
 	<Dialog title="{i18n>approve}" stretch="true" class="sapUiContentPadding" id="approveDialog">
 		<content>
 			<VBox>
-				<HBox>
+				<HBox justifyContent="SpaceBetween" width="430px">
 					<Label class="topLabel" text="{i18n>enterComments} " />
 					<Label class="topLabel" text="{Trader}" />
 				</HBox>

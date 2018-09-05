@@ -68,32 +68,69 @@
 					</OverflowToolbar>
 				</headerToolbar>
 				<items>
-					<ObjectListItem
-						type="Navigation"
-						press="onSelectionChange"
-						title="{CounterpartyName}"
-						number="{
-						    parts: [
-						        {path: 'Value'}, 
-						        {path: 'ValueCurrency'}
-						    ],
-							sorter : {
-								path : 'TCNumber',
-								descending: false
-							},
-						    type: 'sap.ui.model.type.Currency',
-						    formatOptions: {
-						        showMeasure: false
-						    }
-						}"
-						numberUnit="{ValueCurrency}">
-						<attributes>
-							<ObjectAttribute title="Trading Contract" text="{TCNumber}" />
-							<ObjectAttribute title="Variant Number" text="{DealNumber}" />
-							<ObjectAttribute title="Validity Date" 
-								text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"  />
-						</attributes>
-					</ObjectListItem>
+					<!--<ObjectListItem-->
+					<!--	type="Navigation"-->
+					<!--	press="onSelectionChange"-->
+					<!--	title="{CounterpartyName}"-->
+					<!--	number="{-->
+					<!--	    parts: [-->
+					<!--	        {path: 'Value'}, -->
+					<!--	        {path: 'ValueCurrency'}-->
+					<!--	    ],-->
+					<!--		sorter : {-->
+					<!--			path : 'TCNumber',-->
+					<!--			descending: false-->
+					<!--		},-->
+					<!--	    type: 'sap.ui.model.type.Currency',-->
+					<!--	    formatOptions: {-->
+					<!--	        showMeasure: false-->
+					<!--	    }-->
+					<!--	}"-->
+					<!--	numberUnit="{ValueCurrency}">-->
+					<!--	<attributes>-->
+					<!--		<ObjectAttribute title="Trading Contract" text="{TCNumber}" />-->
+					<!--		<ObjectAttribute title="Variant Number" text="{DealNumber}" />-->
+					<!--		<ObjectAttribute title="Validity Date" -->
+					<!--			text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"  />-->
+					<!--	</attributes>-->
+					<!--</ObjectListItem>-->
+					<CustomListItem>
+						<HBox justifyContent="SpaceBetween" class="padding">
+							<VBox>
+								<Title text="{CounterpartyName}" titleStyle="H4" />
+								<HBox visible="{= ${TCNumber} ? true : false }">
+									<Label text="{i18n>tradingContract}" width="120px" />
+									<Text text="{TCNumber}" />
+								</HBox>
+								<HBox visible="{= ${ValidityDate} ? true : false }">
+									<Label text="{i18n>validityDate}" width="120px" />
+									<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }" />
+								</HBox>
+								<HBox visible="{= ${VariantNumber} || ${DealNumber} ? true : false }">
+									<Label text="{i18n>variantNumber}" width="120px" />
+									<Text text="{VariantNumber}{DealNumber}" />
+								</HBox>
+							</VBox>
+							<VBox alignContent="End">
+								<Title class="leftVBoxStyle" text="{
+								    parts: [
+								        {path: 'Value'}, 
+								        {path: 'ValueCurrency'}
+								    ],
+									sorter : {
+										path : 'TCNumber',
+										descending: false
+									},
+								    type: 'sap.ui.model.type.Currency',
+								    formatOptions: {
+								        showMeasure: false
+								    }
+								}" titleStyle="H4" />
+								<Label textAlign="Right" text="{ValueCurrency}" />
+								<Text textAlign="Right" text="{Status}" />
+							</VBox>
+						</HBox>
+					</CustomListItem>
 				</items>
 			</List>
 		</semantic:content>
