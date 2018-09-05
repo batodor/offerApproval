@@ -123,14 +123,14 @@
 										<Label text="{i18n>validityDate}" width="120px" />
 										<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }" />
 									</HBox>
-									<HBox visible="{= ${VariantNumber} || ${DealNumber} ? true : false }">
+									<HBox visible="{= ${VariantNumber} ? true : false }">
 										<Label text="{i18n>variantNumber}" width="120px" />
-										<Text text="{VariantNumber}{DealNumber}" />
+										<Text text="{VariantNumber}" />
 									</HBox>
 								</VBox>
 								<VBox alignContent="End">
 									<Label visible="{= ${ValueCurrency} ? true : false }" textAlign="Right" text="{ValueCurrency}" />
-									<Text textAlign="Right" text="{Status}" />
+									<Text textAlign="Right" text="{StatusName}" />
 								</VBox>
 							</HBox>
 						</VBox>

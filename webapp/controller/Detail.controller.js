@@ -129,9 +129,6 @@ sap.ui.define([
 					};
 				}
 				this.getView().bindElement(settings);
-				
-				// this.byId('offerProductText').bindElement(sObjectPath);
-				//this.byId('offerProductText').bindProperty("text", { path: sObjectPath + "/ProductName" });
 			},
 			
 			dataReceived: function(oEvent){
@@ -174,6 +171,7 @@ sap.ui.define([
 				}
 				var oModel = new JSONModel(data); // Only set data here.
 				this.getView().setModel(oModel, "header"); // set the alias here
+				this.data = data;
 			},
 			
 			changeOfferStatus: function(oEvent){
@@ -370,6 +368,9 @@ sap.ui.define([
 			
 			forward: function(oEvent){
 				var id = oEvent.getSource().data("id");
+				this.byId("approvalValidityDateTime").setDateValue(null);
+				this.byId("approvalValidityTimeZone").setSelectedKey("");
+				this.byId("approvalTrader").setSelectedKey("");
 				this[id + "Dialog"].open();
 			},
 			dialogForward: function(oEvent){
@@ -546,13 +547,12 @@ sap.ui.define([
 				return oData;
 			},
 			
-			collectLimitsData: function(){
+			collectLimitsData: function(data){
 				var oData = {};
-				// var offerData = this.getData(["pageOfferDetails"]);
-				// oData.Partners = this.TCNumber;
-				// oData.CompanyCode = offerData.CompanyBranch;
-				// oData.PaymentMethod = offerData.PaymentMethod;
-				// oData.PaymentTerm = offerData.PaymentTerm;
+				oData.Partners = this.getCounterparties();
+				oData.CompanyCode = data.CompanyCode;
+				oData.PaymentMethod = data.PaymentMethod;
+				oData.PaymentTerm = data.PaymTerms;
 				
 				var volumeData = this.getVolumeData();
 				var DateFrom = null;
@@ -582,8 +582,21 @@ sap.ui.define([
 				return oData;
 			},
 			
-			checkLimits: function(){
-				var oFuncParams = this.collectLimitsData();
+			getCounterparties: function(){
+				var items = this.byId("risks").getItems();
+				var list = '';
+				for(var i = 0; i < items.length; i++){
+					var input = items[i].getContent()[0].getHeaderToolbar().getContent()[1];
+					list = list + input.getValue() + ";";
+				}
+				if(list){
+					list = list.slice(0,-1);
+				}
+				return list;
+			},
+			
+			checkLimits: function(data){
+				var oFuncParams = this.collectLimitsData(data);
 				this.getModel().callFunction("/CheckValidityLimits", {
 					method: "GET",
 					urlParameters: oFuncParams,
@@ -598,12 +611,6 @@ sap.ui.define([
 				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : this.getResourceBundle().getText("worklistTableTitle"));
 				this.byId("limitPeriod").setText(oResult.Period + " " + oResult.PeriodUoM);
 				this.byId("limitTonnage").setText(oResult.Tonnage + " " + oResult.TonnageUoM);
-				
-				if(oResult.PaymentExceed || oResult.PeriodExceed || oResult.TonnageExceed){
-					this.byId("requestLimit").setEnabled(true);
-				}else{
-					this.byId("requestLimit").setEnabled(false);
-				}
 			},
 			
 			// Object.assign doesnt work in IE so this function is created
@@ -634,7 +641,7 @@ sap.ui.define([
 			},
 			
 			onPeriodsFinished: function(oEvent){
-				// this.checkLimits();
+				this.checkLimits(this.data);
 			},
 			
 			createDeal: function(oEvent){

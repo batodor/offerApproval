@@ -6,6 +6,7 @@
 					<headerToolbar>
 						<Toolbar height="3rem">
 							<Title text="{Name}" />
+							<Input visible="false" value="{Code}" />
 							<ToolbarSpacer />
 						</Toolbar>
 					</headerToolbar>
