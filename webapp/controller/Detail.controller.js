@@ -147,7 +147,7 @@ sap.ui.define([
 				}else{
 					this.setInput(["mainDoneButton"], false, "Visible");
 				}
-				if((data.Status !== "0" || data.Status !== "7") && this.type){
+				if(!(data.Status === "0" || data.Status === "7") && this.type){
 					this.byId("mainExecuteButton").setVisible(true);
 				}else{
 					this.byId("mainExecuteButton").setVisible(false);
@@ -191,6 +191,7 @@ sap.ui.define([
 			onChangeStatusSuccess: function(link, oData) {
 				var oResult = oData[link];
 				if (oResult.ActionSuccessful) {
+					this.getModel().refresh(true);
 					MessageToast.show(oResult.Message);
 				} else {
 					MessageBox.error(oResult.Message);
