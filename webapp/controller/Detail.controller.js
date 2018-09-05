@@ -147,12 +147,12 @@ sap.ui.define([
 				}else{
 					this.setInput(["mainDoneButton"], false, "Visible");
 				}
-				if(data.Status !== "0" && this.type){
+				if((data.Status !== "0" || data.Status !== "7") && this.type){
 					this.byId("mainExecuteButton").setVisible(true);
 				}else{
 					this.byId("mainExecuteButton").setVisible(false);
 				}
-				if(!(data.Status === "1" || data.Status === "6" || data.Status === "7") && this.type){
+				if(!(data.Status === "1" || data.Status === "2" || data.Status === "6" || data.Status === "7") && this.type){
 					this.byId("mainApprovalButton").setVisible(true);
 				}else{
 					this.byId("mainApprovalButton").setVisible(false);
@@ -161,6 +161,16 @@ sap.ui.define([
 					this.byId("mainFinalApproveButton").setVisible(true);
 				}else{
 					this.byId("mainFinalApproveButton").setVisible(false);
+				}
+				if(data.Status === "6" && this.type){
+					this.byId("mainCreateDealButton").setVisible(true);
+				}else{
+					this.byId("mainCreateDealButton").setVisible(false);
+				}
+				if(this.type){
+					this.byId("mainCopyButton").setVisible(true);
+				}else{
+					this.byId("mainCopyButton").setVisible(false);
 				}
 				var oModel = new JSONModel(data); // Only set data here.
 				this.getView().setModel(oModel, "header"); // set the alias here
@@ -624,6 +634,10 @@ sap.ui.define([
 			
 			onPeriodsFinished: function(oEvent){
 				// this.checkLimits();
+			},
+			
+			createDeal: function(oEvent){
+				
 			}
 
 		});
