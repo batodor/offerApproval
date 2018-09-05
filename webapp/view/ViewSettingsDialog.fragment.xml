@@ -24,7 +24,7 @@
 				text="{i18n>TCNumber}"
 				multiSelect="true">
 				<items>
-					<ViewSettingsItem text="{TCNumber} - {CounterpartyName}" key="{TCNumber}" custom:name="TCNumber" />
+					<ViewSettingsItem text="{TCNumber} - {PartnerName}" key="{TCNumber}" custom:name="TCNumber" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionaryTradingPurposeSet' }"
