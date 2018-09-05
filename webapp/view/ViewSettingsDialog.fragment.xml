@@ -20,7 +20,7 @@
 				key="ValidityDate"/>
 		</sortItems>
 		<filterItems>
-			<ViewSettingsFilterItem items="{ path: '/offerListSet' }"
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchOfferSet' }"
 				text="{i18n>TCNumber}"
 				multiSelect="true">
 				<items>
