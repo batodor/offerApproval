@@ -4,7 +4,7 @@
 		selectionChange="onListSelect">
 		<CustomListItem>
 			<OverflowToolbar width="100%">
-				<Title text="{= ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} }" class="marginTop" titleStyle="H3"  />
+				<Title text="{VolumeNumber} / {= ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} }" class="marginTop" titleStyle="H3"  />
 			</OverflowToolbar>
 			<List width="100%" noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: true }" 
 				selectionChange="onListSelect">
@@ -21,7 +21,6 @@
 				</CustomListItem>
 			</List>
 			<HBox class="halfPadding" justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Center" width="100%">
-				<!--<Text text="Price"/>-->
 				<Text class="bold" text="{path: 'FixPrice', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {header>/Currency}"/>
 				<Text class="bold" text="{Incoterms} - {DeliveryPointName}"/>
 				<Text class="bold" text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {CVBase}"/>

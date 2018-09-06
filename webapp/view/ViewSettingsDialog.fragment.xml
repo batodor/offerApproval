@@ -29,7 +29,7 @@
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionaryTradingPurposeSet' }"
 				text="{i18n>tradingPurpose}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="TradingPurpose" />
 				</items>
@@ -50,42 +50,42 @@
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet' }"
 				text="{i18n>status}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Status" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchProductTypeSet' }"
 				text="{i18n>productType}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="ProductType" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchProductSet' }"
 				text="{i18n>product}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Product" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchTraderSet' }"
 				text="{i18n>trader}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Trader" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchIncotermsSet' }"
 				text="{i18n>incoterms}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Incoterms" />
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchDeliveryPointSet' }"
 				text="{i18n>deliveryPoint}"
-				multiSelect="false">
+				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="DeliveryPoint" />
 				</items>
