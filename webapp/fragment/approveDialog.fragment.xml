@@ -2,10 +2,11 @@
 	<Dialog title="{i18n>approve}" stretch="true" class="sapUiContentPadding" id="approveDialog">
 		<content>
 			<VBox>
-				<HBox justifyContent="SpaceBetween" width="430px">
+				<HBox justifyContent="SpaceBetween" id="finalApprovalHBox" width="430px">
 					<Label class="topLabel" text="{i18n>enterComments} " />
 					<Label class="topLabel" text="{Trader}" />
 				</HBox>
+				<Label class="topLabel" id="finalApprovalText" visible="false" text="{i18n>enterCommentsFinal}" />
 				<TextArea id="approveComment" valueLiveUpdate="true" maxLength="300" showExceededText="true" rows="6" width="100%" />
 			</VBox>
 		</content>

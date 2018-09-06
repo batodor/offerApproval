@@ -295,11 +295,18 @@ sap.ui.define([
 				}else if(id === "final"){
 					text = this.getResourceBundle().getText("finalApproval");
 				}
-				var buttonText = id === "approve" || id === "final" ? this.getResourceBundle().getText("reject") : buttonText = this.getResourceBundle().getText("approve");
+				var buttonText = id === "approve" || id === "final" ? buttonText = this.getResourceBundle().getText("approve") : this.getResourceBundle().getText("reject");
 				button.data("id", id);
 				button.data("all", oEvent.getSource().data("all"));
 				button.setText(buttonText);
 				dialog.setTitle(text);
+				if(oEvent.getSource().data("all")){
+					sap.ui.getCore().byId("finalApprovalHBox").setVisible(false);
+					sap.ui.getCore().byId("finalApprovalText").setVisible(true);
+				}else{
+					sap.ui.getCore().byId("finalApprovalHBox").setVisible(true);
+					sap.ui.getCore().byId("finalApprovalText").setVisible(false);
+				}
 				dialog.open();
 			},
 			
