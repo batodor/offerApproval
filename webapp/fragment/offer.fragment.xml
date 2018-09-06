@@ -3,12 +3,14 @@
 	<List noDataText="{i18n>none}" id="offerPeriods" mode="None" items="{ path: 'ToOfferVolume', templateShareable: true }" class="padding"
 		selectionChange="onListSelect">
 		<CustomListItem>
-			<List width="100%" noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: true, sorter: { path: 'TCPosition' } }" 
+			<OverflowToolbar width="100%">
+				<Title text="{= ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} }" class="marginTop" titleStyle="H3"  />
+			</OverflowToolbar>
+			<List width="100%" noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: true }" 
 				selectionChange="onListSelect">
 				<CustomListItem>
 					<VBox width="100%">
 						<HBox class="halfPadding" justifyContent="SpaceBetween" alignItems="Center" alignContent="SpaceBetween" width="100%">
-							<Text width="100px" text="{= ${TCPosition} ==='000010' ? ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} : '' }"/>
 							<Text text="{header>/ProductName}"/>
 							<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {header>/VolumeUOM} +/- 
 								{path: 'TonnageTolerance', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {TonnageToleranceUOM}"/>
@@ -19,10 +21,10 @@
 				</CustomListItem>
 			</List>
 			<HBox class="halfPadding" justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Center" width="100%">
-				<Text text="Price"/>
-				<Text text="{path: 'FixPrice', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {header>/Currency}"/>
-				<Text text="{Incoterms} - {DeliveryPointName}"/>
-				<Text text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {CVBase}"/>
+				<!--<Text text="Price"/>-->
+				<Text class="bold" text="{path: 'FixPrice', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {header>/Currency}"/>
+				<Text class="bold" text="{Incoterms} - {DeliveryPointName}"/>
+				<Text class="bold" text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {CVBase}"/>
 			</HBox>
 		</CustomListItem>
 	</List>

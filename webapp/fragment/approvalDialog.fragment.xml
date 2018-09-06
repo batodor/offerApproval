@@ -3,27 +3,25 @@
 		<content>
 			<VBox>
 				<HBox justifyContent="SpaceBetween">
-					<VBox class="leftVBoxStyle" width="40%">
+					<VBox class="leftVBoxStyle" width="50%">
 						<Label text="{i18n>validityDate}" />
 						<DateTimePicker id="approvalValidityDateTime"/>
 					</VBox>
-					<VBox class="leftVBoxStyle" width="20%">
+					<VBox class="leftVBoxStyle" width="50%">
 						<Label text="{i18n>validityDateTimeZone}" />
 						<Select forceSelection="true" id="approvalValidityTimeZone" width="100%" 
 							items="{/dictionaryTimeZoneSet}">
 							<core:Item key="{TimeZoneCode}" text="{TimeZoneName}"/>
 						</Select>
 					</VBox>
-					<VBox class="rightVBoxStyle" width="40%">
-						<Label text="{i18n>trader}" />
-						<Select forceSelection="true" id="approvalTrader" selectedKey="{Trader}" width="100%" 
-							items="{ path: '/dictionaryTraderSet',
-									 parameters: { custom: { Type: 'A' } },
-									 sorter: { path: 'Name' } }">
-							<core:Item key="{Code}" text="{Name}"/>
-						</Select>
-					</VBox>
 				</HBox>
+				<Label text="{i18n>trader}" />
+				<Select forceSelection="true" id="approvalTrader" selectedKey="{Trader}" width="100%" 
+					items="{ path: '/dictionaryTraderSet',
+							 parameters: { custom: { Type: 'A' } },
+							 sorter: { path: 'Name' } }">
+					<core:Item key="{Code}" text="{Name}"/>
+				</Select>
 				<Label class="topLabel noWrapping" text="{i18n>enterComments}" />
 				<TextArea value="{Comment}" id="approvalComment" rows="6" width="100%" />
 				<Label class="topLabel" text="{i18n>attachments}" />

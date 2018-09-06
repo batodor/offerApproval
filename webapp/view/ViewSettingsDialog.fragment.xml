@@ -91,27 +91,25 @@
 				</items>
 			</ViewSettingsFilterItem>
 			<ViewSettingsCustomItem
-				text="{i18n>validityDateFrom}">
+				text="{i18n>validityDate}">
 				<customControl>
-					<DatePicker change="setDateFilter" custom:order="10" custom:operator="GE" custom:name="ValidityDate" />
+					<VBox class="padding">
+						<DatePicker change="setDateFilter" id="validityDateFromPicker" placeholder="{i18n>dateFrom}" 
+							custom:order="10" custom:operator="GE" custom:name="ValidityDate" custom:id="validityDateToPicker" />
+						<DatePicker change="setDateFilter" id="validityDateToPicker" placeholder="{i18n>dateTo}" 
+							custom:order="10" custom:operator="LE" custom:name="ValidityDate" custom:id="validityDateFromPicker" />
+					</VBox>
 				</customControl>
 			</ViewSettingsCustomItem>
 			<ViewSettingsCustomItem
-				text="{i18n>validityDateTo}">
+				text="{i18n>creationDate}">
 				<customControl>
-					<DatePicker change="setDateFilter" custom:order="11" custom:operator="LE" custom:name="ValidityDate" />
-				</customControl>
-			</ViewSettingsCustomItem>
-			<ViewSettingsCustomItem
-				text="{i18n>creationDateFrom}">
-				<customControl>
-					<DatePicker change="setDateFilter" custom:order="12" custom:operator="GE" custom:name="CreationDate" />
-				</customControl>
-			</ViewSettingsCustomItem>
-			<ViewSettingsCustomItem
-				text="{i18n>creationDateTo}">
-				<customControl>
-					<DatePicker change="setDateFilter" custom:order="13" custom:operator="LE" custom:name="CreationDate" />
+					<VBox class="padding">
+						<DatePicker change="setDateFilter" id="creationDateFromPicker" placeholder="{i18n>dateFrom}" 
+							custom:order="11" custom:operator="GE" custom:name="CreationDate" custom:id="creationDateToPicker" />
+						<DatePicker change="setDateFilter" id="creationDateToPicker" placeholder="{i18n>dateTo}" 
+							custom:order="11" custom:operator="LE" custom:name="CreationDate" custom:id="creationDateFromPicker" />
+					</VBox>
 				</customControl>
 			</ViewSettingsCustomItem>
 		</filterItems>

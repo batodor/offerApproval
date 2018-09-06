@@ -368,9 +368,9 @@ sap.ui.define([
 			
 			forward: function(oEvent){
 				var id = oEvent.getSource().data("id");
-				this.byId("approvalValidityDateTime").setDateValue(null);
-				this.byId("approvalValidityTimeZone").setSelectedKey("");
-				this.byId("approvalTrader").setSelectedKey("");
+				sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
+				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
+				sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
 				this[id + "Dialog"].open();
 			},
 			dialogForward: function(oEvent){
@@ -610,7 +610,7 @@ sap.ui.define([
 				this.byId("limitTonnageIcon").setColor(oResult.TonnageExceed ? "red" : "green").setSrc(oResult.TonnageExceed ? 'sap-icon://alert' : 'sap-icon://accept');
 				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : this.getResourceBundle().getText("worklistTableTitle"));
 				this.byId("limitPeriod").setText(oResult.Period + " " + oResult.PeriodUoM);
-				this.byId("limitTonnage").setText(oResult.Tonnage + " " + oResult.TonnageUoM);
+				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " " + oResult.TonnageUoM);
 			},
 			
 			// Object.assign doesnt work in IE so this function is created
@@ -646,6 +646,22 @@ sap.ui.define([
 			
 			createDeal: function(oEvent){
 				
+			},
+			
+			tableDownload: function(oEvent){
+				var id = oEvent.getSource().data("id");
+				var table = this.byId(id + "Table") || sap.ui.getCore().byId(id + "Table");
+				var url = table.getModel().sServiceUrl + table.getSelectedItem().getBindingContextPath() + "/$value";
+				window.open(url);
+			},
+			
+			// On select item in Attachments table
+			onAttachmentSelect: function(e){
+				var listItems = e.getParameters("listItem");
+				if (listItems) {
+					var id = e.getSource().data("id");
+					this.setInput([id + "Delete", id + "Download"], true, "Enabled");
+				}
 			}
 
 		});

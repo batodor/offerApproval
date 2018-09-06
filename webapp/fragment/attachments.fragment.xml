@@ -1,7 +1,14 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Table id="uploadTable" custom:id="upload" select="onTableSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{ path: 'ToAttachment' }" 
+	<Table id="uploadTable" custom:id="upload" select="onAttachmentSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{ path: 'ToAttachment' }" 
 		noDataText="{i18n>none}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" class="padding"
 			growingScrollToLoad="false">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="{i18n>attachments}" />
+				<ToolbarSpacer />
+				<Button id="uploadDownload" custom:id="upload" text="{i18n>download}" press="tableDownload" type="Accept" enabled="false"/>
+			</Toolbar>
+		</headerToolbar>
 		<columns>
 			<Column><Label class="black" text="{i18n>name}"/></Column>
 			<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>

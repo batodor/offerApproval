@@ -166,23 +166,31 @@ sap.ui.define([
 			 * @public
 			 */
 			onConfirmViewSettingsDialog : function (oEvent) {
+				if(sap.ui.getCore().byId("validityDateFromPicker").getDateValue() || sap.ui.getCore().byId("validityDateToPicker").getDateValue() || 
+					sap.ui.getCore().byId("validityDateFromPicker").getDateValue() || sap.ui.getCore().byId("validityDateToPicker").getDateValue()){
+					
+				}
 				var aFilterItems = oEvent.getParameters().filterItems,
 					aFilters = [],
 					aCaptions = [];
-
+				
 				// update filter state:
 				// combine the filter array and the filter string
 				aFilterItems.forEach(function (oItem) {
 					var operator = oItem.data("operator") ? FilterOperator[oItem.data("operator")] : FilterOperator.EQ;
-					aFilters.push(new Filter(oItem.data("name"), operator, oItem.getKey()));
+					var settings = { path: oItem.data("name"), operator: operator, value1: oItem.getKey() };
+					if(oItem.data("value2")){
+						settings.value2 = oItem.data("value2");
+					}
+					aFilters.push(new Filter(settings));
 					aCaptions.push(oItem.getText());
 				});
-				if(aFilters.length > 1){
-					var andFilter = [new Filter({ filters: aFilters, and: true})];
-					this._oListFilterState.aFilter = andFilter;
-				}else{
+				// if(aFilters.length > 1){
+				// 	var andFilter = [new Filter({ filters: aFilters, and: true})];
+				// 	this._oListFilterState.aFilter = andFilter;
+				// }else{
 					this._oListFilterState.aFilter = aFilters;
-				}
+				// }
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();
 				this._applySortGroup(oEvent);
@@ -190,16 +198,28 @@ sap.ui.define([
 			
 			setDateFilter: function(oEvent){
 				var dp = oEvent.getSource();
-				var value = dp.getDateValue();
+				var dpValue = dp.getDateValue();
 				var operator = dp.data("operator");
 				var name = dp.data("name");
+				var id = dp.data("id");
 				var order = dp.data("order");
 				var filterDialog = this.byId("viewSettingsDialog") || sap.ui.getCore().byId("viewSettingsDialog");
 				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
 				customFilter.setFilterCount(1);
 				customFilter.setSelected(true);
 				customFilter.data("name", name);
-				customFilter.setKey(value);
+				customFilter.setKey(dpValue);
+				if(sap.ui.getCore().byId(id).getDateValue()){
+					var dp2Value = sap.ui.getCore().byId(id).getDateValue();
+					if(operator === "GE"){
+						customFilter.setKey(dpValue);
+						customFilter.data("value2", dp2Value);
+					}else if(operator === "LE"){
+						customFilter.setKey(dp2Value);
+						customFilter.data("value2", dpValue);
+					}
+					operator = "BT";
+				}
 				customFilter.data("operator", operator);
 			},
 			
