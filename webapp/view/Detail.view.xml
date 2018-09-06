@@ -76,7 +76,7 @@
 			<ToolbarSpacer/>
 			<Button press="approveReject" id="mainRejectButton" visible="false" custom:id="reject" type="Reject" text="{i18n>reject}" />
 			<Button press="approveReject" id="mainApproveButton" visible="false" custom:id="approve" type="Accept" text="{i18n>approve}" />
-			<Button press="approveReject" id="mainFinalApproveButton" visible="false" custom:id="approve" custom:all="true" type="Accept" text="{i18n>finalApproval}" />
+			<Button press="approveReject" id="mainFinalApproveButton" visible="false" custom:id="final" custom:all="true" type="Accept" text="{i18n>finalApproval}" />
 			<Button press="forward" id="mainForwardButton" visible="false" custom:id="forward" type="Emphasized" text="{i18n>forward}" />
 			
 			<Button press="edit" id="mainEditButton" visible="false" type="Accept" text="{i18n>edit}" />

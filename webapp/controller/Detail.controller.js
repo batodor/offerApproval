@@ -289,15 +289,17 @@ sap.ui.define([
 				var id = oEvent.getSource().data("id");
 				var dialog = this["approveDialog"];
 				var button = this.byId("approveButton") || sap.ui.getCore().byId("approveButton");
-				var text = id === "reject" ? this.getResourceBundle().getText("reject") : this.getResourceBundle().getText("approve");
-				button.data("id", id);
-				button.setText(text);
-				dialog.setTitle(text);
-				if(button.data("all")){
-					sap.ui.getCore().byId("approveButton").data("all", button.data("all"));
-				}else{
-					sap.ui.getCore().byId("approveButton").data("all");
+				var text = this.getResourceBundle().getText("reject");
+				if(id === "approve"){
+					text = this.getResourceBundle().getText("approve"); 
+				}else if(id === "final"){
+					text = this.getResourceBundle().getText("finalApproval");
 				}
+				var buttonText = id === "approve" || id === "final" ? this.getResourceBundle().getText("reject") : buttonText = this.getResourceBundle().getText("approve");
+				button.data("id", id);
+				button.data("all", oEvent.getSource().data("all"));
+				button.setText(buttonText);
+				dialog.setTitle(text);
 				dialog.open();
 			},
 			
@@ -307,7 +309,7 @@ sap.ui.define([
 			},
 			dialogApprove: function(oEvent){
 				var id = oEvent.getSource().data("id");
-				var link = id === "approve" ? "ApproveOffer" : "RejectOffer";
+				var link = id === "approve" || id === "final" ? "ApproveOffer" : "RejectOffer";
 				var all = oEvent.getSource().data("all");
 				var oFuncParams = { 
 					WorkitemID: this.objectId,
