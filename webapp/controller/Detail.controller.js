@@ -293,6 +293,11 @@ sap.ui.define([
 				button.data("id", id);
 				button.setText(text);
 				dialog.setTitle(text);
+				if(button.data("all")){
+					sap.ui.getCore().byId("approveButton").data("all", button.data("all"));
+				}else{
+					sap.ui.getCore().byId("approveButton").data("all");
+				}
 				dialog.open();
 			},
 			
