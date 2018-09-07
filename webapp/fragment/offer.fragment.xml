@@ -21,8 +21,8 @@
 				</CustomListItem>
 			</List>
 			<HBox class="halfPadding" justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Center" width="100%">
-				<Text class="bold" text="{path: 'FixPrice', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {header>/Currency}"/>
-				<Text class="bold" text="{Incoterms} - {DeliveryPointName}"/>
+				<Text class="bold" text="{= ${PriceType} ? ${IndexFormula} : ${path: 'FixPrice', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} } {header>/Currency}"/>
+				<Text class="bold" text="{Incoterms}{= ${DeliveryPointName} ? ' - ' : '' }{DeliveryPointName}"/>
 				<Text class="bold" text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {CVBase}"/>
 			</HBox>
 		</CustomListItem>
