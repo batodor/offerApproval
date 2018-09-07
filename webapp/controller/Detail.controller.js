@@ -330,30 +330,34 @@ sap.ui.define([
 				});
 			},
 			dialogApproval: function(oEvent){
-				var uploadItems = sap.ui.getCore().byId("approvalUpload").getSelectedItems();
-				var attachList = '';
-				for(var i = 0; i < uploadItems.length; i++){
-					attachList = attachList + this.getModel().getData(uploadItems[i].getBindingContextPath()).FileGUID + ";";
+				var validityDate = sap.ui.getCore().byId("approvalValidityDateTime").getDateValue();
+				if(validityDate && validityDate instanceof Date){
+					var uploadItems = sap.ui.getCore().byId("approvalUpload").getSelectedItems();
+					var attachList = '';
+					for(var i = 0; i < uploadItems.length; i++){
+						attachList = attachList + this.getModel().getData(uploadItems[i].getBindingContextPath()).FileGUID + ";";
+					}
+					if(attachList){
+						attachList = attachList.slice(0,-1);
+					}
+					// Consider selected date as UTC date
+					validityDate.setMinutes(validityDate.getMinutes() + (-validityDate.getTimezoneOffset()));
+					var oFuncParams = { 
+						TCNumber: this.TCNumber,
+						Comment: sap.ui.getCore().byId("approvalComment").getValue(),
+						ValidityDate: validityDate,
+						ValidityTimeZone: sap.ui.getCore().byId("approvalValidityTimeZone").getSelectedKey(),
+						AttachList: attachList,
+						GlobalTrader: sap.ui.getCore().byId("approvalTrader").getSelectedKey()
+					};
+					this.getModel().callFunction("/SentOfferToApproval", {
+						method: "POST",
+						urlParameters: oFuncParams,
+						success: this.onApprovalSuccess.bind(this, "SentOfferToApproval")
+					});
+				}else{
+					this.alert(this.getResourceBundle().getText("validityDateAlert"));
 				}
-				if(attachList){
-					attachList = attachList.slice(0,-1);
-				}
-				var dUTCDate = sap.ui.getCore().byId("approvalValidityDateTime").getDateValue();
-				// Consider selected date as UTC date
-				dUTCDate.setMinutes(dUTCDate.getMinutes() + (-dUTCDate.getTimezoneOffset()));
-				var oFuncParams = { 
-					TCNumber: this.TCNumber,
-					Comment: sap.ui.getCore().byId("approvalComment").getValue(),
-					ValidityDate: dUTCDate,
-					ValidityTimeZone: sap.ui.getCore().byId("approvalValidityTimeZone").getSelectedKey(),
-					AttachList: attachList,
-					GlobalTrader: sap.ui.getCore().byId("approvalTrader").getSelectedKey()
-				};
-				this.getModel().callFunction("/SentOfferToApproval", {
-					method: "POST",
-					urlParameters: oFuncParams,
-					success: this.onApprovalSuccess.bind(this, "SentOfferToApproval")
-				});
 			},
 			onApprovalSuccess: function(link, oData) {
 				var oResult = oData[link];
@@ -676,6 +680,16 @@ sap.ui.define([
 					var id = e.getSource().data("id");
 					this.setInput([id + "Delete", id + "Download"], true, "Enabled");
 				}
+			},
+			
+			copyOffer: function(oEvent){
+				window.open("/sap/bc/ui2/flp#ZTS_OFFER-change?&/" + this.TCNumber + "/Copy");
+			},
+			
+			// Default alert message
+			alert: function(msg, settingsArg){
+				var settings = settingsArg ? settingsArg : { actions: [sap.m.MessageBox.Action.CLOSE] };
+				MessageBox.alert(msg, settings);
 			}
 
 		});

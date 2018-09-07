@@ -83,7 +83,7 @@
 			<Button press="delete" id="mainDeleteButton" visible="false" type="Reject" text="{i18n>delete}" />
 			<Button press="forward" id="mainApprovalButton" visible="false" custom:id="approval" type="Accept" text="{i18n>sendForApproval}" />
 			<Button press="changeOfferStatus" custom:id="5" id="mainRecallButton" visible="false" type="Emphasized" text="{i18n>recall}" />
-			<Button id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copyOffer}" />
+			<Button press="copyOffer" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copyOffer}" />
 			<Button press="changeOfferStatus" custom:id="6" id="mainDoneButton" visible="false" type="Emphasized" text="{i18n>offerDone}" />
 			<Button press="changeOfferStatus" custom:id="7" id="mainExecuteButton" visible="false" type="Emphasized" text="{i18n>notExecuted}" />
 			<Button press="createDeal" id="mainCreateDealButton" visible="false" type="Accept" text="{i18n>createDeal}" />
