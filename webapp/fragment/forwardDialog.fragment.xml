@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="{i18n>forward}" stretch="true" class="sapUiContentPadding" id="forwardDialog">
+	<Dialog title="{i18n>forward}" stretch="{device>/system/phone}" class="sapUiContentPadding" id="forwardDialog">
 		<content>
 			<VBox>
 				<Label text="{i18n>trader}" />
