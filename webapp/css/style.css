@@ -29,6 +29,9 @@
 .sapFDynamicPageContent, .sapFDynamicPageContentFitContainer{
 	padding: 0;
 }
+.noBorder{
+	border: 0;
+}
 .detailPage .sapMFooter-CTX div:first-child,
 .closeOffer{
 	display: none;
@@ -52,8 +55,11 @@
 .bold{
 	font-weight: bold;
 }
+.sapMTitle{
+	padding-left: .5rem;
+}
 .sapMIBar .sapMBarChild:first-child{
-	margin-left: .5rem;
+	margin-left: 0;
 }
 .rightVBoxStyle {
   padding-left: .5rem;
