@@ -45,7 +45,7 @@
 			<OverflowToolbar height="3rem" width="100%">
 				<Title text="{i18n>limits}" titleStyle="H3"/>
 			</OverflowToolbar>
-			<Label class="topLabel" text="{i18n>paymentTerms}" />
+			<Label class="topLabel" text="{i18n>paymentCondition}" />
 			<HBox width="100%">
 				<core:Icon class="marginRight" id="limitPaymentConditionIcon" />
 				<Text id="limitPaymentCondition" text="{i18n>none}" />

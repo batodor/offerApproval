@@ -570,7 +570,7 @@ sap.ui.define([
 				oData.Partners = this.getCounterparties();
 				oData.CompanyCode = data.CompanyCode;
 				oData.PaymentMethod = data.PaymentMethod;
-				oData.PaymentTerm = data.PaymTerms;
+				oData.PaymentTerm = data.PaymentTerm;
 				
 				var volumeData = this.getVolumeData();
 				var DateFrom = null;
