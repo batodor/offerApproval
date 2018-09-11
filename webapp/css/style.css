@@ -55,7 +55,7 @@
 .bold{
 	font-weight: bold;
 }
-.sapMTitle{
+.iconTabBar .sapMTitle{
 	padding-left: .5rem;
 }
 .sapMIBar .sapMBarChild:first-child{
