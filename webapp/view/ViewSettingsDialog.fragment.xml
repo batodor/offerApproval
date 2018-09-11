@@ -15,13 +15,13 @@
 				text="{i18n>masterSort1}"
 				key="CounterpartyName"
 				selected="true"/>
-			<ViewSettingsItem
-				text="{i18n>masterSort3}"
-				key="ValidityDate"/>
+			<!--<ViewSettingsItem-->
+			<!--	text="{i18n>masterSort3}"-->
+			<!--	key="ValidityDate"/>-->
 		</sortItems>
 		<filterItems>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchOfferSet' }"
-				text="{i18n>TCNumber}"
+				text="{i18n>offerNumber}"
 				multiSelect="true">
 				<items>
 					<ViewSettingsItem text="{TCNumber} - {PartnerName}" key="{TCNumber}" custom:name="TCNumber" />

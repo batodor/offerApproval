@@ -185,12 +185,7 @@ sap.ui.define([
 					aFilters.push(new Filter(settings));
 					aCaptions.push(oItem.getText());
 				});
-				// if(aFilters.length > 1){
-				// 	var andFilter = [new Filter({ filters: aFilters, and: true})];
-				// 	this._oListFilterState.aFilter = andFilter;
-				// }else{
-					this._oListFilterState.aFilter = aFilters;
-				// }
+				this._oListFilterState.aFilter = aFilters;
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();
 				this._applySortGroup(oEvent);
@@ -340,11 +335,18 @@ sap.ui.define([
 				this.type = oEvent.getParameter("arguments").type;
 				var url = this.type ? "/offerListSet" : "/workitemSet";
 				this.getModel().setSizeLimit(500);
+				
+				var settings = {
+					path: url,
+					template: this._oList['mBindingInfos'].items.template.clone()
+				};
+				if(this.type && this.type === "MyOffers"){
+					settings.filters = [
+						new Filter("AppType", FilterOperator.EQ, "MO")
+					];
+				}
 				if(this._oList.getItems().length === 0){
-					this._oList.bindItems({
-						path: url,
-						template: this._oList['mBindingInfos'].items.template.clone()
-					});
+					this._oList.bindItems(settings);
 				}
 				if(this.type){
 					this.byId("filterButton").setVisible(true);

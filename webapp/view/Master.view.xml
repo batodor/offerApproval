@@ -93,7 +93,7 @@
 										<Label text="{i18n>tradingContract}" width="120px" />
 										<Text text="{TCNumber}" />
 									</HBox>
-									<HBox visible="{= ${ValidityDate} ? true : false }">
+									<HBox visible="{= ${ValidityDate} &amp;&amp; ${WorkitemID} ? true : false }">
 										<Label text="{i18n>validityDate}" width="120px" />
 										<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }" />
 									</HBox>

@@ -3,9 +3,11 @@ sap.ui.define([
 		"OfferApproval/OfferApproval/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"OfferApproval/OfferApproval/model/formatter",
-		'sap/m/MessageToast',
-		'sap/m/MessageBox'
-	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox) {
+		"sap/m/MessageToast",
+		"sap/m/MessageBox",
+		"sap/ui/model/Filter",
+		"sap/ui/model/FilterOperator"
+	], function (BaseController, JSONModel, formatter, MessageToast, MessageBox, Filter, FilterOperator) {
 		"use strict";
 
 		return BaseController.extend("OfferApproval.OfferApproval.controller.Detail", {
@@ -110,7 +112,7 @@ sap.ui.define([
 			_bindView : function (sObjectPath) {
 				// Set busy indicator during view binding
 				var oViewModel = this.getModel("detailView");
-
+				
 				// If the view was not bound yet its not busy, only if the binding requests data it is set to busy again
 				oViewModel.setProperty("/busy", false);
 				var settings = {
