@@ -20,11 +20,12 @@
 					showRefreshButton="true"
 					tooltip="{i18n>masterSearchTooltip}"
 					search="onSearch"
+					placeholder="{i18n>searchOfferNumber}"
 					width="auto">
 					<layoutData>
 						<OverflowToolbarLayoutData
-							minWidth="150px"
-							maxWidth="240px"
+							minWidth="200px"
+							maxWidth="250px"
 							shrinkable="true"
 							priority="NeverOverflow"/>
 					</layoutData>
@@ -90,7 +91,7 @@
 							<HBox justifyContent="SpaceBetween" alignItems="Start">
 								<VBox>
 									<HBox visible="{= ${TCNumber} ? true : false }">
-										<Label text="{i18n>tradingContract}" width="120px" />
+										<Label text="{i18n>offerNumber}" width="120px" />
 										<Text text="{TCNumber}" />
 									</HBox>
 									<HBox visible="{= ${ValidityDate} &amp;&amp; ${WorkitemID} ? true : false }">

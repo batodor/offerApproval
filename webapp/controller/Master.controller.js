@@ -141,8 +141,12 @@ sap.ui.define([
 				if (!this._oViewSettingsDialog) {
 					this._oViewSettingsDialog = sap.ui.xmlfragment("OfferApproval.OfferApproval.view.ViewSettingsDialog", this);
 					this.getView().addDependent(this._oViewSettingsDialog);
+					
 					// forward compact/cozy style into Dialog
 					this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
+				}
+				if(!this.type){
+					sap.ui.getCore().byId("viewSettingsDialog").removeAllFilterItems();
 				}
 				var sDialogTab = "sort";
 				if (oEvent.getSource() instanceof sap.m.Button) {
