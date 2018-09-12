@@ -7,7 +7,7 @@
 						<Label text="{i18n>validityDate}" />
 						<DateTimePicker id="approvalValidityDateTime" minutesStep="30" secondsStep="60" />
 					</VBox>
-					<VBox class="leftVBoxStyle" width="50%">
+					<VBox class="rightVBoxStyle" width="50%">
 						<Label text="{i18n>validityDateTimeZone}" />
 						<Select forceSelection="true" id="approvalValidityTimeZone" width="100%" 
 							items="{/dictionaryTimeZoneSet}">
@@ -15,7 +15,7 @@
 						</Select>
 					</VBox>
 				</HBox>
-				<Label text="{i18n>trader}" />
+				<Label text="{i18n>trader}" class="topLabel" />
 				<Select forceSelection="true" id="approvalTrader" selectedKey="{Trader}" width="100%" 
 					items="{ path: '/dictionaryTraderSet',
 							 parameters: { custom: { Type: 'A' } },
@@ -26,7 +26,8 @@
 				<TextArea value="{Comment}" id="approvalComment" rows="6" width="100%" />
 				<Label class="topLabel" text="{i18n>attachments}" />
 				<Table id="approvalUpload" custom:id="approvalUpload" select="onAttachmentSelect" mode="MultiSelect" includeItemInSelection="true" 
-					width="100%" items="{ path: 'ToAttachment' }" noDataText="{i18n>noData}" growing="true" growingThreshold="5" growingScrollToLoad="false">
+					width="100%" items="{ path: 'ToAttachment', parameters: { custom: { Approval: 'X' } } }" noDataText="{i18n>noData}" growing="true" 
+					growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
 						<Column hAlign="Center" width="100px"><Label class="black" text="{i18n>uploadDate}"/></Column>
