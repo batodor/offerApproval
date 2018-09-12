@@ -44,6 +44,7 @@ sap.ui.define([
 				this.getView().addDependent(this.approvalDialog);
 				
 				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
+				this.isRisk = {};
 			},
 
 			/* =========================================================== */
@@ -599,6 +600,7 @@ sap.ui.define([
 				oData.Period = Period;
 				oData.Tonnage = Tonnage;
 				oData.TCNumber = this.TCNumber;
+				oData.OfferType = data.OfferType;
 				return oData;
 			},
 			
@@ -692,6 +694,36 @@ sap.ui.define([
 			alert: function(msg, settingsArg){
 				var settings = settingsArg ? settingsArg : { actions: [sap.m.MessageBox.Action.CLOSE] };
 				MessageBox.alert(msg, settings);
+			},
+			
+			// On Compliance Risks list update finished
+			checkRisks: function(oEvent){
+				var list = oEvent.getSource();
+				var risks = list.getItems();
+				if(risks.length > 0){
+					var type = list.data("type");
+					this.isRisk[type] = false;
+					if(type === "other"){
+						if(risks.length > 0){
+							this.isRisk[type] = true;
+						}
+					}else if(type === "main"){
+						for(var i = 0; i < risks.length; i++){
+							var color = risks[i].getContent()[0].getItems()[0].getColor();
+							if(color === "red" || color === "yellow"){
+								this.isRisk[type] = true;
+							}
+						}
+					}
+					if(this.isRisk.main || this.isRisk.other){
+						this.byId("requestRisk").setEnabled(true);
+					}else{
+						this.byId("requestRisk").setEnabled(false);
+					}
+					if((this.status && this.status === "7") || (this.isChanged && this.TCNumber)){
+						this.byId("requestRisk").setEnabled(false);
+					}
+				}
 			}
 
 		});
