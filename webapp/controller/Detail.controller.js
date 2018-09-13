@@ -278,31 +278,26 @@ sap.ui.define([
 				}
 			},
 			
-			reject: function(oEvent){
-				var id = oEvent.getSource().data("id");
-				var dialog = this[id];
-				var text = sap.ui.getCore().byId("approveText");
-				var created = this.getView().getBindingContext().getProperty("CreatedByName");
-				text.setText("Reject the offer contract submitted by " + created + "?");
-				dialog.setTitle("Reject Offer");
-				dialog.open();
-			},
-			
 			approveReject: function(oEvent){
 				var id = oEvent.getSource().data("id");
 				var dialog = this["approveDialog"];
 				var button = this.byId("approveButton") || sap.ui.getCore().byId("approveButton");
-				var text = this.getResourceBundle().getText("reject");
-				if(id === "approve"){
-					text = this.getResourceBundle().getText("approve"); 
-				}else if(id === "final"){
-					text = this.getResourceBundle().getText("finalApproval");
+				var title = this.getResourceBundle().getText("reject");
+				var text = this.getResourceBundle().getText("enterComments");
+				if(id === "reject"){
+					text = this.getResourceBundle().getText("rejectText");
 				}
+				if(id === "approve"){
+					title = this.getResourceBundle().getText("approve"); 
+				}else if(id === "final"){
+					title = this.getResourceBundle().getText("finalApproval");
+				}
+				sap.ui.getCore().byId("approveText").setText(text);
 				var buttonText = id === "approve" || id === "final" ? buttonText = this.getResourceBundle().getText("approve") : this.getResourceBundle().getText("reject");
 				button.data("id", id);
 				button.data("all", oEvent.getSource().data("all"));
 				button.setText(buttonText);
-				dialog.setTitle(text);
+				dialog.setTitle(title);
 				if(oEvent.getSource().data("all")){
 					sap.ui.getCore().byId("finalApprovalHBox").setVisible(false);
 					sap.ui.getCore().byId("finalApprovalText").setVisible(true);

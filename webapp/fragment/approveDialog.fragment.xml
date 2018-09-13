@@ -3,7 +3,7 @@
 		<content>
 			<VBox>
 				<HBox justifyContent="SpaceBetween" id="finalApprovalHBox" width="430px">
-					<Label class="topLabel" text="{i18n>enterComments} " />
+					<Label class="topLabel" id="approveText" text="{i18n>enterComments} " />
 					<Label class="topLabel" text="{Trader}" />
 				</HBox>
 				<Label class="topLabel" id="finalApprovalText" visible="false" text="{i18n>enterCommentsFinal}" />
