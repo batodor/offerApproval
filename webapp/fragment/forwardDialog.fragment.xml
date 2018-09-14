@@ -10,8 +10,8 @@
 							 sorter: { path: 'Name' } }">
 					<core:Item key="{Code}" text="{Name}"/>
 				</Select>
-				<Label text="{i18n>enterForwardComments}" class="marginTop" />
-				<TextArea id="forwardComment" valueLiveUpdate="true" maxLength="300" showExceededText="true" rows="6" width="100%" />
+				<!--<Label text="{i18n>enterForwardComments}" class="marginTop" />-->
+				<TextArea id="forwardComment" class="marginTop" valueLiveUpdate="true" maxLength="300" showExceededText="true" rows="6" width="100%" />
 			</VBox>
 		</content>
 		<buttons>

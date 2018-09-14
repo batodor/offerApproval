@@ -389,26 +389,29 @@ sap.ui.define([
 			},
 			
 			forward: function(oEvent){
-				var check = "";
-				var checkArr = ["tradingPurpose", "product", "paymentMethod", "paymentTerm", "meansOfTransport"];
-				for(var i = 0; i < checkArr.length; i++){
-					if(!this.data[checkArr[i].charAt(0).toUpperCase() + checkArr[i].slice(1)]){
-						check = check + this.getResourceBundle().getText(checkArr[i]) + "\n ";
+				var id = oEvent.getSource().data("id");
+				if(id === "approval"){
+					var check = "";
+					var checkArr = ["tradingPurpose", "product", "paymentMethod", "paymentTerm", "meansOfTransport"];
+					for(var i = 0; i < checkArr.length; i++){
+						if(!this.data[checkArr[i].charAt(0).toUpperCase() + checkArr[i].slice(1)]){
+							check = check + this.getResourceBundle().getText(checkArr[i]) + "\n ";
+						}
+					}
+					if(this.byId("volumesList").getItems().length === 0){
+						check = check + this.getResourceBundle().getText("volume") + ", ";
+					}
+					if(check){
+						var msg = this.getResourceBundle().getText("plsFillIn") + " \n\n " + check.slice(0,-2);
+						this.alert(msg);
+						return true;
 					}
 				}
-				if(this.byId("volumesList").getItems().length === 0){
-					check = check + this.getResourceBundle().getText("volume") + ", ";
-				}
-				if(check){
-					var msg = this.getResourceBundle().getText("plsFillIn") + " \n\n " + check.slice(0,-2);
-					this.alert(msg);
-				}else{
-					var id = oEvent.getSource().data("id");
-					sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
-					sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
-					sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
-					this[id + "Dialog"].open();
-				}
+					
+				sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
+				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
+				sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
+				this[id + "Dialog"].open();
 			},
 			dialogForward: function(oEvent){
 				var oFuncParams = { 
@@ -424,7 +427,7 @@ sap.ui.define([
 			},
 			onForwardSuccess: function(link, oData){
 				var oResult = oData[link];
-				if (oResult.CopyingSuccessfully) {
+				if (oResult.ActionSuccessful) {
 					MessageToast.show(oResult.Message);
 				} else {
 					MessageBox.error(oResult.Message);
