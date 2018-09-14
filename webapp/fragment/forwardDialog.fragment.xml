@@ -5,6 +5,7 @@
 				<Label text="{i18n>trader}" />
 				<Select forceSelection="true" id="forwardTrader" selectedKey="{Trader}" width="100%" 
 					items="{ path: '/dictionaryTraderSet',
+							 templateShareable: false,
 							 parameters: { custom: { Type: 'A' } },
 							 sorter: { path: 'Name' } }">
 					<core:Item key="{Code}" text="{Name}"/>

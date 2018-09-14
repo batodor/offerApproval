@@ -1,5 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Table id="uploadTable" custom:id="upload" select="onAttachmentSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" items="{ path: 'ToAttachment' }" 
+	<Table id="uploadTable" custom:id="upload" select="onAttachmentSelect" mode="SingleSelectLeft" includeItemInSelection="true" width="100%" 
+		items="{ path: 'ToAttachment', templateShareable: false }" 
 		noDataText="{i18n>none}" busyIndicatorDelay="{worklistView>/tableBusyDelay}" growing="true" growingThreshold="5" class="padding"
 			growingScrollToLoad="false">
 		<headerToolbar>

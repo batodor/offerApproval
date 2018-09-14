@@ -118,6 +118,7 @@ sap.ui.define([
 				oViewModel.setProperty("/busy", false);
 				var settings = {
 					path : sObjectPath,
+					templateShareable: false,
 					events: {
 						change : this._onBindingChange.bind(this),
 						dataRequested : function () {
@@ -137,6 +138,12 @@ sap.ui.define([
 			dataReceived: function(oEvent){
 				this.getModel("detailView").setProperty("/busy", false);
 				var data = oEvent.getParameters("data").data;
+				var oModel = new JSONModel(data); // Only set data here.
+				this.getView().setModel(oModel, "header"); // set the alias here
+				this.setDataByStatus(data);
+			},
+			
+			setDataByStatus: function(data){
 				if(data.Status === "1" && this.type){
 					this.byId("mainRecallButton").setVisible(true);
 				}else{
@@ -172,8 +179,6 @@ sap.ui.define([
 				}else{
 					this.byId("mainCopyButton").setVisible(false);
 				}
-				var oModel = new JSONModel(data); // Only set data here.
-				this.getView().setModel(oModel, "header"); // set the alias here
 				this.data = data;
 			},
 			
@@ -229,6 +234,7 @@ sap.ui.define([
 						oResourceBundle.getText("shareSendEmailObjectSubject", [sObjectId]));
 					oViewModel.setProperty("/shareSendEmailMessage",
 						oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
+					this.setDataByStatus(oObject);
 				}
 			},
 
@@ -383,11 +389,26 @@ sap.ui.define([
 			},
 			
 			forward: function(oEvent){
-				var id = oEvent.getSource().data("id");
-				sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
-				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
-				sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
-				this[id + "Dialog"].open();
+				var check = "";
+				var checkArr = ["tradingPurpose", "product", "paymentMethod", "paymentTerm", "meansOfTransport"];
+				for(var i = 0; i < checkArr.length; i++){
+					if(!this.data[checkArr[i].charAt(0).toUpperCase() + checkArr[i].slice(1)]){
+						check = check + this.getResourceBundle().getText(checkArr[i]) + "\n ";
+					}
+				}
+				if(this.byId("volumesList").getItems().length === 0){
+					check = check + this.getResourceBundle().getText("volume") + ", ";
+				}
+				if(check){
+					var msg = this.getResourceBundle().getText("plsFillIn") + " \n\n " + check.slice(0,-2);
+					this.alert(msg);
+				}else{
+					var id = oEvent.getSource().data("id");
+					sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
+					sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
+					sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
+					this[id + "Dialog"].open();
+				}
 			},
 			dialogForward: function(oEvent){
 				var oFuncParams = { 
@@ -471,7 +492,7 @@ sap.ui.define([
 			},
 			
 			// Set odata from any dialog, argument object = any object / return object inputs Data
-			getData: function(object){
+			getData: function(object, isSave){
 				var oData = {};
 				var inputs = this.getInputs(object);
 				for(var i = 0; i < inputs.length; i++){
@@ -479,15 +500,15 @@ sap.ui.define([
 					if(input["sId"].indexOf('hbox') > -1){
 						var vboxes = input.getItems();
 						for(var j = 0; j < vboxes.length; j++){
-							oData = this.mergeObjects(oData, this.getDataInner(vboxes[j].getItems()[1]));
+							oData = this.mergeObjects(oData, this.getDataInner(vboxes[j].getItems()[1], isSave));
 						}
 					}else{
-						oData = this.mergeObjects(oData, this.getDataInner(input));
+						oData = this.mergeObjects(oData, this.getDataInner(input, isSave));
 					}
 				}
 				return oData;
 			},
-			getDataInner: function(input){
+			getDataInner: function(input, isSave){
 				var oData = {};
 				for(var j = 0; j < this.typeArr.length; j++){
 					var type = this.typeArr[j];
@@ -529,7 +550,9 @@ sap.ui.define([
 						if(input.hasOwnProperty("_oMaxDate")){
 							value = input.getDateValue();
 							if(value) {
-								value.setMinutes(-value.getTimezoneOffset());
+								if(isSave){
+									value.setMinutes(-value.getTimezoneOffset());
+								}
 							} else { 
 								value = null;
 							}
@@ -561,6 +584,22 @@ sap.ui.define([
 					oData.ToOfferVolume.push(allVolumeData);
 				}
 				return oData;
+			},
+			
+			// oData = object with data, keyArr is array of keys to check
+			checkDataInner: function(oData, keyArr){
+				var check = "";
+				for(var key in oData){
+					if(keyArr.indexOf(key) > -1 ){
+						if(!oData[key] || oData[key] === "0" || oData[key] === "0.00"){
+							check = check + key + ",";
+						}
+					}
+				}
+				if(check){
+					check = check.slice(0,-1);
+				}
+				return check;
 			},
 			
 			collectLimitsData: function(data){

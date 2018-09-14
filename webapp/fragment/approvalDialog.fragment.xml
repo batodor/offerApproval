@@ -18,6 +18,7 @@
 				<Label text="{i18n>trader}" class="topLabel" />
 				<Select forceSelection="true" id="approvalTrader" selectedKey="{Trader}" width="100%" 
 					items="{ path: '/dictionaryTraderSet',
+							 templateShareable: false,
 							 parameters: { custom: { Type: 'A' } },
 							 sorter: { path: 'Name' } }">
 					<core:Item key="{Code}" text="{Name}"/>
@@ -26,7 +27,7 @@
 				<TextArea value="{Comment}" id="approvalComment" rows="6" width="100%" />
 				<Label class="topLabel" text="{i18n>attachments}" />
 				<Table id="approvalUpload" custom:id="approvalUpload" select="onAttachmentSelect" mode="MultiSelect" includeItemInSelection="true" 
-					width="100%" items="{ path: 'ToAttachment', parameters: { custom: { Approval: 'X' } } }" noDataText="{i18n>noData}" growing="true" 
+					width="100%" items="{ path: 'ToAttachment', templateShareable: false, parameters: { custom: { Approval: 'X' } } }" noDataText="{i18n>noData}" growing="true" 
 					growingThreshold="5" growingScrollToLoad="false">
 					<columns>
 						<Column><Label class="black" text="{i18n>name}"/></Column>
