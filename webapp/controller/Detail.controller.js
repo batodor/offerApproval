@@ -96,10 +96,10 @@ sap.ui.define([
 				}.bind(this));
 				if(this.type){
 					this.setInput(["mainDeleteButton", "mainEditButton"], true, "Visible");
-					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], false, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton"], false, "Visible");
 				}else{
 					this.setInput(["mainDeleteButton", "mainEditButton"], false, "Visible");
-					this.setInput(["mainApproveButton", "mainRejectButton", "mainForwardButton"], true, "Visible");
+					this.setInput(["mainApproveButton", "mainRejectButton"], true, "Visible");
 				}
 			},
 
