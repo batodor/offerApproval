@@ -132,6 +132,7 @@ sap.ui.define([
 						custom: { WorkitemID: this.objectId }
 					};
 				}
+				this.isBlacklist = false;
 				this.getView().bindElement(settings);
 			},
 			
@@ -401,9 +402,16 @@ sap.ui.define([
 					if(this.byId("volumesList").getItems().length === 0){
 						check = check + this.getResourceBundle().getText("volume") + ", ";
 					}
-					if(check){
-						var msg = this.getResourceBundle().getText("plsFillIn") + " \n\n " + check.slice(0,-2);
-						this.alert(msg);
+					if(check || this.isBlacklist){
+						if(check){
+							check = this.getResourceBundle().getText("plsFillIn") + " \n\n " + check.slice(0,-2);
+							if(this.isBlacklist){
+								check = check + "\n\n" + this.getResourceBundle().getText("counterpartyBlacklisted");
+							}
+						}else{
+							check = this.getResourceBundle().getText("counterpartyBlacklisted");
+						}
+						this.alert(check);
 						return true;
 					}
 				}
@@ -669,7 +677,7 @@ sap.ui.define([
 				this.byId("limitTonnageIcon").setColor(oResult.TonnageExceed ? "red" : "green").setSrc(oResult.TonnageExceed ? 'sap-icon://alert' : 'sap-icon://accept');
 				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : this.getResourceBundle().getText("worklistTableTitle"));
 				this.byId("limitPeriod").setText(oResult.Period + " " + oResult.PeriodUoM);
-				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " " + oResult.TonnageUoM);
+				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + oResult.TonnageUoM);
 			},
 			
 			// Object.assign doesnt work in IE so this function is created
@@ -759,6 +767,17 @@ sap.ui.define([
 					}
 					if((this.status && this.status === "7") || (this.isChanged && this.TCNumber)){
 						this.byId("requestRisk").setEnabled(false);
+					}
+				}
+			},
+			
+			checkBlacklist: function(oEvent){
+				var list = oEvent.getSource();
+				var counterparties = list.getItems();
+				for(var i = 0; i < counterparties.length; i++){
+					var blacklist = counterparties[i].getContent()[0].getContent()[0].getItems()[0].getItems()[1].getItems()[1].getText();
+					if(blacklist === "Blacklisted"){
+						this.isBlacklist = true;
 					}
 				}
 			}

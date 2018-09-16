@@ -391,7 +391,11 @@ sap.ui.define([
 				var sTitle;
 				// only update the counter if the length is final
 				if (this._oList.getBinding("items").isLengthFinal()) {
-					sTitle = this.getResourceBundle().getText("masterTitleCount", [iTotalItems]);
+					if(this.type){
+						sTitle = this.getResourceBundle().getText("searchOffers", [iTotalItems]);
+					}else{
+						sTitle = this.getResourceBundle().getText("approvalOffers", [iTotalItems]);
+					}
 					this.getModel("masterView").setProperty("/title", sTitle);
 				}
 			},
