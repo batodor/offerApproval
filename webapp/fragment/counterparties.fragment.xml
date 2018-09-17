@@ -7,8 +7,8 @@
 						<Toolbar height="3rem">
 							<Link class="sapMTitleStyleH4" text="{Name}" target="_blank"
 									href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{Code}" />
-							<Title titleStyle="H4" text="({Code})" />
 							<Input visible="false" value="{Code}" />
+							<Title titleStyle="H4" text="({Code})" />
 							<ToolbarSpacer />
 						</Toolbar>
 					</headerToolbar>

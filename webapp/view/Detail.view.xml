@@ -23,19 +23,26 @@
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell width="4">
 						<VBox>
-							<Title id="objectHeader" text="{CounterpartyName} ({TCNumber})" titleStyle="H3" />
+							<!--<HBox justifyContent="Start">-->
+								<Link class="sapMTitleStyleH3" text="{CounterpartyName}" target="_blank"
+										href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{CounterpartyCode}" />
+							<!--</HBox>-->
 							<Label class="wrap" text="{= ${Company} ? ${Company} : ''}{= ${Company} &amp;&amp; ${Trader} ? ' / ' : '' }{= ${Trader} ? ${Trader} : ''}
 								{= ${Trader} &amp;&amp; ${DealNumber} ? ' / ' : '' }{= ${DealNumber} ? 'Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="3">
-						<VBox class="alignRight" justifyContent="SpaceBetween">
-							<HBox justifyContent="End">
-								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>validityDate}" visible="{= ${ValidityDate} ? true : false }" width="90px" />
+						<VBox class="alignRight" alignItems="Center" justifyContent="SpaceBetween">
+							<HBox justifyContent="End" visible="{= ${CounterpartyCode} ? true : false }">
+								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>offerNumber}" width="90px" />
+								<Text width="200px" text="{CounterpartyCode}"/>
+							</HBox>
+							<HBox justifyContent="End" visible="{= ${ValidityDate} ? true : false }">
+								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>validityDate}" width="90px" />
 								<Text width="200px" text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"/>
 							</HBox>
-							<HBox justifyContent="End">
-								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>status}" visible="{= ${StatusName} ? true : false }" width="90px" />
+							<HBox justifyContent="End" visible="{= ${StatusName} ? true : false }">
+								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>status}" width="90px" />
 								<Text text="{StatusName}" width="200px" />
 							</HBox>
 						</VBox>
