@@ -406,6 +406,9 @@ sap.ui.define([
 				if (this._oList.getBinding("items").isLengthFinal()) {
 					if(this.type){
 						sTitle = this.getResourceBundle().getText("searchOffers", [iTotalItems]);
+						if(this.type === "MyOffers"){
+							sTitle = this.getResourceBundle().getText("myOffers", [iTotalItems]);
+						}
 					}else{
 						sTitle = this.getResourceBundle().getText("approvalOffers", [iTotalItems]);
 					}
