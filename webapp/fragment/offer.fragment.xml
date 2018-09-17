@@ -6,7 +6,7 @@
 			<OverflowToolbar width="100%">
 				<Title text="{VolumeNumber} / {= ${VolumeType} ? ${i18n>optionalVolume} : ${i18n>fixedVolume} }" class="marginTop" titleStyle="H3"  />
 			</OverflowToolbar>
-			<List width="100%" noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: false }" 
+			<List width="100%" noDataText="{i18n>none}" mode="None" items="{ path: 'ToOfferPeriod', templateShareable: false, sorter: { path: 'DateFrom', descending : true } }" 
 				selectionChange="onListSelect">
 				<CustomListItem>
 					<VBox width="100%">

@@ -76,6 +76,14 @@ sap.ui.define([
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().getRoute("object").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
+				
+				var eventBus = sap.ui.getCore().getEventBus();
+			    eventBus.subscribe("DetailMasterChannel", "onApproveEvent", this.onEventBus, this);
+			},
+			
+			// Passed data from Detail controller
+			onEventBus : function(channel, event) {
+				this._oList.getModel().refresh();
 			},
 
 			/* =========================================================== */

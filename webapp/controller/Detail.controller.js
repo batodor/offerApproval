@@ -468,12 +468,13 @@ sap.ui.define([
 						if (sAction === that.getResourceBundle().getText("delete")) {
 							model.remove("/offerHeaderSet('" + that.TCNumber + "')",{
 								success: function(){
-									MessageToast.show("Delete successful!");
+									var eventBus = sap.ui.getCore().getEventBus();
+									eventBus.publish("DetailMasterChannel", "onApproveEvent");
+									
+									MessageToast.show(that.getResourceBundle().getText("successfullyDeleted"));
 									that.onCloseDetailPress();
 								}
 							});
-						} else {
-							MessageToast.show("Delete canceled!");
 						}
 					}
 				});
