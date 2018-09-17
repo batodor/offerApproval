@@ -5,9 +5,9 @@
 				<Panel expandable="true" expanded="true" width="auto">
 					<headerToolbar>
 						<Toolbar height="3rem">
-							<Link class="sapMTitleStyleH3" text="{Name}" target="_blank"
+							<Link class="sapMTitleStyleH4" text="{Name}" target="_blank"
 									href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{Code}" />
-							<Title titleStyle="H3" text="({Code})" />
+							<Title titleStyle="H4" text="({Code})" />
 							<Input visible="false" value="{Code}" />
 							<ToolbarSpacer />
 						</Toolbar>
