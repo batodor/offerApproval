@@ -780,6 +780,7 @@ sap.ui.define([
 						this.isBlacklist = true;
 					}
 				}
+				this.checkLimits(this.data);
 			}
 
 		});
