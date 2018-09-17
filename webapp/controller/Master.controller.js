@@ -112,13 +112,15 @@ sap.ui.define([
 				}
 
 				var sQuery = oEvent.getParameter("query");
-
+				var filters = [];
 				if (sQuery) {
 					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.EQ, sQuery);
-					this._oListFilterState.aSearch = [filter];
+					filters.push(filter);
+					this._oListFilterState.aSearch = filters;
 				} else {
 					this._oListFilterState.aSearch = [];
 				}
+				
 				this._applyFilterSearch();
 
 			},
@@ -356,6 +358,9 @@ sap.ui.define([
 					this.byId("filterButton").setVisible(true);
 				}else{
 					this.byId("filterButton").setVisible(false);
+				}
+				if(this.type && this.type === "MyOffers"){
+					this._oListFilterState.aFilter.push(new Filter("AppType", FilterOperator.EQ, "MO"));
 				}
 			},
 
