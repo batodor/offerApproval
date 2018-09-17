@@ -33,9 +33,9 @@
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="3">
 						<VBox class="alignRight" alignItems="Center" justifyContent="SpaceBetween">
-							<HBox justifyContent="End" visible="{= ${CounterpartyCode} ? true : false }">
+							<HBox justifyContent="End" visible="{= ${TCNumber} ? true : false }">
 								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>offerNumber}" width="90px" />
-								<Text width="200px" text="{CounterpartyCode}"/>
+								<Text width="200px" text="{TCNumber}"/>
 							</HBox>
 							<HBox justifyContent="End" visible="{= ${ValidityDate} ? true : false }">
 								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>validityDate}" width="90px" />
