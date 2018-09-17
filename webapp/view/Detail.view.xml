@@ -23,12 +23,7 @@
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell width="4">
 						<VBox>
-							<HBox justifyContent="Start">
-								<Link id="objectHeader" class="sapMTitleStyleH3" text="{CounterpartyName}" target="_blank"
-									href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{CounterpartyCode}" />
-								<Title titleStyle="H3" text="({TCNumber})" />
-							</HBox>
-							
+							<Title id="objectHeader" text="{CounterpartyName} ({TCNumber})" titleStyle="H3" />
 							<Label class="wrap" text="{= ${Company} ? ${Company} : ''}{= ${Company} &amp;&amp; ${Trader} ? ' / ' : '' }{= ${Trader} ? ${Trader} : ''}
 								{= ${Trader} &amp;&amp; ${DealNumber} ? ' / ' : '' }{= ${DealNumber} ? 'Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
