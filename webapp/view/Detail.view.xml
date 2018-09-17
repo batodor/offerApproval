@@ -25,7 +25,7 @@
 						<VBox>
 							<HBox justifyContent="Start">
 								<Link id="objectHeader" class="sapMTitleStyleH3" text="{CounterpartyName}" target="_blank"
-									href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{TCNumber}" />
+									href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{CounterpartyCode}" />
 								<Title titleStyle="H3" text="({TCNumber})" />
 							</HBox>
 							
