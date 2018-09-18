@@ -24,8 +24,8 @@
 					width="auto">
 					<layoutData>
 						<OverflowToolbarLayoutData
-							minWidth="200px"
-							maxWidth="250px"
+							minWidth="300px"
+							maxWidth="350px"
 							shrinkable="true"
 							priority="NeverOverflow"/>
 					</layoutData>
