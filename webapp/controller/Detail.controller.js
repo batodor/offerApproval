@@ -312,6 +312,7 @@ sap.ui.define([
 					sap.ui.getCore().byId("finalApprovalHBox").setVisible(true);
 					sap.ui.getCore().byId("finalApprovalText").setVisible(false);
 				}
+				sap.ui.getCore().byId("approveComment").setValue("");
 				dialog.open();
 			},
 			

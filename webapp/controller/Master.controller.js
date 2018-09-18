@@ -79,6 +79,8 @@ sap.ui.define([
 				
 				var eventBus = sap.ui.getCore().getEventBus();
 			    eventBus.subscribe("DetailMasterChannel", "onApproveEvent", this.onEventBus, this);
+			    
+			    sap.ui.core.LocaleData.getInstance(sap.ui.getCore().getConfiguration().getFormatSettings().getFormatLocale()).mData["weekData-firstDay"] = 1;
 			},
 			
 			// Passed data from Detail controller

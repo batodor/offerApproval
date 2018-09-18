@@ -12,7 +12,7 @@
 					<VBox width="100%">
 						<HBox class="halfPadding" justifyContent="SpaceBetween" alignItems="Center" alignContent="SpaceBetween" width="100%">
 							<Text text="{header>/ProductName}"/>
-							<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} {header>/VolumeUOM} +/- 
+							<Text text="{path: 'TonnageMax', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 0}} {header>/VolumeUOM} +/- 
 								{path: 'TonnageTolerance', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 0}} {TonnageToleranceUOM}"/>
 							<Text textAlign="Right" text="{ path: 'DateFrom', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } } 
 								{= ${DateFrom} ? ' - ' : '' } { path: 'DateTo', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }"/>
@@ -21,7 +21,7 @@
 				</CustomListItem>
 			</List>
 			<HBox class="halfPadding" justifyContent="SpaceBetween" alignContent="SpaceBetween" alignItems="Center" width="100%">
-				<Text class="bold" text="{= ${PriceType} ? ${IndexFormula} : ${path: 'OfferPriceBaseRoute', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2}} } {header>/Currency}"/>
+				<Text class="bold" text="{= ${PriceType} ? ${IndexFormula} : ${path: 'OfferPriceBaseRoute', type: 'sap.ui.model.type.Float', formatOptions: {minFractionDigits: 2, maxFractionDigits: 2}} } {header>/Currency}"/>
 				<Text class="bold" text="{Incoterms}{= ${DeliveryPointName} ? ' - ' : '' }{DeliveryPointName}"/>
 				<Text class="bold" text="{path: 'CV', type: 'sap.ui.model.type.Float', formatOptions: {maxFractionDigits: 0}} {CVBase}"/>
 			</HBox>
