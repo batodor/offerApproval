@@ -81,7 +81,14 @@
 			<Label class="topLabel" text="{i18n>risks}" />
 			<List noDataText="{i18n>none}" updateFinished="checkRisks" class="listText heightAuto" items="{ path: 'ToRisksByOffer', templateShareable: false }">
 				<CustomListItem>
-					<Text text="{RiskName}" />
+					<HBox width="100%">
+						<core:Icon 
+							src="{= ${Color} === 'red' ? 'sap-icon://alert' : '' }{= ${Color} === 'yellow' ? 'sap-icon://message-warning' : '' }{= ${Color} === 'green' ? 'sap-icon://accept' : '' }" 
+							class="marginRight" 
+							color="{Color}"
+							visible="{= ${Color} ? true : false }" />
+						<Text text="{RiskName}" />
+					</HBox>
 				</CustomListItem>
 			</List>
 		</VBox>

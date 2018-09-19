@@ -416,7 +416,7 @@ sap.ui.define([
 						return true;
 					}
 				}
-					
+				sap.ui.getCore().byId("approvalUpload").selectAll();
 				sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
 				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
 				sap.ui.getCore().byId("approvalTrader").setSelectedKey("");

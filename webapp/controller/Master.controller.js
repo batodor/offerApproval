@@ -200,6 +200,9 @@ sap.ui.define([
 					aFilters.push(new Filter(settings));
 					aCaptions.push(oItem.getText());
 				});
+				if(this.type && this.type === "MyOffers"){
+					aFilters.push(new Filter("AppType", FilterOperator.EQ, "MO"));
+				}
 				this._oListFilterState.aFilter = aFilters;
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();
@@ -367,9 +370,6 @@ sap.ui.define([
 					this.byId("filterButton").setVisible(true);
 				}else{
 					this.byId("filterButton").setVisible(false);
-				}
-				if(this.type && this.type === "MyOffers"){
-					this._oListFilterState.aFilter.push(new Filter("AppType", FilterOperator.EQ, "MO"));
 				}
 			},
 
