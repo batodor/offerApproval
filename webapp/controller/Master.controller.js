@@ -356,7 +356,8 @@ sap.ui.define([
 				
 				var settings = {
 					path: url,
-					template: this._oList['mBindingInfos'].items.template.clone()
+					template: this._oList['mBindingInfos'].items.template.clone(),
+					sorter: { path: "TCNumber", descending: true }
 				};
 				if(this.type && this.type === "MyOffers"){
 					settings.filters = [

@@ -6,18 +6,16 @@
 	<ViewSettingsDialog
 			id="viewSettingsDialog"
 			confirm="onConfirmViewSettingsDialog"
+			sortDescending="true"
 			resetFilters="onResetFilters">
 		<sortItems>
 			<ViewSettingsItem
 				text="{i18n>masterSort2}"
-				key="TCNumber"/>
+				key="TCNumber"
+				selected="true"/>
 			<ViewSettingsItem
 				text="{i18n>masterSort1}"
-				key="CounterpartyName"
-				selected="true"/>
-			<!--<ViewSettingsItem-->
-			<!--	text="{i18n>masterSort3}"-->
-			<!--	key="ValidityDate"/>-->
+				key="CounterpartyName"/>
 		</sortItems>
 		<filterItems>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchOfferSet' }"

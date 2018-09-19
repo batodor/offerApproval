@@ -23,10 +23,8 @@
 				<l:BlockLayoutRow>
 					<l:BlockLayoutCell width="4">
 						<VBox>
-							<!--<HBox justifyContent="Start">-->
-								<Link class="sapMTitleStyleH3" text="{CounterpartyName}" target="_blank"
-										href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{CounterpartyCode}" />
-							<!--</HBox>-->
+							<Link class="sapMTitleStyleH3" text="{CounterpartyName}" target="_blank"
+								href="/sap/bc/ui2/flp#ZTS_BUSINESS_PARTNER-display&amp;/CounterpartyHeaderSet/{CounterpartyCode}" />
 							<Label class="wrap" text="{= ${Company} ? ${Company} : ''}{= ${Company} &amp;&amp; ${Trader} ? ' / ' : '' }{= ${Trader} ? ${Trader} : ''}
 								{= ${Trader} &amp;&amp; ${DealNumber} ? ' / ' : '' }{= ${DealNumber} ? 'Variant Number: ' + ${DealNumber} : '' }" />
 						</VBox>
@@ -93,7 +91,7 @@
 			<Button press="copyOffer" id="mainCopyButton" visible="false" type="Emphasized" text="{i18n>copyOffer}" />
 			<Button press="changeOfferStatus" custom:id="6" id="mainDoneButton" visible="false" type="Emphasized" text="{i18n>offerDone}" />
 			<Button press="changeOfferStatus" custom:id="7" id="mainExecuteButton" visible="false" type="Emphasized" text="{i18n>notExecuted}" />
-			<Button press="createDeal" id="mainCreateDealButton" visible="false" type="Accept" text="{i18n>createDeal}" />
+			<!--<Button press="createDeal" id="mainCreateDealButton" visible="false" type="Accept" text="{i18n>createDeal}" />-->
 		</semantic:customFooterContent>
 	</semantic:SemanticPage>
 
