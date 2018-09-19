@@ -170,11 +170,11 @@ sap.ui.define([
 				}else{
 					this.byId("mainFinalApproveButton").setVisible(false);
 				}
-				if(data.Status === "6" && this.type){
-					this.byId("mainCreateDealButton").setVisible(true);
-				}else{
-					this.byId("mainCreateDealButton").setVisible(false);
-				}
+				// if(data.Status === "6" && this.type){
+				// 	this.byId("mainCreateDealButton").setVisible(true);
+				// }else{
+				// 	this.byId("mainCreateDealButton").setVisible(false);
+				// }
 				if(this.type){
 					this.byId("mainCopyButton").setVisible(true);
 				}else{
