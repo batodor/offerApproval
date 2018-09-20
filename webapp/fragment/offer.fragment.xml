@@ -29,7 +29,8 @@
 	</List>
 	<form:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" backgroundDesign="Transparent">
 		<form:content>
-			<Label text="Payment Term"/><Text text="{= ${PaymentTermName} ? ${PaymentTermName} : ${i18n>none} }"/>
+			<Label text="{i18n>paymentMethod}"/><Text text="{= ${PaymentMethodName} ? ${PaymentMethodName} : ${i18n>none} }"/>
+			<Label text="{i18n>paymentCondition}"/><Text text="{= ${PaymentTermName} ? ${PaymentTermName} : ${i18n>none} }"/>
 			<Label text="Comment"/><Text text="{= ${Comment} ? ${Comment} : ${i18n>none} }"/>
 		</form:content>
 	</form:SimpleForm>
