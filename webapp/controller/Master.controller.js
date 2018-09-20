@@ -126,13 +126,13 @@ sap.ui.define([
 				if (sQuery) {
 					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.EQ, sQuery);
 					filters.push(filter);
-					this._oListFilterState.aSearch = filters;
-				} else {
-					this._oListFilterState.aSearch = [];
 				}
-				
+				if(this.type && this.type === "MyOffers"){
+					filters.push(new Filter("AppType", FilterOperator.EQ, "MO"));
+					filters = [new Filter({ filters: filters, and: true })];
+				}
+				this._oListFilterState.aSearch = filters;
 				this._applyFilterSearch();
-
 			},
 
 			/**
