@@ -156,7 +156,7 @@ sap.ui.define([
 					// forward compact/cozy style into Dialog
 					this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
 				}
-				if(!this.type){
+				if(this.type !== "Display"){
 					sap.ui.getCore().byId("viewSettingsDialog").removeAllFilterItems();
 				}
 				var sDialogTab = "sort";
@@ -367,7 +367,7 @@ sap.ui.define([
 				if(this._oList.getItems().length === 0){
 					this._oList.bindItems(settings);
 				}
-				if(this.type){
+				if(this.type && this.type === "Display"){
 					this.byId("filterButton").setVisible(true);
 				}else{
 					this.byId("filterButton").setVisible(false);
