@@ -30,12 +30,12 @@
 								</VBox>
 							</HBox>
 							<Label class="topLabel" text="{i18n>risks}" />
-							<List noDataText="{i18n>noData}" class="listText" 
+							<List noDataText="{i18n>none}" class="listText" 
 								items="{ path: 'ToComplianceRisk', templateShareable: false }">
 								<CustomListItem>
 									<HBox width="100%">
 										<core:Icon 
-											src="{= ${Color} === 'red' ? 'sap-icon://alert' : '' }{= ${Color} === 'yellow' ? 'sap-icon://message-warning' : '' }{= ${Color} === 'green' ? 'sap-icon://accept' : '' }" 
+											src="{= ${Color} === 'red' ? 'sap-icon://alert' : '' }{= ${Color} === 'orange' ? 'sap-icon://message-warning' : '' }{= ${Color} === 'green' ? 'sap-icon://accept' : '' }" 
 											class="size1 marginRight" 
 											color="{Color}"
 											visible="{= ${Color} ? true : false }" />
