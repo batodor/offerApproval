@@ -146,7 +146,7 @@ sap.ui.define([
 			 * @public
 			 */
 			onOpenViewSettings : function (oEvent) {
-				if(this.type && this.type === "MyOffers"){
+				if(this.type && this.type === "MyOffers" && !this._oViewSettingsDialog){
 					this._oViewSettingsDialog = sap.ui.xmlfragment("OfferApproval.OfferApproval.view.MyViewSettingsDialog", this);
 					this.getView().addDependent(this._oViewSettingsDialog);
 					// forward compact/cozy style into Dialog
@@ -182,10 +182,6 @@ sap.ui.define([
 			 * @public
 			 */
 			onConfirmViewSettingsDialog : function (oEvent) {
-				if(sap.ui.getCore().byId("validityDateFromPicker").getDateValue() || sap.ui.getCore().byId("validityDateToPicker").getDateValue() || 
-					sap.ui.getCore().byId("validityDateFromPicker").getDateValue() || sap.ui.getCore().byId("validityDateToPicker").getDateValue()){
-					
-				}
 				var aFilterItems = oEvent.getParameters().filterItems,
 					aFilters = [],
 					aCaptions = [];
@@ -214,7 +210,7 @@ sap.ui.define([
 				var name = dp.data("name");
 				var id = dp.data("id");
 				var order = dp.data("order");
-				var filterDialog = this.byId("viewSettingsDialog") || sap.ui.getCore().byId("viewSettingsDialog");
+				var filterDialog = sap.ui.getCore().byId("viewSettingsDialog") || sap.ui.getCore().byId("myViewSettingsDialog");
 				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
 				customFilter.setFilterCount(1);
 				customFilter.setSelected(true);
