@@ -1,0 +1,115 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:core="sap.ui.core">
+
+	<ViewSettingsDialog
+			id="myViewSettingsDialog"
+			confirm="onConfirmViewSettingsDialog"
+			sortDescending="true"
+			resetFilters="onResetFilters">
+		<sortItems>
+			<ViewSettingsItem
+				text="{i18n>masterSort2}"
+				key="TCNumber"
+				selected="true"/>
+			<ViewSettingsItem
+				text="{i18n>masterSort1}"
+				key="CounterpartyName"/>
+		</sortItems>
+		<filterItems>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchOfferSet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>offerNumber}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{TCNumber} - {PartnerName}" key="{TCNumber}" custom:name="TCNumber" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionaryTradingPurposeSet' }"
+				text="{i18n>tradingPurpose}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="TradingPurpose" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' }, parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>counterpartyName}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Name} - {Code}" key="{Name}" custom:name="CounterpartyName" custom:operator="Contains" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchCounterpartySet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>counterpartyCode}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="CounterpartyCode" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet' }"
+				text="{i18n>status}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Status" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchProductTypeSet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>productType}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="ProductType" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchProductSet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>product}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Product" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchTraderSet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>trader}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Trader" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchIncotermsSet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>incoterms}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Incoterms" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem items="{ path: '/dictionarySearchDeliveryPointSet', parameters: { custom: { AppType: 'MO' } } }"
+				text="{i18n>deliveryPoint}"
+				multiSelect="true">
+				<items>
+					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="DeliveryPoint" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsCustomItem
+				text="{i18n>validityDate}">
+				<customControl>
+					<VBox class="padding">
+						<DatePicker change="setDateFilter" id="validityDateFromPicker2" placeholder="{i18n>dateFrom}" 
+							custom:order="10" custom:operator="GE" custom:name="ValidityDate" custom:id="validityDateToPicker2" />
+						<DatePicker change="setDateFilter" id="validityDateToPicker2" placeholder="{i18n>dateTo}" 
+							custom:order="10" custom:operator="LE" custom:name="ValidityDate" custom:id="validityDateFromPicker2" />
+					</VBox>
+				</customControl>
+			</ViewSettingsCustomItem>
+			<ViewSettingsCustomItem
+				text="{i18n>creationDate}">
+				<customControl>
+					<VBox class="padding">
+						<DatePicker change="setDateFilter" id="creationDateFromPicker2" placeholder="{i18n>dateFrom}" 
+							custom:order="11" custom:operator="GE" custom:name="CreationDate" custom:id="creationDateToPicker2" />
+						<DatePicker change="setDateFilter" id="creationDateToPicker2" placeholder="{i18n>dateTo}" 
+							custom:order="11" custom:operator="LE" custom:name="CreationDate" custom:id="creationDateFromPicker2" />
+					</VBox>
+				</customControl>
+			</ViewSettingsCustomItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

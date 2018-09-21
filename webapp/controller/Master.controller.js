@@ -127,10 +127,6 @@ sap.ui.define([
 					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.EQ, sQuery);
 					filters.push(filter);
 				}
-				if(this.type && this.type === "MyOffers"){
-					filters.push(new Filter("AppType", FilterOperator.EQ, "MO"));
-					filters = [new Filter({ filters: filters, and: true })];
-				}
 				this._oListFilterState.aSearch = filters;
 				this._applyFilterSearch();
 			},
@@ -150,13 +146,18 @@ sap.ui.define([
 			 * @public
 			 */
 			onOpenViewSettings : function (oEvent) {
-				if (!this._oViewSettingsDialog) {
+				if(this.type && this.type === "MyOffers"){
+					this._oViewSettingsDialog = sap.ui.xmlfragment("OfferApproval.OfferApproval.view.MyViewSettingsDialog", this);
+					this.getView().addDependent(this._oViewSettingsDialog);
+					// forward compact/cozy style into Dialog
+					this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
+				}else if (!this._oViewSettingsDialog) {
 					this._oViewSettingsDialog = sap.ui.xmlfragment("OfferApproval.OfferApproval.view.ViewSettingsDialog", this);
 					this.getView().addDependent(this._oViewSettingsDialog);
 					// forward compact/cozy style into Dialog
 					this._oViewSettingsDialog.addStyleClass(this.getOwnerComponent().getContentDensityClass());
 				}
-				if(this.type !== "Display"){
+				if(!this.type){
 					sap.ui.getCore().byId("viewSettingsDialog").removeAllFilterItems();
 				}
 				var sDialogTab = "sort";
@@ -200,9 +201,6 @@ sap.ui.define([
 					aFilters.push(new Filter(settings));
 					aCaptions.push(oItem.getText());
 				});
-				if(this.type && this.type === "MyOffers"){
-					aFilters.push(new Filter("AppType", FilterOperator.EQ, "MO"));
-				}
 				this._oListFilterState.aFilter = aFilters;
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();
@@ -353,21 +351,20 @@ sap.ui.define([
 				this.type = oEvent.getParameter("arguments").type;
 				var url = this.type ? "/offerListSet" : "/workitemSet";
 				this.getModel().setSizeLimit(500);
-				
 				var settings = {
 					path: url,
 					template: this._oList['mBindingInfos'].items.template.clone(),
 					sorter: { path: "TCNumber", descending: true }
 				};
 				if(this.type && this.type === "MyOffers"){
-					settings.filters = [
-						new Filter("AppType", FilterOperator.EQ, "MO")
-					];
+					settings.parameters = {
+						custom: { AppType: "MO" }
+					};
 				}
 				if(this._oList.getItems().length === 0){
 					this._oList.bindItems(settings);
 				}
-				if(this.type && this.type === "Display"){
+				if(this.type){
 					this.byId("filterButton").setVisible(true);
 				}else{
 					this.byId("filterButton").setVisible(false);
