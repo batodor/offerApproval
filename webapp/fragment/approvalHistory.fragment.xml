@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns:layout="sap.ui.layout" xmlns:form="sap.ui.layout.form" xmlns="sap.m" xmlns:core="sap.ui.core"
 	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 	<IconTabBar id="idIconTabBarNoIcons" expanded="true" expandable="false" showOverflowSelectList="true"
-		items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' }, templateShareable: false }">
+		items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' }, sorter: { path: 'Iteration', descending : true } , templateShareable: false }">
 		<items>
 			<IconTabFilter key="{Iteration}" text="Approval Cycle: {Iteration}">
 				<List items="{path: 'ToLevels', templateShareable: false}">

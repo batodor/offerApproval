@@ -16,11 +16,12 @@
 					</VBox>
 				</HBox>
 				<Label visible="{= ${AgentIsApprover} ? false : true }" text="{i18n>trader}" class="topLabel" />
-				<Select visible="{= ${AgentIsApprover} ? false : true }" forceSelection="true" id="approvalTrader" selectedKey="{Trader}" width="100%" 
+				<Select visible="{= ${AgentIsApprover} ? false : true }" forceSelection="true" id="approvalTrader" selectedKey="{= ${AgentIsApprover} ? ${Trader} : '' }" 
+					width="100%" 
 					items="{ path: '/dictionaryTraderSet',
-							 templateShareable: false,
-							 parameters: { custom: { Type: 'A' } },
-							 sorter: { path: 'Name' } }">
+						templateShareable: false,
+						parameters: { custom: { Type: 'A' } },
+						sorter: { path: 'Name' } }">
 					<core:Item key="{Code}" text="{Name}"/>
 				</Select>
 				<Label class="topLabel noWrapping" text="{i18n>enterComments}" />

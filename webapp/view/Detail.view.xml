@@ -31,13 +31,17 @@
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="3">
 						<VBox class="alignRight" alignItems="Center" justifyContent="SpaceBetween">
+							<HBox justifyContent="End" visible="{= ${WorkitemID} ? true : false }">
+								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>dealNumber}" width="90px" />
+								<Link text="{WorkitemID}" target="_blank" href="/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID={WorkitemID}" />
+							</HBox>
 							<HBox justifyContent="End" visible="{= ${TCNumber} ? true : false }">
 								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>offerNumber}" width="90px" />
 								<Text width="200px" text="{TCNumber}"/>
 							</HBox>
 							<HBox justifyContent="End" visible="{= ${ValidityDate} ? true : false }">
 								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>validityDate}" width="90px" />
-								<Text width="200px" text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }"/>
+								<Text width="200px" text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy hh:mm z' } }"/>
 							</HBox>
 							<HBox justifyContent="End" visible="{= ${StatusName} ? true : false }">
 								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>status}" width="90px" />

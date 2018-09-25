@@ -35,6 +35,15 @@
 .noBorder{
 	border: 0;
 }
+.sapFFCLNavigationButton .sapMBtnInner{
+	background: rgba(229,229,229, .35);
+}
+.sapMText[data-class="red"] {
+	color: red;
+}
+.sapMText[data-class="green"] {
+	color: green;
+}
 .detailPage .sapMFooter-CTX div:first-child,
 .closeOffer{
 	display: none;

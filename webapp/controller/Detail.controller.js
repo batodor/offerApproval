@@ -348,6 +348,7 @@ sap.ui.define([
 					}
 					// Consider selected date as UTC date
 					validityDate.setMinutes(validityDate.getMinutes() + (-validityDate.getTimezoneOffset()));
+					validityDate = new Date(new Date(validityDate.setMinutes(0)).setSeconds(0));
 					var oFuncParams = { 
 						TCNumber: this.TCNumber,
 						Comment: sap.ui.getCore().byId("approvalComment").getValue(),
@@ -679,7 +680,7 @@ sap.ui.define([
 				this.byId("limitTonnageIcon").setColor(oResult.TonnageIcon).setSrc(this.setIcon(oResult.TonnageIcon));
 				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : this.getResourceBundle().getText("worklistTableTitle"));
 				this.byId("limitPeriod").setText(oResult.Period + " " + oResult.PeriodUoM);
-				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + oResult.TonnageUoM);
+				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + oResult.TonnageUoM);
 			},
 			
 			// Sets the icons depending on its color

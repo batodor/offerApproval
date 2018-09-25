@@ -124,7 +124,7 @@ sap.ui.define([
 				var sQuery = oEvent.getParameter("query");
 				var filters = [];
 				if (sQuery) {
-					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.EQ, sQuery);
+					var filter = isNaN(sQuery) ? new Filter("CounterpartyName", FilterOperator.Contains, sQuery) : new Filter("TCNumber", FilterOperator.Contains, sQuery);
 					filters.push(filter);
 				}
 				this._oListFilterState.aSearch = filters;

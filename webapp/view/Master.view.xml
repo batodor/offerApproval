@@ -1,6 +1,7 @@
 <mvc:View
 	controllerName="OfferApproval.OfferApproval.controller.Master"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core" 
 	xmlns="sap.m"
 	xmlns:semantic="sap.f.semantic">
 
@@ -96,7 +97,7 @@
 									</HBox>
 									<HBox visible="{= ${ValidityDate} &amp;&amp; ${WorkitemID} ? true : false }">
 										<Label text="{i18n>validityDate}" width="120px" />
-										<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy hh:mm z' } }" />
+										<Text text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy' } }" />
 									</HBox>
 									<HBox visible="{= ${VariantNumber} ? true : false }">
 										<Label text="{i18n>variantNumber}" width="120px" />
@@ -105,7 +106,12 @@
 								</VBox>
 								<VBox alignContent="End">
 									<Label visible="{= ${ValueCurrency} ? true : false }" textAlign="Right" text="{ValueCurrency}" />
-									<Text textAlign="Right" text="{StatusName}" />
+									<Text textAlign="Right" text="{StatusName}">
+										<customData>
+									    	<core:CustomData key="class" value="red" writeToDom="{= ${Status} === '1' ? true : false }"/>
+									    	<core:CustomData key="class" value="green" writeToDom="{= ${Status} === '2' ? true : false }"/>
+										</customData>
+									</Text>
 								</VBox>
 							</HBox>
 						</VBox>
