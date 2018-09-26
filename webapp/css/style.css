@@ -9,6 +9,9 @@
 .sapMTB{
 	height: auto;
 }
+.alignLeft{
+	text-align: left;
+}
 .minusMargin{
 	margin: -1rem;
 }

@@ -31,9 +31,9 @@
 					</l:BlockLayoutCell>
 					<l:BlockLayoutCell width="3">
 						<VBox class="alignRight" alignItems="Center" justifyContent="SpaceBetween">
-							<HBox justifyContent="End" visible="{= ${WorkitemID} ? true : false }">
+							<HBox justifyContent="End" visible="{= ${LinkedTC} ? true : false }">
 								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>dealNumber}" width="90px" />
-								<Link text="{WorkitemID}" target="_blank" href="/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID={WorkitemID}" />
+								<Link class="alignLeft" width="200px" text="{LinkedTC}" target="_blank" href="/sap/bc/ui2/flp#ZTS_TC_DEAL-display?DealID={LinkedTC}" />
 							</HBox>
 							<HBox justifyContent="End" visible="{= ${TCNumber} ? true : false }">
 								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>offerNumber}" width="90px" />
