@@ -21,7 +21,7 @@
 										<content>
 											<form:SimpleForm backgroundDesign="Transparent" layout="ResponsiveGridLayout" labelSpanL="2" labelSpanM="3" labelSpanS="5" 
 												adjustLabelSpan="false" singleContainerFullSize="false">
-												<Label text="Action"/><Text text="{path:'Status', formatter : '.formatter.getApprovalAction'}"/>
+												<Label text="Action"/><Text text="{StatusDescr}"/>
 												<Label text="Comment"/><Text text="{Comment}"/>
 												<Label text="Action Date"/><Text text="{path:'Executed', type:'sap.ui.model.type.DateTime', formatOptions : { pattern: 'dd.MM.y' }}"/>
 											</form:SimpleForm>

@@ -29,7 +29,7 @@
 	</List>
 	<form:SimpleForm maxContainerCols="3" editable="false" layout="ResponsiveGridLayout" backgroundDesign="Transparent">
 		<form:content>
-			<Label text="{i18n>paymentMethod}"/><Text text="{= ${PaymentMethodName} ? ${PaymentMethodName} : ${i18n>none} }
+			<Label text="{i18n>paymentCondition}"/><Text text="{= ${PaymentMethodName} ? ${PaymentMethodName} : ${i18n>none} }
 				{= ${PaymentTermName} ? ' - ' : '' }{= ${PaymentTermName} ? ${PaymentTermName} : ${i18n>none} }"/>
 			<!--<Label text="{i18n>paymentCondition}"/><Text text="{= ${PaymentTermName} ? ${PaymentTermName} : ${i18n>none} }"/>-->
 			<Label text="{i18n>offerComment}"/><Text text="{= ${OfferComment} ? ${OfferComment} : ${i18n>none} }"/>
