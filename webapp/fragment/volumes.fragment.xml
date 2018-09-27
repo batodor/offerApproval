@@ -28,7 +28,7 @@
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
 						<Label class="topLabel" text="{i18n>deliveryPoint}" />
-						<Text text="{DeliveryPointName}" />
+						<Text custom:name="DeliveryPoint" custom:data="{DeliveryPoint}" text="{DeliveryPointName}" />
 					</VBox>
 				</HBox>
 				<HBox justifyContent="SpaceBetween">
