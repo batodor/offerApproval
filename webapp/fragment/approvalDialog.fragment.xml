@@ -5,7 +5,7 @@
 				<HBox justifyContent="SpaceBetween">
 					<VBox class="leftVBoxStyle" width="50%">
 						<Label text="{i18n>validityDate}" />
-						<DateTimePicker id="approvalValidityDateTime" minutesStep="30" secondsStep="60" />
+						<DateTimePicker dateValue="{ValidityDate}" id="approvalValidityDateTime" minutesStep="30" secondsStep="60"/>
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
 						<Label text="{i18n>validityDateTimeZone}" />
@@ -15,8 +15,8 @@
 						</Select>
 					</VBox>
 				</HBox>
-				<Label visible="{= ${AgentIsApprover} ? false : true }" text="{i18n>trader}" class="topLabel" />
-				<Select visible="{= ${AgentIsApprover} ? false : true }" forceSelection="true" id="approvalTrader" selectedKey="{= ${AgentIsApprover} ? ${Trader} : '' }" 
+				<Label text="{i18n>chiefTrader}" class="topLabel" />
+				<Select forceSelection="true" id="approvalTrader" selectedKey="{= ${AgentIsApprover} ? ${header>/UserID} : '' }" 
 					width="100%" 
 					items="{ path: '/dictionaryTraderSet',
 						templateShareable: false,

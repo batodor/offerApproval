@@ -45,6 +45,9 @@ sap.ui.define([
 				
 				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
 				this.isRisk = {};
+				
+				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("UTC" + (new Date().getTimezoneOffset() / 60));
+				sap.ui.getCore().byId("approvalValidityDateTime").setInitialFocusedDateValue(new Date(new Date(new Date().setMinutes(0)).setSeconds(0)));
 			},
 
 			/* =========================================================== */
@@ -139,6 +142,8 @@ sap.ui.define([
 			dataReceived: function(oEvent){
 				this.getModel("detailView").setProperty("/busy", false);
 				var data = oEvent.getParameters("data").data;
+				var UserID = sap.ushell.Container.getService("UserInfo").getUser().getId();
+				data.UserID = UserID;
 				var oModel = new JSONModel(data); // Only set data here.
 				this.getView().setModel(oModel, "header"); // set the alias here
 				this.setDataByStatus(data);
@@ -348,7 +353,6 @@ sap.ui.define([
 					}
 					// Consider selected date as UTC date
 					validityDate.setMinutes(validityDate.getMinutes() + (-validityDate.getTimezoneOffset()));
-					validityDate = new Date(new Date(validityDate.setMinutes(0)).setSeconds(0));
 					var oFuncParams = { 
 						TCNumber: this.TCNumber,
 						Comment: sap.ui.getCore().byId("approvalComment").getValue(),
@@ -418,8 +422,6 @@ sap.ui.define([
 					}
 				}
 				sap.ui.getCore().byId("approvalUpload").selectAll();
-				sap.ui.getCore().byId("approvalValidityDateTime").setDateValue(null);
-				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("");
 				sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
 				this[id + "Dialog"].open();
 			},
