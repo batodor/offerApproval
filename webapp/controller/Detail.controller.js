@@ -428,7 +428,9 @@ sap.ui.define([
 						this.alert(check);
 						return true;
 					}
-					sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("YG" + (new Date().getTimezoneOffset() / 60));
+					var offset = new Date().getTimezoneOffset()/-60;
+					var sign = offset < 0 ? "-" : "+";
+					sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("YG" + sign + offset);
 				}
 				sap.ui.getCore().byId("approvalUpload").selectAll();
 				sap.ui.getCore().byId("approvalComment").setValue("");
