@@ -681,12 +681,17 @@ sap.ui.define([
 			},
 			onCheckLimitsSuccess: function(link, oData) {
 				var oResult = oData[link];
-				this.byId("limitPaymentConditionIcon").setColor(oResult.PaymentIcon).setSrc(this.setIcon(oResult.PaymentIcon));
-				this.byId("limitPeriodIcon").setColor(oResult.PeriodIcon).setSrc(this.setIcon(oResult.PeriodIcon));
-				this.byId("limitTonnageIcon").setColor(oResult.TonnageIcon).setSrc(this.setIcon(oResult.TonnageIcon));
-				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : this.getResourceBundle().getText("worklistTableTitle"));
-				this.byId("limitPeriod").setText(oResult.Period + " " + oResult.PeriodUoM);
-				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " + oResult.TonnageUoM);
+				var PaymentIcon = this.byId("limitPaymentConditionIcon");
+				var PeriodIcon = this.byId("limitPeriodIcon");
+				var TonnageIcon = this.byId("limitTonnageIcon");
+				var none = this.getResourceBundle().getText("none");
+				oResult.PaymentIcon ? PaymentIcon.setColor(oResult.PaymentIcon).setSrc(this.setIcon(oResult.PaymentIcon)).setVisible(true) : PaymentIcon.setVisible(false);
+				oResult.PeriodIcon ? PeriodIcon.setColor(oResult.PeriodIcon).setSrc(this.setIcon(oResult.PeriodIcon)).setVisible(true) : PeriodIcon.setVisible(false);
+				oResult.TonnageIcon ? TonnageIcon.setColor(oResult.TonnageIcon).setSrc(this.setIcon(oResult.TonnageIcon)).setVisible(true) : TonnageIcon.setVisible(false);
+				this.byId("limitPaymentCondition").setText(oResult.PaymentCondition ? oResult.PaymentCondition : none);
+				this.byId("limitPeriod").setText(parseFloat(oResult.Period) ? oResult.Period + " " + oResult.PeriodUoM : none);
+				this.byId("limitTonnage").setText(parseFloat(oResult.Tonnage) ? parseFloat(oResult.Tonnage).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " " 
+					+ oResult.TonnageUoM : none);
 			},
 			
 			// Sets the icons depending on its color
