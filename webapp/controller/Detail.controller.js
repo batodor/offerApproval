@@ -46,7 +46,6 @@ sap.ui.define([
 				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
 				this.isRisk = {};
 				
-				sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("UTC" + (new Date().getTimezoneOffset() / 60));
 				//sap.ui.getCore().byId("approvalValidityDateTime").setInitialFocusedDateValue(new Date(new Date(new Date().setMinutes(0)).setSeconds(0)));
 			},
 
@@ -145,10 +144,6 @@ sap.ui.define([
 				var oModel = new JSONModel(data); // Only set data here.
 				this.getView().setModel(oModel, "header"); // set the alias here
 				this.setDataByStatus(data);
-				
-				if(data.AgentIsApprover){
-					sap.ui.getCore().byId("approvalTrader").setSelectedKey(sap.ushell.Container.getService("UserInfo").getUser().getId());
-				}
 			},
 			
 			setDataByStatus: function(data){
@@ -390,6 +385,7 @@ sap.ui.define([
 					var oDialog = this.approveDialog;
 					oDialog.close();
 					this.getRouter().navTo("master", { type: "" });
+					this.getModel().refresh();
 					// Refresh Master list data
 					this.getOwnerComponent().byId("master").getController()._oList.getBinding("items").refresh();
 				} else {
@@ -422,9 +418,15 @@ sap.ui.define([
 						this.alert(check);
 						return true;
 					}
+					sap.ui.getCore().byId("approvalValidityTimeZone").setSelectedKey("YG" + (new Date().getTimezoneOffset() / 60));
 				}
 				sap.ui.getCore().byId("approvalUpload").selectAll();
-				sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
+				sap.ui.getCore().byId("approvalComment").setValue("");
+				if(this.data.AgentIsApprover){
+					sap.ui.getCore().byId("approvalTrader").setSelectedKey(sap.ushell.Container.getService("UserInfo").getUser().getId());
+				}else{
+					sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
+				}
 				this[id + "Dialog"].open();
 			},
 			dialogForward: function(oEvent){
