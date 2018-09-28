@@ -118,6 +118,8 @@ sap.ui.define([
 					// In this case no new search is triggered, we only
 					// refresh the list binding.
 					this.onRefresh();
+					var eventBus = sap.ui.getCore().getEventBus();
+					eventBus.publish("DetailMasterChannel", "onRefreshDetail");
 					return;
 				}
 

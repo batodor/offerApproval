@@ -46,7 +46,17 @@ sap.ui.define([
 				this.typeArr = ["text", "value", "dateValue", "selectedKey", "selected", "state", "tokens"];
 				this.isRisk = {};
 				
+				// Set for approval validity date minutes and secs to 0
 				//sap.ui.getCore().byId("approvalValidityDateTime").setInitialFocusedDateValue(new Date(new Date(new Date().setMinutes(0)).setSeconds(0)));
+				
+				// Communication between views
+				var eventBus = sap.ui.getCore().getEventBus();
+			    eventBus.subscribe("DetailMasterChannel", "onRefreshDetail", this.onEventBus, this);
+			},
+			
+			// Passed data from Master controller
+			onEventBus : function(channel, event) {
+				this.getModel().refresh();
 			},
 
 			/* =========================================================== */
