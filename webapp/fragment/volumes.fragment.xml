@@ -15,7 +15,10 @@
 					</VBox>
 					<VBox class="rightVBoxStyle" visible="{= ${VolumeType} ? true : false }" width="50%">
 						<Label class="topLabel" text="{i18n>volumeOwner}" />
-						<Text text="{VolumeOwner}" />
+						<Select enabled="false" custom:key="volumeOwner" forceSelection="false" selectedKey="{VolumeOwner}" width="100%" 
+							items="{ path: '/dictionaryVolumeOwnerSet', sorter: { path: 'Code' }, templateShareable: true }">
+							<core:Item key="{Code}" text="{Code} - {Name}"/>
+						</Select>
 					</VBox>
 				</HBox>
 				<OverflowToolbar width="100%">
