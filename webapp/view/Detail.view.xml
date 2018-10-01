@@ -41,7 +41,7 @@
 							</HBox>
 							<HBox justifyContent="End" visible="{= ${ValidityDate} ? true : false }">
 								<Label textAlign="Right" class="leftVBoxStyle"  text="{i18n>validityDate}" width="90px" />
-								<Text width="200px" text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy kk:mm z' } }"/>
+								<Text width="200px" text="{ path: 'ValidityDate', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd.MM.yyyy HH:mm z' } }"/>
 							</HBox>
 							<HBox justifyContent="End" visible="{= ${StatusName} ? true : false }">
 								<Label class="leftVBoxStyle" textAlign="Right" text="{i18n>status}" width="90px" />

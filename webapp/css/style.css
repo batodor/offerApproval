@@ -38,7 +38,9 @@
 .noBorder{
 	border: 0;
 }
-.sapFFCLNavigationButton .sapMBtnInner{
+.sapFFCLNavigationButton .sapMBtnInner,
+.sapContrastPlus.sapFFCLNavigationButton .sapMBtnInner, 
+.sapContrastPlus .sapFFCLNavigationButton .sapMBtnInner{
 	background: rgba(229,229,229, .35);
 }
 .sapMText[data-class="red"] {

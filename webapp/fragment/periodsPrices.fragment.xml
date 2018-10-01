@@ -34,7 +34,7 @@
 						<Text text="{ShipmentTolerance}" />
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
-						<Label class="topLabel" text="{i18n>toleranceUom}" />
+						<Label class="topLabel" text="{i18n>shipmentToleranceUom}" />
 						<Text text="{ShipmentToleranceUOM}" />
 					</VBox>
 				</HBox>
@@ -58,7 +58,7 @@
 						<Text text="{TonnageTolerance}" />
 					</VBox>
 					<VBox class="rightVBoxStyle" width="50%">
-						<Label class="topLabel" text="{i18n>toleranceUom}" />
+						<Label class="topLabel" text="{i18n>tonnageToleranceUom}" />
 						<Text text="{TonnageToleranceUOM}" />
 					</VBox>
 				</HBox>

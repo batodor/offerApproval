@@ -434,7 +434,7 @@ sap.ui.define([
 				}
 				sap.ui.getCore().byId("approvalUpload").selectAll();
 				sap.ui.getCore().byId("approvalComment").setValue("");
-				if(this.data.AgentIsApprover){
+				if(this.data && this.data.AgentIsApprover){
 					sap.ui.getCore().byId("approvalTrader").setSelectedKey(sap.ushell.Container.getService("UserInfo").getUser().getId());
 				}else{
 					sap.ui.getCore().byId("approvalTrader").setSelectedKey("");
@@ -855,6 +855,14 @@ sap.ui.define([
 				}else{
 					text.setText(this.getResourceBundle().getText("none")).removeStyleClass("red");
 				}
+			},
+			
+			// After each time History list loaded, select always first tab
+			onHistoryFinished: function(oEvent){
+				var list = oEvent.getSource();
+				var iconTab = list.getParent().getParent();
+				var key = iconTab.getItems()[0].getProperty("key");
+				iconTab.setSelectedKey(key);
 			}
 
 		});
