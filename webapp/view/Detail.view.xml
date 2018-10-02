@@ -52,7 +52,7 @@
 				</l:BlockLayoutRow>
 			</l:BlockLayout>
 			
-			<IconTabBar class="iconTabBar" id="itbMain" selectedKey="offer">
+			<IconTabBar class="iconTabBar" id="itbMain" selectedKey="approvalHistory">
 				<items>
 					<IconTabFilter icon="sap-icon://hint" text="{i18n>offer}" key="offer">
 						<core:Fragment fragmentName="fragment.offer" type="XML"></core:Fragment>

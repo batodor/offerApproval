@@ -4,10 +4,10 @@
 		items="{path: 'ToApprIterations', parameters: { expand: 'ToLevels/ToAgents' }, sorter: { path: 'Iteration', descending : true } , templateShareable: false }">
 		<items>
 			<IconTabFilter key="{Iteration}" text="Approval Cycle: {Iteration}">
-				<List items="{path: 'ToLevels', templateShareable: false}" updateFinished="onHistoryFinished" >
+				<List items="{path: 'ToLevels', templateShareable: false }" updateFinished="onHistoryFinished" >
 					<CustomListItem>
 						<Panel width="auto" headerText="{LevelName}" expandable="true">
-							<List items="{path: 'ToAgents', templateShareable: false}">
+							<List items="{path: 'ToAgents', templateShareable: false }">
 								<CustomListItem>
 									<Panel width="auto">
 										<headerToolbar>
