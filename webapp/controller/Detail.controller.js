@@ -818,7 +818,7 @@ sap.ui.define([
 				var list = oEvent.getSource();
 				var counterparties = list.getItems();
 				for(var i = 0; i < counterparties.length; i++){
-					var blacklist = counterparties[i].getContent()[0].getContent()[0].getItems()[0].getItems()[1].getItems()[1].getText();
+					var blacklist = counterparties[i].getContent()[0].getContent()[1].getItems()[0].getItems()[1].getItems()[1].getText();
 					if(blacklist === "Blacklisted"){
 						this.isBlacklist = true;
 					}
