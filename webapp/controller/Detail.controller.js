@@ -504,24 +504,24 @@ sap.ui.define([
 				window.open("/sap/bc/ui2/flp#ZTS_OFFER-change&/" + this.TCNumber);
 			},
 			
-			copy: function(oEvent){
-				var oFuncParams = { 
-					OfferNumber: this.TCNumber
-				};
-				this.getModel().callFunction("/CopyOfferToTradingContract", {
-					method: "POST",
-					urlParameters: oFuncParams,
-					success: this.onCopySuccess.bind(this, "CopyOfferToTradingContract")
-				});
-			},
-			onCopySuccess: function(link, oData) {
-				var oResult = oData[link];
-				if (oResult.CopyingSuccessfully) {
-					MessageToast.show(oResult.Message);
-				} else {
-					MessageBox.error(oResult.Message);
-				}
-			},
+			// copy: function(oEvent){
+			// 	var oFuncParams = { 
+			// 		OfferNumber: this.TCNumber
+			// 	};
+			// 	this.getModel().callFunction("/CopyOfferToTradingContract", {
+			// 		method: "POST",
+			// 		urlParameters: oFuncParams,
+			// 		success: this.onCopySuccess.bind(this, "CopyOfferToTradingContract")
+			// 	});
+			// },
+			// onCopySuccess: function(link, oData) {
+			// 	var oResult = oData[link];
+			// 	if (oResult.CopyingSuccessfully) {
+			// 		MessageToast.show(oResult.Message);
+			// 	} else {
+			// 		MessageBox.error(oResult.Message);
+			// 	}
+			// },
 			
 			// Set odata from any dialog, argument object = any object / return object inputs Data
 			getData: function(object, isSave){
