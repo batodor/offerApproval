@@ -70,7 +70,7 @@
 					</Toolbar>
 				</infoToolbar>
 				<items>
-					<CustomListItem>
+					<CustomListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange">
 						<VBox  class="padding">
 							<HBox justifyContent="SpaceBetween">
 								<Title text="{CounterpartyName}" />
