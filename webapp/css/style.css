@@ -118,6 +118,7 @@
 .paddingRem{
 	padding: 1rem;
 }
+.sapMLIBSelected .sapMTitle,
 .sapMLIBSelected .sapMText,
 .sapMLIBSelected .sapMObjectNumberText,
 .sapMLIBSelected .sapMObjectNumberUnit{
