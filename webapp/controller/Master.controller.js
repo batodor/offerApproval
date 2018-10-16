@@ -50,7 +50,7 @@ sap.ui.define([
 						};
 					}.bind(this)
 				};
-
+				this.search = {}; // for searchFields
 				this._oList = oList;
 				// keeps the filter and search state
 				this._oListFilterState = {
@@ -191,12 +191,16 @@ sap.ui.define([
 				// update filter state:
 				// combine the filter array and the filter string
 				aFilterItems.forEach(function (oItem) {
-					var operator = oItem.data("operator") ? FilterOperator[oItem.data("operator")] : FilterOperator.EQ;
-					var settings = { path: oItem.data("name"), operator: operator, value1: oItem.getKey() };
-					if(oItem.data("value2")){
-						settings.value2 = oItem.data("value2");
+					var key = oItem.getKey();
+					var keys = key.split(";");
+					for(var i = 0; i < keys.length; i++){ 
+						var operator = oItem.data("operator") ? FilterOperator[oItem.data("operator")] : FilterOperator.EQ;
+						var settings = { path: oItem.data("name"), operator: operator, value1: keys[i] };
+						if(oItem.data("value2")){
+							settings.value2 = oItem.data("value2");
+						}
+						aFilters.push(new Filter(settings));
 					}
-					aFilters.push(new Filter(settings));
 					aCaptions.push(oItem.getText());
 				});
 				this._oListFilterState.aFilter = aFilters;
@@ -348,7 +352,7 @@ sap.ui.define([
 				this.getModel("appView").setProperty("/layout", "OneColumn");
 				this.type = oEvent.getParameter("arguments").type;
 				var url = this.type ? "/offerListSet" : "/workitemSet";
-				this.getModel().setSizeLimit(500);
+				// this.getModel().setSizeLimit(500);
 				var settings = {
 					path: url,
 					template: this._oList['mBindingInfos'].items.template.clone(),
@@ -439,6 +443,61 @@ sap.ui.define([
 				var oViewModel = this.getModel("masterView");
 				oViewModel.setProperty("/isFilterBarVisible", (this._oListFilterState.aFilter.length > 0));
 				oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
+			},
+			
+			onTableSelect: function(oEvent){
+				var table = oEvent.getSource();
+				var items = table.getSelectedItems();
+				var model = this.getModel();
+				var key = table.data("key");
+				var order = table.data("order");
+				var filterDialog = sap.ui.getCore().byId("viewSettingsDialog") || sap.ui.getCore().byId("myViewSettingsDialog");
+				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
+				customFilter.setFilterCount(1);
+				customFilter.setSelected(true);
+				customFilter.data("name", key);
+				var keys = "";
+				for(var i = 0; i < items.length; i++){
+					var path = items[i].getBindingContext().getPath();
+					keys = keys + model.getData(path)[key] + ";";
+				}
+				if(keys){
+					keys = keys.slice(0, -1);
+				}
+				customFilter.setKey(keys);
+			},
+			
+			// Search function for all tables
+			triggerSearch: function(oEvent) {
+				var query = oEvent.getParameter("query") || oEvent.getParameter("selected"),
+					id = oEvent.getSource().data('id'),
+					key = oEvent.getSource().data('key'),
+					customOperator = oEvent.getSource().data('operator'),
+					oTable = this.byId(id) || sap.ui.getCore().byId(id),
+					filters = [];
+					
+				if(!this.search[id]){ 
+					this.search[id] = {};
+				}
+				if(typeof query !== "undefined"){
+					var operator = FilterOperator.EQ;
+					if(customOperator){
+						operator = FilterOperator[customOperator];
+					}
+					this.search[id][key] = new Filter({path: key, operator: operator, value1: query });
+				}else{
+					delete this.search[id][key];
+				}
+				
+				var filterKeys = Object.keys(this.search[id]);
+				for(var i in filterKeys){
+					filters.push(this.search[id][filterKeys[i]]);
+				}
+				var newFilter = new Filter({ filters: filters, and: true });
+				if(filters.length === 0){
+					newFilter = filters;
+				}
+				oTable.getBinding("items").filter(newFilter);
 			}
 
 		});
