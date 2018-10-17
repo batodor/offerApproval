@@ -18,13 +18,40 @@
 				key="CounterpartyName"/>
 		</sortItems>
 		<filterItems>
-			<ViewSettingsFilterItem items="{ path: '/dictionarySearchOfferSet', parameters: { custom: { AppType: 'MO' } } }"
-				text="{i18n>offerNumber}"
-				multiSelect="true">
-				<items>
-					<ViewSettingsItem text="{TCNumber} - {PartnerName}" key="{TCNumber}" custom:name="TCNumber" />
-				</items>
-			</ViewSettingsFilterItem>
+			<ViewSettingsCustomItem
+				text="{i18n>offerNumber}">
+				<!--<items>-->
+				<!--	<ViewSettingsItem text="{TCNumber} - {PartnerName}" key="{TCNumber}" custom:name="TCNumber" />-->
+				<!--</items>-->
+				<customControl>
+					<Table mode="MultiSelect" includeItemInSelection="true" id="offerPopup" custom:key="TCNumber" custom:order="0" 
+						items="{ path: '/dictionarySearchOfferSet', parameters: { custom: { AppType: 'MO' } } }" 
+						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
+						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<headerToolbar>
+							<Toolbar class="white">
+								<SearchField placeholder="{i18n>code}" custom:id="offerPopup" custom:operator="Contains" custom:key="TCNumber" showSearchButton="true" 
+									search="triggerSearch" width="100%" id="offerPopupCodeFilter" />
+								<ToolbarSpacer/>
+								<SearchField placeholder="{i18n>name}" custom:id="offerPopup" custom:operator="Contains" custom:key="PartnerName" showSearchButton="true" 
+									search="triggerSearch" width="100%" id="offerPopupNameFilter" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column><Text class="black" text="{i18n>code}"/></Column>
+							<Column><Text class="black" text="{i18n>name}"/></Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{TCNumber}"/>
+									<Text text="{PartnerName}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</customControl>
+			</ViewSettingsCustomItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionaryTradingPurposeSet' }"
 				text="{i18n>tradingPurpose}"
 				multiSelect="true">
