@@ -21,16 +21,16 @@
 			<ViewSettingsCustomItem
 				text="{i18n>offerNumber}">
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" id="offerPopup" custom:key="TCNumber" custom:name="TCNumber" custom:order="0" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="TCNumberTable" custom:key="TCNumber" custom:name="TCNumber" custom:order="0" 
 						items="{ path: '/dictionarySearchOfferSet', parameters: { custom: { AppType: 'MO' } } }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 						<headerToolbar>
 							<Toolbar class="white">
-								<SearchField placeholder="{i18n>code}" custom:id="offerPopup" custom:operator="Contains" custom:key="TCNumber" showSearchButton="true" 
+								<SearchField placeholder="{i18n>code}" custom:id="TCNumberTable" custom:operator="Contains" custom:key="TCNumber" showSearchButton="true" 
 									search="triggerSearch" width="100%" id="offerPopupCodeFilter" />
 								<ToolbarSpacer/>
-								<SearchField placeholder="{i18n>name}" custom:id="offerPopup" custom:operator="Contains" custom:key="PartnerName" showSearchButton="true" 
+								<SearchField placeholder="{i18n>name}" custom:id="TCNumberTable" custom:operator="Contains" custom:key="PartnerName" showSearchButton="true" 
 									search="triggerSearch" width="100%" id="offerPopupNameFilter" />
 							</Toolbar>
 						</headerToolbar>
@@ -58,16 +58,16 @@
 			</ViewSettingsFilterItem>
 			<ViewSettingsCustomItem text="{i18n>counterpartyName}">
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="CounterpartyName" custom:key="Name" custom:order="2" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="counterPartyNameTable" custom:name="CounterpartyName" custom:key="Name" custom:order="2" 
 						items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' }, parameters: { custom: { AppType: 'MO' } } }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 						<headerToolbar>
 							<Toolbar class="white">
-								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+								<SearchField placeholder="{i18n>code}" custom:id="counterPartyNameTable" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 								<ToolbarSpacer/>
-								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+								<SearchField placeholder="{i18n>name}" custom:id="counterPartyNameTable" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 							</Toolbar>
 						</headerToolbar>
@@ -88,16 +88,16 @@
 			</ViewSettingsCustomItem>
 			<ViewSettingsCustomItem text="{i18n>counterpartyCode}">
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="CounterpartyCode" custom:key="Code" custom:order="3" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="counterpartyCodeTable" custom:name="CounterpartyCode" custom:key="Code" custom:order="3" 
 						items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' }, parameters: { custom: { AppType: 'MO' } } }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 						<headerToolbar>
 							<Toolbar class="white">
-								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+								<SearchField placeholder="{i18n>code}" custom:id="counterpartyCodeTable" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 								<ToolbarSpacer/>
-								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+								<SearchField placeholder="{i18n>name}" custom:id="counterpartyCodeTable" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 							</Toolbar>
 						</headerToolbar>
@@ -139,16 +139,16 @@
 			</ViewSettingsFilterItem>
 			<ViewSettingsCustomItem text="{i18n>trader}">
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="Trader" custom:key="Code" custom:order="7" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="traderTable" custom:name="Trader" custom:key="Code" custom:order="7" 
 						items="{ path: '/dictionarySearchTraderSet', parameters: { custom: { AppType: 'MO' } } }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 						<headerToolbar>
 							<Toolbar class="white">
-								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+								<SearchField placeholder="{i18n>code}" custom:id="traderTable" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 								<ToolbarSpacer/>
-								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+								<SearchField placeholder="{i18n>name}" custom:id="traderTable" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 							</Toolbar>
 						</headerToolbar>
