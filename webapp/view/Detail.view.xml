@@ -58,7 +58,7 @@
 						<core:Fragment fragmentName="fragment.offer" type="XML"></core:Fragment>
 					</IconTabFilter>
 					<IconTabFilter icon="sap-icon://activity-items" text="{i18n>volumes}" key="volumes">
-						<List noDataText="{i18n>noData}" mode="None" id="volumesList" items="{ path: 'ToOfferVolume', templateShareable: false }" 
+						<List noDataText="{i18n>noData}" updateFinished="onVolumesFinished" mode="None" id="volumesList" items="{ path: 'ToOfferVolume', templateShareable: false }" 
 							selectionChange="onListSelect">
 							<items>
 								<CustomListItem>
