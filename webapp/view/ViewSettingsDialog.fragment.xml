@@ -63,52 +63,22 @@
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
 						<headerToolbar>
 							<Toolbar class="white">
-								<SearchField placeholder="{i18n>code}" custom:id="counterPartyNameTable" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
-									search="triggerSearch" width="100%" />
-								<ToolbarSpacer/>
 								<SearchField placeholder="{i18n>name}" custom:id="counterPartyNameTable" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
-							</Toolbar>
-						</headerToolbar>
-						<columns>
-							<Column><Text class="black" text="{i18n>code}"/></Column>
-							<Column><Text class="black" text="{i18n>name}"/></Column>
-						</columns>
-						<items>
-							<ColumnListItem>
-								<cells>
-									<Text text="{Code}"/>
-									<Text text="{Name}"/>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
-				</customControl>
-			</ViewSettingsCustomItem>
-			<ViewSettingsCustomItem text="{i18n>counterpartyCode}">
-				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" id="counterpartyCodeTable" custom:name="CounterpartyCode" custom:key="Code" custom:order="3" 
-						items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' } }" 
-						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
-						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
-						<headerToolbar>
-							<Toolbar class="white">
-								<SearchField placeholder="{i18n>code}" custom:id="counterpartyCodeTable" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
-									search="triggerSearch" width="100%" />
 								<ToolbarSpacer/>
-								<SearchField placeholder="{i18n>name}" custom:id="counterpartyCodeTable" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+								<SearchField placeholder="{i18n>code}" custom:id="counterPartyNameTable" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
 									search="triggerSearch" width="100%" />
 							</Toolbar>
 						</headerToolbar>
 						<columns>
-							<Column><Text class="black" text="{i18n>code}"/></Column>
 							<Column><Text class="black" text="{i18n>name}"/></Column>
+							<Column><Text class="black" text="{i18n>code}"/></Column>
 						</columns>
 						<items>
 							<ColumnListItem>
 								<cells>
-									<Text text="{Code}"/>
 									<Text text="{Name}"/>
+									<Text text="{Code}"/>
 								</cells>
 							</ColumnListItem>
 						</items>
@@ -138,7 +108,7 @@
 			</ViewSettingsFilterItem>
 			<ViewSettingsCustomItem text="{i18n>trader}">
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" id="traderTable" custom:name="Trader" custom:key="Code" custom:order="7" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="traderTable" custom:name="Trader" custom:key="Code" custom:order="6" 
 						items="{ path: '/dictionarySearchTraderSet' }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
@@ -175,7 +145,7 @@
 			</ViewSettingsFilterItem>
 			<ViewSettingsCustomItem text="{i18n>deliveryPoint}">
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" id="deliveryPointTable" custom:name="DeliveryPoint" custom:key="Code" custom:order="9" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="deliveryPointTable" custom:name="DeliveryPoint" custom:key="Code" custom:order="8" 
 						items="{ path: '/dictionarySearchDeliveryPointSet' }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
@@ -208,9 +178,9 @@
 				<customControl>
 					<VBox class="padding">
 						<DatePicker change="setDateFilter" id="validityDateFromPicker" placeholder="{i18n>dateFrom}" 
-							custom:order="10" custom:operator="GE" custom:name="ValidityDate" custom:id="validityDateToPicker" />
+							custom:order="9" custom:operator="GE" custom:name="ValidityDate" custom:id="validityDateToPicker" />
 						<DatePicker change="setDateFilter" id="validityDateToPicker" placeholder="{i18n>dateTo}" 
-							custom:order="10" custom:operator="LE" custom:name="ValidityDate" custom:id="validityDateFromPicker" />
+							custom:order="9" custom:operator="LE" custom:name="ValidityDate" custom:id="validityDateFromPicker" />
 					</VBox>
 				</customControl>
 			</ViewSettingsCustomItem>
@@ -219,9 +189,9 @@
 				<customControl>
 					<VBox class="padding">
 						<DatePicker change="setDateFilter" id="creationDateFromPicker" placeholder="{i18n>dateFrom}" 
-							custom:order="11" custom:operator="GE" custom:name="CreationDate" custom:id="creationDateToPicker" />
+							custom:order="10" custom:operator="GE" custom:name="CreationDate" custom:id="creationDateToPicker" />
 						<DatePicker change="setDateFilter" id="creationDateToPicker" placeholder="{i18n>dateTo}" 
-							custom:order="11" custom:operator="LE" custom:name="CreationDate" custom:id="creationDateFromPicker" />
+							custom:order="10" custom:operator="LE" custom:name="CreationDate" custom:id="creationDateFromPicker" />
 					</VBox>
 				</customControl>
 			</ViewSettingsCustomItem>
