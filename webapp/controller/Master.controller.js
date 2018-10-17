@@ -449,13 +449,14 @@ sap.ui.define([
 				var table = oEvent.getSource();
 				var items = table.getSelectedItems();
 				var model = this.getModel();
+				var name = table.data("name");
 				var key = table.data("key");
 				var order = table.data("order");
 				var filterDialog = sap.ui.getCore().byId("viewSettingsDialog") || sap.ui.getCore().byId("myViewSettingsDialog");
 				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
 				customFilter.setFilterCount(1);
 				customFilter.setSelected(true);
-				customFilter.data("name", key);
+				customFilter.data("name", name);
 				var keys = "";
 				for(var i = 0; i < items.length; i++){
 					var path = items[i].getBindingContext().getPath();

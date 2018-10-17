@@ -20,11 +20,8 @@
 		<filterItems>
 			<ViewSettingsCustomItem
 				text="{i18n>offerNumber}">
-				<!--<items>-->
-				<!--	<ViewSettingsItem text="{TCNumber} - {PartnerName}" key="{TCNumber}" custom:name="TCNumber" />-->
-				<!--</items>-->
 				<customControl>
-					<Table mode="MultiSelect" includeItemInSelection="true" id="offerPopup" custom:key="TCNumber" custom:order="0" 
+					<Table mode="MultiSelect" includeItemInSelection="true" id="offerPopup" custom:key="TCNumber" custom:name="TCNumber" custom:order="0" 
 						items="{ path: '/dictionarySearchOfferSet', parameters: { custom: { AppType: 'MO' } } }" 
 						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
 						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
@@ -59,20 +56,66 @@
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="TradingPurpose" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' }, parameters: { custom: { AppType: 'MO' } } }"
-				text="{i18n>counterpartyName}"
-				multiSelect="true">
-				<items>
-					<ViewSettingsItem text="{Name} - {Code}" key="{Name}" custom:name="CounterpartyName" custom:operator="Contains" />
-				</items>
-			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionarySearchCounterpartySet', parameters: { custom: { AppType: 'MO' } } }"
-				text="{i18n>counterpartyCode}"
-				multiSelect="true">
-				<items>
-					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="CounterpartyCode" />
-				</items>
-			</ViewSettingsFilterItem>
+			<ViewSettingsCustomItem text="{i18n>counterpartyName}">
+				<customControl>
+					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="CounterpartyName" custom:key="Name" custom:order="2" 
+						items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' }, parameters: { custom: { AppType: 'MO' } } }" 
+						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
+						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<headerToolbar>
+							<Toolbar class="white">
+								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+								<ToolbarSpacer/>
+								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column><Text class="black" text="{i18n>code}"/></Column>
+							<Column><Text class="black" text="{i18n>name}"/></Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{Code}"/>
+									<Text text="{Name}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</customControl>
+			</ViewSettingsCustomItem>
+			<ViewSettingsCustomItem text="{i18n>counterpartyCode}">
+				<customControl>
+					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="CounterpartyCode" custom:key="Code" custom:order="3" 
+						items="{ path: '/dictionarySearchCounterpartySet', sorter: { path: 'Name' }, parameters: { custom: { AppType: 'MO' } } }" 
+						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
+						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<headerToolbar>
+							<Toolbar class="white">
+								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+								<ToolbarSpacer/>
+								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column><Text class="black" text="{i18n>code}"/></Column>
+							<Column><Text class="black" text="{i18n>name}"/></Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{Code}"/>
+									<Text text="{Name}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</customControl>
+			</ViewSettingsCustomItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionaryStatusSet' }"
 				text="{i18n>status}"
 				multiSelect="true">
@@ -94,13 +137,36 @@
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Product" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionarySearchTraderSet', parameters: { custom: { AppType: 'MO' } } }"
-				text="{i18n>trader}"
-				multiSelect="true">
-				<items>
-					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Trader" />
-				</items>
-			</ViewSettingsFilterItem>
+			<ViewSettingsCustomItem text="{i18n>trader}">
+				<customControl>
+					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="Trader" custom:key="Code" custom:order="7" 
+						items="{ path: '/dictionarySearchTraderSet', parameters: { custom: { AppType: 'MO' } } }" 
+						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
+						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<headerToolbar>
+							<Toolbar class="white">
+								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+								<ToolbarSpacer/>
+								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column><Text class="black" text="{i18n>code}"/></Column>
+							<Column><Text class="black" text="{i18n>name}"/></Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{Code}"/>
+									<Text text="{Name}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</customControl>
+			</ViewSettingsCustomItem>
 			<ViewSettingsFilterItem items="{ path: '/dictionarySearchIncotermsSet', parameters: { custom: { AppType: 'MO' } } }"
 				text="{i18n>incoterms}"
 				multiSelect="true">
@@ -108,13 +174,36 @@
 					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="Incoterms" />
 				</items>
 			</ViewSettingsFilterItem>
-			<ViewSettingsFilterItem items="{ path: '/dictionarySearchDeliveryPointSet', parameters: { custom: { AppType: 'MO' } } }"
-				text="{i18n>deliveryPoint}"
-				multiSelect="true">
-				<items>
-					<ViewSettingsItem text="{Code} - {Name}" key="{Code}" custom:name="DeliveryPoint" />
-				</items>
-			</ViewSettingsFilterItem>
+			<ViewSettingsCustomItem text="{i18n>deliveryPoint}">
+				<customControl>
+					<Table mode="MultiSelect" includeItemInSelection="true" custom:name="DeliveryPoint" custom:key="Code" custom:order="9" 
+						items="{ path: '/dictionarySearchDeliveryPointSet', parameters: { custom: { AppType: 'MO' } } }" 
+						selectionChange="onTableSelect" width="auto" noDataText="{i18n>detailLineItemTableNoDataText}" growingThreshold="10" 
+						growing="true" growingScrollToLoad="false" busyIndicatorDelay="{detailView>/lineItemTableDelay}">
+						<headerToolbar>
+							<Toolbar class="white">
+								<SearchField placeholder="{i18n>code}" custom:operator="Contains" custom:key="Code" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+								<ToolbarSpacer/>
+								<SearchField placeholder="{i18n>name}" custom:operator="Contains" custom:key="Name" showSearchButton="true" 
+									search="triggerSearch" width="100%" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column><Text class="black" text="{i18n>code}"/></Column>
+							<Column><Text class="black" text="{i18n>name}"/></Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{Code}"/>
+									<Text text="{Name}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</customControl>
+			</ViewSettingsCustomItem>
 			<ViewSettingsCustomItem
 				text="{i18n>validityDate}">
 				<customControl>
