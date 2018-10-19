@@ -80,6 +80,7 @@ sap.ui.define([
 				var eventBus = sap.ui.getCore().getEventBus();
 			    eventBus.subscribe("DetailMasterChannel", "onApproveEvent", this.onEventBus, this);
 			    
+			    // Set monday in calendar as first day(not Sunday)
 			    sap.ui.core.LocaleData.getInstance(sap.ui.getCore().getConfiguration().getFormatSettings().getFormatLocale()).mData["weekData-firstDay"] = 1;
 			},
 			
@@ -206,7 +207,6 @@ sap.ui.define([
 				this._oListFilterState.aFilter = aFilters;
 				this._updateFilterBar(aCaptions.join(", "));
 				this._applyFilterSearch();
-				this._applySortGroup(oEvent);
 			},
 			
 			setDateFilter: function(oEvent){
@@ -245,30 +245,6 @@ sap.ui.define([
 						items[i].setSelected(false);
 					}
 				}
-			},
-
-			/**
-			 * Apply the chosen sorter and grouper to the master list
-			 * @param {sap.ui.base.Event} oEvent the confirm event
-			 * @private
-			 */
-			_applySortGroup: function (oEvent) {
-				var mParams = oEvent.getParameters(),
-					sPath,
-					bDescending,
-					aSorters = [];
-				// apply sorter to binding
-				// (grouping comes before sorting)
-				if (mParams.groupItem) {
-					sPath = mParams.groupItem.getKey();
-					bDescending = mParams.groupDescending;
-					var vGroup = this._oGroupFunctions[sPath];
-					aSorters.push(new Sorter(sPath, bDescending, vGroup));
-				}
-				sPath = mParams.sortItem.getKey();
-				bDescending = mParams.sortDescending;
-				aSorters.push(new Sorter(sPath, bDescending));
-				this._oList.getBinding("items").sort(aSorters);
 			},
 
 			/**

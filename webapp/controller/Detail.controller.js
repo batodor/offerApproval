@@ -150,10 +150,6 @@ sap.ui.define([
 			
 			dataReceived: function(oEvent){
 				this.getModel("detailView").setProperty("/busy", false);
-				var data = oEvent.getParameters("data").data;
-				var oModel = new JSONModel(data); // Only set data here.
-				this.getView().setModel(oModel, "header"); // set the alias here
-				this.setDataByStatus(data);
 			},
 			
 			setDataByStatus: function(data){
@@ -182,11 +178,6 @@ sap.ui.define([
 				}else{
 					this.byId("mainFinalApproveButton").setVisible(false);
 				}
-				// if(data.Status === "6" && this.type){
-				// 	this.byId("mainCreateDealButton").setVisible(true);
-				// }else{
-				// 	this.byId("mainCreateDealButton").setVisible(false);
-				// }
 				if(this.type){
 					this.byId("mainCopyButton").setVisible(true);
 				}else{
@@ -248,6 +239,8 @@ sap.ui.define([
 					oViewModel.setProperty("/shareSendEmailMessage",
 						oResourceBundle.getText("shareSendEmailObjectMessage", [sObjectName, sObjectId, location.href]));
 					this.setDataByStatus(oObject);
+					var oModel = new JSONModel(oObject); // Only set data here.
+					this.getView().setModel(oModel, "header"); // set the alias here
 				}
 			},
 
