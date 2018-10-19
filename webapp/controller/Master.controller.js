@@ -32,24 +32,7 @@ sap.ui.define([
 					// so it can be restored later on. Busy handling on the master list is
 					// taken care of by the master list itself.
 					iOriginalBusyDelay = oList.getBusyIndicatorDelay();
-
-				this._oGroupFunctions = {
-					Value : function(oContext) {
-						var iGrouper = oContext.getProperty('Value'),
-							key, text;
-						if (iGrouper <= 20) {
-							key = "LE20";
-							text = this.getResourceBundle().getText("masterGroup1Header1");
-						} else {
-							key = "GT20";
-							text = this.getResourceBundle().getText("masterGroup1Header2");
-						}
-						return {
-							key: key,
-							text: text
-						};
-					}.bind(this)
-				};
+				
 				this.search = {}; // for searchFields
 				this._oList = oList;
 				// keeps the filter and search state
@@ -72,11 +55,15 @@ sap.ui.define([
 						this.getOwnerComponent().oListSelector.setBoundMasterList(oList);
 					}.bind(this)
 				});
-
+				
+				/*	Sets one function on two router patterns master and object
+				*	To run the scripts event when object pattern is matched in master controller so to load master list
+				*/
 				this.getRouter().getRoute("master").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().getRoute("object").attachPatternMatched(this._onMasterMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
 				
+				/* This event is used to transfer or call functions between controllers (master - object) */
 				var eventBus = sap.ui.getCore().getEventBus();
 			    eventBus.subscribe("DetailMasterChannel", "onApproveEvent", this.onEventBus, this);
 			    
@@ -209,33 +196,7 @@ sap.ui.define([
 				this._applyFilterSearch();
 			},
 			
-			setDateFilter: function(oEvent){
-				var dp = oEvent.getSource();
-				var dpValue = dp.getDateValue();
-				var operator = dp.data("operator");
-				var name = dp.data("name");
-				var id = dp.data("id");
-				var order = dp.data("order");
-				var filterDialog = sap.ui.getCore().byId("viewSettingsDialog") || sap.ui.getCore().byId("myViewSettingsDialog");
-				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
-				customFilter.setFilterCount(1);
-				customFilter.setSelected(true);
-				customFilter.data("name", name);
-				customFilter.setKey(dpValue);
-				if(sap.ui.getCore().byId(id).getDateValue()){
-					var dp2Value = sap.ui.getCore().byId(id).getDateValue();
-					if(operator === "GE"){
-						customFilter.setKey(dpValue);
-						customFilter.data("value2", dp2Value);
-					}else if(operator === "LE"){
-						customFilter.setKey(dp2Value);
-						customFilter.data("value2", dpValue);
-					}
-					operator = "BT";
-				}
-				customFilter.data("operator", operator);
-			},
-			
+			/* On reset filters in View Settings Dialog, clears filter count */
 			onResetFilters: function(oEvent){
 				var filterDialog = oEvent.getSource();
 				var items = filterDialog.getFilterItems();
@@ -322,7 +283,8 @@ sap.ui.define([
 					groupBy: "None"
 				});
 			},
-
+			
+			/* After router pattern of master and object are matched bind the to master list  */
 			_onMasterMatched :  function(oEvent) {
 				//Set the layout property of the FCL control to 'OneColumn'
 				this.getModel("appView").setProperty("/layout", "OneColumn");
@@ -421,6 +383,39 @@ sap.ui.define([
 				oViewModel.setProperty("/filterBarLabel", this.getResourceBundle().getText("masterFilterBarText", [sFilterBarText]));
 			},
 			
+			/*	For using custom dates filters in View Settings Dialog fragment 
+			*	Also checks the date from or to depends on which was first entered and apply filter accordingly
+			*/
+			setDateFilter: function(oEvent){
+				var dp = oEvent.getSource();
+				var dpValue = dp.getDateValue();
+				var operator = dp.data("operator");
+				var name = dp.data("name");
+				var id = dp.data("id");
+				var order = dp.data("order");
+				var filterDialog = sap.ui.getCore().byId("viewSettingsDialog") || sap.ui.getCore().byId("myViewSettingsDialog");
+				var customFilter = filterDialog.getFilterItems()[parseInt(order)];
+				customFilter.setFilterCount(1);
+				customFilter.setSelected(true);
+				customFilter.data("name", name);
+				customFilter.setKey(dpValue);
+				if(sap.ui.getCore().byId(id).getDateValue()){
+					var dp2Value = sap.ui.getCore().byId(id).getDateValue();
+					if(operator === "GE"){
+						customFilter.setKey(dpValue);
+						customFilter.data("value2", dp2Value);
+					}else if(operator === "LE"){
+						customFilter.setKey(dp2Value);
+						customFilter.data("value2", dpValue);
+					}
+					operator = "BT";
+				}
+				customFilter.data("operator", operator);
+			},
+			
+			/*	For using custom dates filters in View Settings Dialog fragment 
+			*	On table selectionChange event, generates the filter
+			*/
 			onTableSelect: function(oEvent){
 				var table = oEvent.getSource();
 				var items = table.getSelectedItems();

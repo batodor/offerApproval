@@ -12,6 +12,9 @@
 .alignLeft{
 	text-align: left;
 }
+.sapMSF{
+	min-width: 295px !important;
+}
 .minusMargin{
 	margin: -1rem;
 }
